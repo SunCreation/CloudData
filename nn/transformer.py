@@ -535,6 +535,16 @@ class Transformer(tf.keras.Model):
 
         return enc_mask, dec_enc_mask, dec_mask
 
+    def translate(self, sentence, src_tokenizer, tgt_tokenizer, plot_attention=False):
+        pieces, result, enc_attns, dec_attns, dec_enc_attns = \
+        evaluate(sentence, self, src_tokenizer, tgt_tokenizer)
+
+        print('Input: %s' % (sentence))
+        print('Predicted translation: {}'.format(result))
+
+        if plot_attention:
+            visualize_attention(pieces, result.split(), enc_attns, dec_attns, dec_enc_attns)
+
     @tf.function()
     def train_step(self, src, tgt, optimizer):
         gold = tgt[:, 1:]
@@ -568,7 +578,7 @@ class Transformer(tf.keras.Model):
 
     def fit(self, epochs=20, x_train=None, y_train=None,
             x_val=None, y_val=None, BATCH_SIZE=128, 
-            offset_epoch=0, translate=None, examples=None):
+            offset_epoch=0, translate=None, examples=None, enc_tokenizer=None, dec_tokenizer=None):
         EPOCHS = epochs
 
         for epoch in range(EPOCHS):
@@ -608,7 +618,7 @@ class Transformer(tf.keras.Model):
 
             if examples and translate:
                 for ex in examples:
-                    translate(ex, transformer, ko, en)
+                    self.translate(ex, enc_tokenizer, dec_tokenizer)
                 time.sleep(2)
 
         self.history['attention'].extend([enc_attns, dec_attns, dec_enc_attns])
@@ -643,5 +653,3 @@ def loss_function(real, pred):
     loss_ *= mask
 
     return tf.reduce_sum(loss_)/tf.reduce_sum(mask)
-
-
