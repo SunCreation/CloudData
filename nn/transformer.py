@@ -416,8 +416,8 @@ def visualize_attention(src, tgt, enc_attns, dec_attns, dec_enc_attns):
 
 # 번역 생성 함수
 mecab = Mecab()
-START_TOKEN = [2]
-END_TOKEN = [3]
+START_TOKEN = 2
+END_TOKEN = 3
 
 def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=50):
     sentence = preprocess_sentence(sentence)
@@ -466,7 +466,7 @@ def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=
 
         ids = []
 
-        output = tf.expand_dims(START_TOKEN, 0)
+        output = tf.expand_dims([START_TOKEN], 0)
         for i in range(dec_len):
             enc_padding_mask, combined_mask, dec_padding_mask = generate_masks(_input, output)
 
