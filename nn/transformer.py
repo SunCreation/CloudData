@@ -458,7 +458,7 @@ def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=
         return pieces, result, enc_attns, dec_attns, dec_enc_attns
     except:
         pieces = mecab.morphs(sentence)
-        tokens = src_tokenizer.texts_to_sentences(sentence)
+        tokens = src_tokenizer.texts_to_sequences(sentence)
 
         _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
                                                             maxlen=enc_len,
