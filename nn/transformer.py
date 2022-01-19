@@ -9,6 +9,7 @@ import time
 import random
 
 import seaborn # Attention 시각화
+from konlpy.tag import Mecab
 
 
 # 트렌스포머는 위치에 대한 정보가 없어서
@@ -414,43 +415,79 @@ def visualize_attention(src, tgt, enc_attns, dec_attns, dec_enc_attns):
         plt.show()
 
 # 번역 생성 함수
+mecab = Mecab()
+START_TOKEN = [2]
+END_TOKEN = [3]
 
 def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=50):
     sentence = preprocess_sentence(sentence)
+    try:
+        pieces = src_tokenizer.encode_as_pieces(sentence)
+        tokens = src_tokenizer.encode_as_ids(sentence)
 
-    pieces = src_tokenizer.encode_as_pieces(sentence)
-    tokens = src_tokenizer.encode_as_ids(sentence)
+        _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
+                                                            maxlen=enc_len,
+                                                            padding='post')
 
-    _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
-                                                           maxlen=enc_len,
-                                                           padding='post')
+        ids = []
 
-    ids = []
-    output = tf.expand_dims([tgt_tokenizer.bos_id()], 0)
-    for i in range(dec_len):
-        enc_padding_mask, combined_mask, dec_padding_mask = \
-        generate_masks(_input, output)
+        output = tf.expand_dims([tgt_tokenizer.bos_id()], 0)
+        for i in range(dec_len):
+            enc_padding_mask, combined_mask, dec_padding_mask = \
+            generate_masks(_input, output)
 
-        predictions, enc_attns, dec_attns, dec_enc_attns =\
-        model(_input,
-              output,
-              enc_padding_mask,
-              combined_mask,
-              dec_padding_mask)
+            predictions, enc_attns, dec_attns, dec_enc_attns =\
+            model(_input,
+                output,
+                enc_padding_mask,
+                combined_mask,
+                dec_padding_mask)
 
-        predicted_id = \
-        tf.argmax(tf.math.softmax(predictions, axis=-1)[0, -1]).numpy().item()
+            predicted_id = \
+            tf.argmax(tf.math.softmax(predictions, axis=-1)[0, -1]).numpy().item()
 
-        if tgt_tokenizer.eos_id() == predicted_id:
-            result = tgt_tokenizer.decode_ids(ids)
-            return pieces, result, enc_attns, dec_attns, dec_enc_attns
+            if tgt_tokenizer.eos_id() == predicted_id:
+                result = tgt_tokenizer.decode_ids(ids)
+                return pieces, result, enc_attns, dec_attns, dec_enc_attns
 
-        ids.append(predicted_id)
-        output = tf.concat([output, tf.expand_dims([predicted_id], 0)], axis=-1)
+            ids.append(predicted_id)
+            output = tf.concat([output, tf.expand_dims([predicted_id], 0)], axis=-1)
 
-    result = tgt_tokenizer.decode_ids(ids)
+        result = tgt_tokenizer.decode_ids(ids)
 
-    return pieces, result, enc_attns, dec_attns, dec_enc_attns
+        return pieces, result, enc_attns, dec_attns, dec_enc_attns
+    except:
+        pieces = mecab.morphs(sentence)
+        tokens = src_tokenizer.texts_to_sentences(sentence)
+
+        _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
+                                                            maxlen=enc_len,
+                                                            padding='post')
+
+        ids = []
+
+        output = tf.expand_dims(START_TOKEN, 0)
+        for i in range(dec_len):
+            enc_padding_mask, combined_mask, dec_padding_mask = generate_masks(_input, output)
+
+            predictions, enc_attns, dec_attns, enc_dec_attns = \
+                model(_input, output, enc_padding_mask, combined_mask, dec_padding_mask)
+
+            predicted_id = \
+                tf.argmax(tf.math.softmax(predictions, axis=-1)[0,-1]).numpy().item()
+
+            if predicted_id == END_TOKEN:
+                result = tgt_tokenizer.decode([i for i in ids if i < tgt_tokenizer.vocab_size])
+                return pieces, result, enc_attns, dec_attns, dec_enc_attns
+
+            ids.append(predicted_id)
+            output = tf.concat([output, tf.expand_dims([predicted_id], 0)], axis=-1)
+        
+        result = tgt_tokenizer.decode([i for i in ids if i < tgt_tokenizer.vocab_size])
+
+        return pieces, result, enc_attns, dec_attns, dec_enc_attns
+
+
 
 # 번역 생성 및 Attention 시각화 결합
 
