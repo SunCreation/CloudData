@@ -460,7 +460,7 @@ def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=
         pieces = mecab.morphs(sentence)
         tokens = src_tokenizer.texts_to_sequences([pieces])
 
-        _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
+        _input = tf.keras.preprocessing.sequence.pad_sequences(tokens,
                                                             maxlen=enc_len,
                                                             padding='post')
 
