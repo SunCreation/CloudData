@@ -470,7 +470,7 @@ def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=
         for i in range(dec_len):
             enc_padding_mask, combined_mask, dec_padding_mask = generate_masks(_input, output)
 
-            predictions, enc_attns, dec_attns, enc_dec_attns = \
+            predictions, enc_attns, dec_attns, dec_enc_attns = \
                 model(_input, output, enc_padding_mask, combined_mask, dec_padding_mask)
 
             predicted_id = \
