@@ -557,6 +557,8 @@ class Transformer(tf.keras.Model):
         if plot_attention:
             visualize_attention(pieces, result.split(), enc_attns, dec_attns, dec_enc_attns)
 
+        return result
+
     @tf.function()
     def train_step(self, src, tgt, optimizer):
         gold = tgt[:, 1:]
