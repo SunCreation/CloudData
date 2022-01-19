@@ -477,13 +477,13 @@ def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=
                 tf.argmax(tf.math.softmax(predictions, axis=-1)[0,-1]).numpy().item()
 
             if predicted_id == END_TOKEN:
-                result = tgt_tokenizer.sequences_to_texts([i for i in ids if i < tgt_tokenizer.vocab_size])
+                result = tgt_tokenizer.sequences_to_texts(ids)
                 return pieces, result, enc_attns, dec_attns, dec_enc_attns
 
             ids.append(predicted_id)
             output = tf.concat([output, tf.expand_dims([predicted_id], 0)], axis=-1)
         
-        result = tgt_tokenizer.sequences_to_texts([i for i in ids if i < tgt_tokenizer.vocab_size])
+        result = tgt_tokenizer.sequences_to_texts(ids)
 
         return pieces, result, enc_attns, dec_attns, dec_enc_attns
 
