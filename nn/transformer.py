@@ -54,7 +54,6 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
         return out, attentions
 
-
     def split_heads(self, *xs): # num_heads는 self에 있으니까 받을 필요 없음
         # MultiHead에 넣을려고 분할 
         # x: [ batch x length x embedding_dimension ]
@@ -87,6 +86,10 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         wq = self.W_q(Q)
         wk = self.W_k(K)
         wv = self.W_v(V)
+
+        # 사과: [1,2,3,4,5,6,6,7,8,9] -> (10,)
+        # 사과: [[1,2,3,4,5],[6,6,7,8,9]] -> (2,5) 확실!!
+        # apple: 
 
         # 2: split heads
         W_qkv_split = self.split_heads(wq,wk,wv)
@@ -460,6 +463,7 @@ def translate(sentence, model, src_tokenizer, tgt_tokenizer, plot_attention=Fals
 
     if plot_attention:
         visualize_attention(pieces, result.split(), enc_attns, dec_attns, dec_enc_attns)
+    return result
 
 
 
