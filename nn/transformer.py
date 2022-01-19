@@ -10,6 +10,9 @@ import random
 
 import seaborn # Attention 시각화
 
+
+# 트렌스포머는 위치에 대한 정보가 없어서
+# 사과: (1,5,3,2,7,23,23,....(512개)) + positional
 def positional_encoding(pos_len, d_model):
     def cal_angle(position, i):
         return position / np.power(10000, int(i) / d_model)
@@ -44,7 +47,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         QK_T = tf.matmul(Q, K, transpose_b=True)
         scaled_qk = QK_T / tf.math.sqrt(d_k)
 
-        if mask is not None: scaled_qk += (mask * -1e9)
+        if mask is not None: scaled_qk += (mask * -1e9) # -무한대에서 소프트맥스 -> 0
 
         attentions = tf.nn.softmax(scaled_qk, axis=-1)
         out = tf.matmul(attentions, V)
@@ -53,7 +56,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
 
     def split_heads(self, *xs): # num_heads는 self에 있으니까 받을 필요 없음
-        # MultiHead에 넣을려고 분할
+        # MultiHead에 넣을려고 분할 
         # x: [ batch x length x embedding_dimension ]
         # return: [ batch x heads x length x embedding_dimension]
         split_xs = []
@@ -409,19 +412,19 @@ def visualize_attention(src, tgt, enc_attns, dec_attns, dec_enc_attns):
 
 # 번역 생성 함수
 
-def evaluate(sentence, model, src_tokenizer, tgt_tokenizer):
+def evaluate(sentence, model, src_tokenizer, tgt_tokenizer, enc_len=50, dec_len=50):
     sentence = preprocess_sentence(sentence)
 
     pieces = src_tokenizer.encode_as_pieces(sentence)
     tokens = src_tokenizer.encode_as_ids(sentence)
 
     _input = tf.keras.preprocessing.sequence.pad_sequences([tokens],
-                                                           maxlen=enc_train.shape[-1],
+                                                           maxlen=enc_len,
                                                            padding='post')
 
     ids = []
     output = tf.expand_dims([tgt_tokenizer.bos_id()], 0)
-    for i in range(dec_train.shape[-1]):
+    for i in range(dec_len):
         enc_padding_mask, combined_mask, dec_padding_mask = \
         generate_masks(_input, output)
 
@@ -486,6 +489,9 @@ class Transformer(tf.keras.Model):
 
         self.loss_function = loss_function
 
+        self.x_len = None
+        self.y_len = None
+
         if shared: self.out_linear.set_weights(tf.transpose(self.dec_embedding.weights)) # 이런 생각을 한다는 것이 매우 놀랍다.
 
     
@@ -503,6 +509,8 @@ class Transformer(tf.keras.Model):
     
     def call(self, enc_in, dec_in, enc_mask, causality_mask, dec_mask, training=False):
         # 1 embedding
+        if self.x_len is None: self.x_len = enc_in.shape[1]
+        if self.y_len is None: self.y_len = dec_in.shape[1]
         enc = self.embedding(self.enc_embedding, enc_in, training)
         dec = self.embedding(self.dec_embedding, dec_in, training)
 
@@ -537,7 +545,7 @@ class Transformer(tf.keras.Model):
 
     def translate(self, sentence, src_tokenizer, tgt_tokenizer, plot_attention=False):
         pieces, result, enc_attns, dec_attns, dec_enc_attns = \
-        evaluate(sentence, self, src_tokenizer, tgt_tokenizer)
+        evaluate(sentence, self, src_tokenizer, tgt_tokenizer, enc_len=self.x_len, dec_len=self.y_len)
 
         print('Input: %s' % (sentence))
         print('Predicted translation: {}'.format(result))
