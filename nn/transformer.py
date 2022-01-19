@@ -547,12 +547,13 @@ class Transformer(tf.keras.Model):
 
         return enc_mask, dec_enc_mask, dec_mask
 
-    def translate(self, sentence, src_tokenizer, tgt_tokenizer, plot_attention=False):
+    def translate(self, sentence, src_tokenizer, tgt_tokenizer, _print=True ,plot_attention=False):
         pieces, result, enc_attns, dec_attns, dec_enc_attns = \
         evaluate(sentence, self, src_tokenizer, tgt_tokenizer, enc_len=self.x_len, dec_len=self.y_len)
 
-        print('Input: %s' % (sentence))
-        print('Predicted translation: {}'.format(result))
+        if _print:
+            print('Input: %s' % (sentence))
+            print('Predicted translation: {}'.format(result))
 
         if plot_attention:
             visualize_attention(pieces, result.split(), enc_attns, dec_attns, dec_enc_attns)
