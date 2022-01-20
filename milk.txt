@@ -1,3 +1,7 @@
 git config --global user.email "cake0103@nate.com"
 git config --global user.name "SunCreation"
-sudo pip3 install -U Commitizen
+pip install -U Commitizen
+pip install sentencepiece
+apt install vim -y
+echo "alias push='. ~/CloudData/push'" >> ~/.bashrc
+bash

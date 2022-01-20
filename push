@@ -1,0 +1,13 @@
+#!/bin/bash
+  
+if [ $# -eq 0 ]
+then
+        echo "Usage: Use it anyway"
+        echo "You should use it with {comment}"
+else
+        MENT=${1:TIL}
+
+        git add .
+        git commit -m ${MENT}
+        git push origin main
+fi
