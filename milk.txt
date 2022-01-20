@@ -1,5 +1,9 @@
-git config --global user.email "cake0103@nate.com"
-git config --global user.name "SunCreation"
+echo "Enter the User name: "
+read name
+echo "Enter the User email: "
+read email
+git config --global user.name $name
+git config --global user.email $email
 pip install -U Commitizen
 pip install sentencepiece
 pip install transformers
