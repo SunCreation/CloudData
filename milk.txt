@@ -1,2 +1,3 @@
 git config --global user.email "cake0103@nate.com"
 git config --global user.name "SunCreation"
+sudo pip3 install -U Commitizen
