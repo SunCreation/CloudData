@@ -5,4 +5,3 @@ pip install sentencepiece
 pip install transformers
 apt install vim -y
 echo "alias push='. ~/CloudData/push'" >> ~/.bashrc
-bash
