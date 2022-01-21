@@ -1,7 +1,5 @@
-echo "Enter the User name: "
-read name
-echo "Enter the User email: "
-read email
+read -p "Enter the User name: " name
+read -p "Enter the User email: " email
 git config --global user.name $name
 git config --global user.email $email
 pip install -U Commitizen
