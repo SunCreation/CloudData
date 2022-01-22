@@ -6,4 +6,5 @@ pip install -U Commitizen
 pip install sentencepiece
 pip install transformers
 apt install vim -y
-echo "alias push='. ~/CloudData/push'" >> ~/.bashrc
+echo "alias push='. /workspace/CloudData/push'" >> ~/.bashrc
+pip install -r /workspace/CloudData/requirements
