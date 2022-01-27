@@ -1,2 +1,5 @@
 nlp
 git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf
+gdown
+tensorflow_datasets
+datasets
