@@ -2,6 +2,9 @@
 # read -p "Enter the User email: " email
 git config --global user.name SunCreation # $name
 git config --global user.email cake0103@nate.com # $email
+apt update
+apt upgrade
+apt install openjdk-11-jdk
 pip install -U Commitizen
 pip install sentencepiece
 pip install transformers

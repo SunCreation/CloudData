@@ -6,3 +6,4 @@ datasets
 wandb
 sentencepiece
 rich[jupyter]
+koeda
