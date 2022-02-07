@@ -4,3 +4,5 @@ gdown
 tensorflow_datasets
 datasets
 wandb
+sentencepiece
+rich[jupyter]
