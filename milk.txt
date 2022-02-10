@@ -1,5 +1,6 @@
 # read -p "Enter the User name: " name
 # read -p "Enter the User email: " email
+read -p "Enter the home dir: " dirt
 git config --global user.name SunCreation # $name
 git config --global user.email cake0103@nate.com # $email
 apt update
@@ -9,6 +10,5 @@ pip install -U Commitizen
 pip install sentencepiece
 pip install transformers
 apt install vim -y
-read -p "Enter the home dir: " dirt
 echo "alias push='. /${dirt}/CloudData/push'" >> ~/.bashrc
 pip install -r /${dirt}/CloudData/requirements
