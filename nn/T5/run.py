@@ -59,7 +59,7 @@ def compute_metrics(eval_pred):
     A = sys.stdout
     B = sys.stdin
     sys.stdout = open(f"{homedir}/stdout.txt","w")
-    sys.stdin = open(f"{homedir}/content/stdout.txt","r")
+    sys.stdin = open(f"{homedir}/stdout.txt","r")
     count = 0 
     for i, j in zip(predictions, labels):
         count += 1
