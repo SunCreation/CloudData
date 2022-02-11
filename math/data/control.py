@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import sys
+
 A = sys.stdout
 sys.stdout = open("double_slash.txt", 'w')
 data = pd.read_csv("train.csv")
@@ -19,3 +20,4 @@ for i, j in enumerate(zip(data["problem"], data["code"])):
         print("")
 sys.stdout = A
 print(count)
+
