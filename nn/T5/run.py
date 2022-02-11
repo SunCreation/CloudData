@@ -69,13 +69,13 @@ def compute_metrics(eval_pred):
         # print("  pred: ", end='')
         try: exec(get_answer(i)[0])
         except: print("error")
-        try: pred.append(sys.stdin.readline())
+        try: pred.append(input())
         except: pred.append("bb")
         # print("\n  label: ", end='')
         try: exec(get_answer(j)[0])
         except: print("Error")
         # print("")
-        try: label.append(sys.stdin.readline())
+        try: label.append(input())
         except: label.append("ab")
     sys.stdout = A
     sys.stdin = B
@@ -111,7 +111,7 @@ def prepare_train_features(examples):
 tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, \
     remove_columns=dictdataset["train"].column_names, load_from_cache_file=False)
 
-batch_size = 20
+batch_size = 16
 args = Seq2SeqTrainingArguments(
     output_dir="test-translation",
     evaluation_strategy="epoch",
