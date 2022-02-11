@@ -53,7 +53,7 @@ def compute_metrics(eval_pred):
     # print(logits, len(logits))
     # print(attn, len(attn))
     predictions = np.argmax(logits[0], axis=-1)
-    # print(get_answer(tokenizer.decode(predictions[0]))[0].replace('enter','\n'))
+    print(get_answer(tokenizer.decode(predictions[0]))[0].replace('enter','\n'))
     pred = []
     label = []
     A = sys.stdout
@@ -66,11 +66,11 @@ def compute_metrics(eval_pred):
         i = tokenizer.decode(i).replace('enter', '\n')
         j = tokenizer.decode(j).replace('enter', '\n')
     
-        try: exec(get_answer(i)[0])
+        try: exec(get_answer(i))
         except: print("error")
         try: pred.append(input())
         except: pred.append("bb")
-        try: exec(get_answer(j)[0])
+        try: exec(get_answer(j))
         except: print("Error")
         try: label.append(input())
         except: label.append("ab")
@@ -89,8 +89,8 @@ dictdataset = dataset.train_test_split(0.02)
 def prepare_train_features(examples):
 
     for i, x in enumerate(examples['code']):
-      new = x.replace('\n', 'enter')
-      examples['code'][i] = new # str(examples["class"][i]) + '<sep>' + 
+        new = x.replace('\n', 'enter')
+        examples['code'][i] = new # str(examples["class"][i]) + '<sep>' + 
 
     tokenized_examples = tokenizer(
         text=examples['problem'],
@@ -136,7 +136,7 @@ trainer = Seq2SeqTrainer(
 
 trainer_output = trainer.train()
 
-trainer.save_model('test-kot5-trained-epoch10_0211')
+# trainer.save_model('test-kot5-trained-epoch10_0211')
 
 from transformers import AutoModelForSeq2SeqLM
 
