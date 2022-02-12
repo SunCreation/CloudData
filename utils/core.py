@@ -1,6 +1,8 @@
 import numpy as np
 import sys
 from sklearn.metrics import accuracy_score as acsr
+import yaml
+import pandas as pd
 
 def get_answer(sent, sep_token="<sep>", end_token="</s>", classi_class=True):
     if classi_class:
@@ -46,28 +48,38 @@ class T5_Accuracy_Metrics:
         logits, labels = eval_pred
         predictions = np.argmax(logits[0], axis=-1)
         # print(get_answer(self.tokenizer.decode(predictions[0]))[0].replace('enter','\n'), self.classi)
-        pred = []
-        label = []
+        # pred = []
+        # label = []
         A = sys.stdout
         B = sys.stdin
         sys.stdout = open(f"{self.homedir}/stdout.txt","w")
-        sys.stdin = open(f"{self.homedir}/stdout.txt","r")
+        # sys.stdin = open(f"{self.homedir}/stdout.txt","r")
         count = 0 
         for i, j in zip(predictions, labels):
             count += 1
             i = self.tokenizer.decode(i).replace('enter', '\n')
             j = self.tokenizer.decode(j).replace('enter', '\n')
-        
+            print(f"{count}: ")
+            print("  pred:", end='')
+    
             try: exec(get_answer(i, classi_class=self.classi))
             except: print("error")
-            try: pred.append(input())
-            except: pred.append("bb")
+            finally: print("")
+            # try: pred.append(input())
+            # except: pred.append("bb")
+            print("  label:", end='')
             try: exec(get_answer(j, classi_class=self.classi))
             except: print("Error")
-            try: label.append(input())
-            except: label.append("ab")
+            finally: print("")
+            # try: label.append(input())
+            # except: label.append("ab")
         sys.stdout = A
-        sys.stdin = B
-        # print(pred, label)
+        # sys.stdin = B
+        with open(f"{self.homedir}/stdout.txt",'r') as f:
+            result = yaml.load(f, Loader=yaml.FullLoader)
+        result = pd.DataFrame(result).transpose()
+        pred = list(result['pred'])
+        label = list(result['label'])
+        result=None
         return {'accuracy':acsr(pred, label)}
 
