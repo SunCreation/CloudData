@@ -1,4 +1,4 @@
 from utils.core import (
-    compute_metrics,
+    T5_Accuracy_Metrics,
     solve_problem2json
 )
