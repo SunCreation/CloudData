@@ -36,36 +36,38 @@ def solve_problem2json(problem, i, model=None, tokenizer=None, classi_class=True
     print("")
 
 
+class T5_Accuracy_Metrics:
+    def __init__(self, tokenizer, homedir='~', classi_class=False):
+        self.tokenizer = tokenizer
+        self.homedir = homedir
+        self.classi=classi_class
 
-def compute_metrics(eval_pred, tokenizer=None, homedir='~', classi_class=False):
-    # print(help(eval_pred))
-    logits, labels = eval_pred
-    # print(logits[1])
-    # print(logits, len(logits))
-    # print(attn, len(attn))
-    predictions = np.argmax(logits[0], axis=-1)
-    print(get_answer(tokenizer.decode(predictions[0]))[0].replace('enter','\n'), classi_class)
-    pred = []
-    label = []
-    A = sys.stdout
-    B = sys.stdin
-    sys.stdout = open(f"{homedir}/stdout.txt","w")
-    sys.stdin = open(f"{homedir}/stdout.txt","r")
-    count = 0 
-    for i, j in zip(predictions, labels):
-        count += 1
-        i = tokenizer.decode(i).replace('enter', '\n')
-        j = tokenizer.decode(j).replace('enter', '\n')
-    
-        try: exec(get_answer(i, classi_class=classi_class))
-        except: print("error")
-        try: pred.append(input())
-        except: pred.append("bb")
-        try: exec(get_answer(j, classi_class=classi_class))
-        except: print("Error")
-        try: label.append(input())
-        except: label.append("ab")
-    sys.stdout = A
-    sys.stdin = B
-    # print(pred, label)
-    return {'accuracy':acsr(pred, label)}
+    def __call__(self, eval_pred):
+        logits, labels = eval_pred
+        predictions = np.argmax(logits[0], axis=-1)
+        # print(get_answer(self.tokenizer.decode(predictions[0]))[0].replace('enter','\n'), self.classi)
+        pred = []
+        label = []
+        A = sys.stdout
+        B = sys.stdin
+        sys.stdout = open(f"{self.homedir}/stdout.txt","w")
+        sys.stdin = open(f"{self.homedir}/stdout.txt","r")
+        count = 0 
+        for i, j in zip(predictions, labels):
+            count += 1
+            i = self.tokenizer.decode(i).replace('enter', '\n')
+            j = self.tokenizer.decode(j).replace('enter', '\n')
+        
+            try: exec(get_answer(i, classi_class=self.classi))
+            except: print("error")
+            try: pred.append(input())
+            except: pred.append("bb")
+            try: exec(get_answer(j, classi_class=self.classi))
+            except: print("Error")
+            try: label.append(input())
+            except: label.append("ab")
+        sys.stdout = A
+        sys.stdin = B
+        # print(pred, label)
+        return {'accuracy':acsr(pred, label)}
+
