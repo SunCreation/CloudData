@@ -55,6 +55,35 @@ class T5_Accuracy_Metrics:
         sys.stdout = open(f"{self.homedir}/stdout.txt","w")
         # sys.stdin = open(f"{self.homedir}/stdout.txt","r")
         count = 0 
+        if not self.classi:
+            for i, j in zip(predictions, labels):
+                count += 1
+                i = self.tokenizer.decode(i).replace('enter', '\n')
+                j = self.tokenizer.decode(j).replace('enter', '\n')
+                print(f"{count}: ")
+                print("  pred: ", end='')
+        
+                try: exec(get_answer(i, classi_class=self.classi))
+                except: print("error")
+                finally: print("")
+                # try: pred.append(input())
+                # except: pred.append("bb")
+                print("  label: ", end='')
+                try: exec(get_answer(j, classi_class=self.classi))
+                except: print("Error")
+                finally: print("")
+                # try: label.append(input())
+                # except: label.append("ab")
+            sys.stdout = A
+            # sys.stdin = B
+            with open(f"{self.homedir}/stdout.txt",'r') as f:
+                result = yaml.load(f, Loader=yaml.FullLoader)
+            result = pd.DataFrame(result).transpose()
+            pred = list(result['pred'])
+            label = list(result['label'])
+            result=None
+            return {'accuracy':acsr(pred, label)}
+
         for i, j in zip(predictions, labels):
             count += 1
             i = self.tokenizer.decode(i).replace('enter', '\n')
@@ -62,13 +91,13 @@ class T5_Accuracy_Metrics:
             print(f"{count}: ")
             print("  pred: ", end='')
     
-            try: exec(get_answer(i, classi_class=self.classi))
+            try: exec(get_answer(i, classi_class=self.classi)[0])
             except: print("error")
             finally: print("")
             # try: pred.append(input())
             # except: pred.append("bb")
             print("  label: ", end='')
-            try: exec(get_answer(j, classi_class=self.classi))
+            try: exec(get_answer(j, classi_class=self.classi)[0])
             except: print("Error")
             finally: print("")
             # try: label.append(input())
@@ -82,4 +111,5 @@ class T5_Accuracy_Metrics:
         label = list(result['label'])
         result=None
         return {'accuracy':acsr(pred, label)}
+
 
