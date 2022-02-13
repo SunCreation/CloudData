@@ -70,8 +70,8 @@ class T5_Accuracy_Metrics:
         if not self.classi:
             for i, j in zip(predictions, labels):
                 count += 1
-                i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}")
-                j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}")
+                i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+                j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
                 print(f"{count}: ")
                 print("  pred: ", end='')
         
@@ -98,8 +98,8 @@ class T5_Accuracy_Metrics:
 
         for i, j in zip(predictions, labels):
             count += 1
-            i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}")
-            j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}")
+            i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+            j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
             print(f"{count}: ")
             print("  pred: ", end='')
             try: exec(get_answer(i, classi_class=self.classi)[0])
