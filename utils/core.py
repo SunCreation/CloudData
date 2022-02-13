@@ -44,7 +44,7 @@ def check_yaml(filedir):
     with open(filedir, "r") as f:
         for i in f.readlines():
             if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
-            if len(re.findall(":", i)) > 1: i='error\n'
+            if len(re.findall(":", i)) > 1: i='  pred: error\n'
             cleanfile.append(i)
     
     with open(filedir, "w") as f:
