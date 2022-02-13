@@ -1,4 +1,3 @@
-from tabnanny import check
 import numpy as np
 import sys
 from sklearn.metrics import accuracy_score as acsr
