@@ -4,6 +4,7 @@ import sys
 from sklearn.metrics import accuracy_score as acsr
 import yaml
 import pandas as pd
+import re
 
 def get_answer(sent, sep_token="<sep>", end_token="</s>", classi_class=True):
     if classi_class:
@@ -43,6 +44,7 @@ def check_yaml(filedir):
     with open(filedir, "r") as f:
         for i in f.readlines():
             if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
+            if len(re.findall(":", i)) > 1: i='error\n'
             cleanfile.append(i)
     
     with open(filedir, "w") as f:
