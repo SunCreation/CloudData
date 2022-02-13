@@ -10,6 +10,19 @@
 import yaml
 import pandas as pd
 
+def check_yaml(filedir):
+    cleanfile = []
+    with open(filedir, "r") as f:
+        for i in f.readlines():
+            if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
+            cleanfile.append(i)
+    
+    with open(filedir, "w") as f:
+        for i in cleanfile:
+            f.write(i)
+
+check_yaml('yam.yaml')
+
 with open("yam.yaml", 'r') as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
 data = pd.DataFrame(data).transpose()

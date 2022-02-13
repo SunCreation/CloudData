@@ -1,3 +1,4 @@
+from tabnanny import check
 import numpy as np
 import sys
 from sklearn.metrics import accuracy_score as acsr
@@ -36,6 +37,17 @@ def solve_problem2json(problem, i, model=None, tokenizer=None, classi_class=True
     except:
         print('error')
     print("")
+
+def check_yaml(filedir):
+    cleanfile = []
+    with open(filedir, "r") as f:
+        for i in f.readlines():
+            if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
+            cleanfile.append(i)
+    
+    with open(filedir, "w") as f:
+        for i in cleanfile:
+            f.write(i)
 
 
 class T5_Accuracy_Metrics:
@@ -90,20 +102,18 @@ class T5_Accuracy_Metrics:
             j = self.tokenizer.decode(j).replace('enter', '\n')
             print(f"{count}: ")
             print("  pred: ", end='')
-    
             try: exec(get_answer(i, classi_class=self.classi)[0])
             except: print("error")
             finally: print("")
-            # try: pred.append(input())
-            # except: pred.append("bb")
+            
             print("  label: ", end='')
             try: exec(get_answer(j, classi_class=self.classi)[0])
             except: print("Error")
             finally: print("")
-            # try: label.append(input())
-            # except: label.append("ab")
+            
         sys.stdout = A
-        # sys.stdin = B
+        check_yaml(self.homedir)
+
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
         result = pd.DataFrame(result).transpose()
