@@ -112,7 +112,7 @@ class T5_Accuracy_Metrics:
             finally: print("")
             
         sys.stdout = A
-        check_yaml(self.homedir)
+        check_yaml(f"{self.homedir}/stdout.txt")
 
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
