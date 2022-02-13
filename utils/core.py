@@ -70,8 +70,8 @@ class T5_Accuracy_Metrics:
         if not self.classi:
             for i, j in zip(predictions, labels):
                 count += 1
-                i = self.tokenizer.decode(i).replace('enter', '\n')
-                j = self.tokenizer.decode(j).replace('enter', '\n')
+                i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}")
+                j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}")
                 print(f"{count}: ")
                 print("  pred: ", end='')
         
