@@ -47,7 +47,7 @@ def check_yaml(filedir):
             if len(re.findall(":", i)) > 1: i='  pred: error\n'
             i = i.replace("'", "").replace('"', "")
             i_ = i.split(":")
-            if len(i_[-1])>2: i = i_[0] + ': "' + i_[-1].strip() + '"' + '\n'
+            if len(i_[-1].strip())>1: i = i_[0] + ': "' + i_[-1].strip() + '"' + '\n'
 
             cleanfile.append(i)
     
