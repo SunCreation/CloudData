@@ -46,6 +46,9 @@ def check_yaml(filedir):
             if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
             if len(re.findall(":", i)) > 1: i='  pred: error\n'
             i = i.replace("'", "").replace('"', "")
+            i_ = i.split(":")
+            if len(i_)>1: i = i_[0] + ': "' + i_[-1] + '"'
+
             cleanfile.append(i)
     
     with open(filedir, "w") as f:
@@ -93,8 +96,8 @@ class T5_Accuracy_Metrics:
             with open(f"{self.homedir}/stdout.txt",'r') as f:
                 result = yaml.load(f, Loader=yaml.FullLoader)
             result = pd.DataFrame(result).transpose()
-            pred = list(map(str, result['pred']))
-            label = list(map(str, result['label']))
+            pred = list(result['pred'])
+            label = list(result['label'])
             result=None
             return {'accuracy':acsr(pred, label)}
 
@@ -119,8 +122,8 @@ class T5_Accuracy_Metrics:
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
         result = pd.DataFrame(result).transpose()
-        pred = list(map(str, result['pred']))
-        label = list(map(str, result['label']))
+        pred = list(result['pred'])
+        label = list(result['label'])
         result=None
         return {'accuracy':acsr(pred, label)}
 
@@ -165,8 +168,8 @@ class GPT_Accuracy_Metrics:
             with open(f"{self.homedir}/stdout.txt",'r') as f:
                 result = yaml.load(f, Loader=yaml.FullLoader)
             result = pd.DataFrame(result).transpose()
-            pred = list(map(str, result['pred']))
-            label = list(map(str, result['label']))
+            pred = list(result['pred'])
+            label = list(result['label'])
             result=None
             return {'accuracy':acsr(pred, label)}
 
@@ -191,7 +194,7 @@ class GPT_Accuracy_Metrics:
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
         result = pd.DataFrame(result).transpose()
-        pred = list(map(str, result['pred']))
-        label = list(map(str, result['label']))
+        pred = list(result['pred'])
+        label = list(result['label'])
         result=None
         return {'accuracy':acsr(pred, label)}
