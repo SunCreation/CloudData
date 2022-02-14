@@ -27,5 +27,5 @@ check_yaml('yam.yaml')
 
 with open("yam.yaml", 'r') as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
-data = pd.DataFrame(data).transpose()
-print(list(data['class^2']))
+# data = pd.DataFrame(data).transpose()
+print(data[2])

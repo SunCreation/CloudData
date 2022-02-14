@@ -38,12 +38,14 @@ def solve_problem2json(problem, i, model=None, tokenizer=None, classi_class=True
         print('error')
     print("")
 
+
 def check_yaml(filedir):
     cleanfile = []
     with open(filedir, "r") as f:
         for i in f.readlines():
             if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
             if len(re.findall(":", i)) > 1: i='  pred: error\n'
+            i = i.replace("'", "").replace('"', "")
             cleanfile.append(i)
     
     with open(filedir, "w") as f:
