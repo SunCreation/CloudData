@@ -46,8 +46,8 @@ def check_yaml(filedir):
             if i.startswith('error') or i.startswith('Error') or i.strip() == '': continue
             if len(re.findall(":", i)) > 1: i='  pred: error\n'
             i = i.replace("'", "").replace('"', "")
-            # i_ = i.split(":")
-            # if len(i_[-1].strip())>1: i = i_[0] + ': "' + i_[-1].strip() + '"' + '\n'
+            i_ = i.split(":")
+            if len(i_[-1].strip())>1: i = i_[0] + ': "' + i_[-1].strip() + '"' + '\n'
 
             cleanfile.append(i)
     
