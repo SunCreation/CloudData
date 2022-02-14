@@ -93,8 +93,8 @@ class T5_Accuracy_Metrics:
             with open(f"{self.homedir}/stdout.txt",'r') as f:
                 result = yaml.load(f, Loader=yaml.FullLoader)
             result = pd.DataFrame(result).transpose()
-            pred = list(result['pred'])
-            label = list(result['label'])
+            pred = list(map(str, result['pred']))
+            label = list(map(str, result['label']))
             result=None
             return {'accuracy':acsr(pred, label)}
 
@@ -119,8 +119,8 @@ class T5_Accuracy_Metrics:
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
         result = pd.DataFrame(result).transpose()
-        pred = list(result['pred'])
-        label = list(result['label'])
+        pred = list(map(str, result['pred']))
+        label = list(map(str, result['label']))
         result=None
         return {'accuracy':acsr(pred, label)}
 
@@ -165,8 +165,8 @@ class GPT_Accuracy_Metrics:
             with open(f"{self.homedir}/stdout.txt",'r') as f:
                 result = yaml.load(f, Loader=yaml.FullLoader)
             result = pd.DataFrame(result).transpose()
-            pred = list(result['pred'])
-            label = list(result['label'])
+            pred = list(map(str, result['pred']))
+            label = list(map(str, result['label']))
             result=None
             return {'accuracy':acsr(pred, label)}
 
@@ -191,7 +191,7 @@ class GPT_Accuracy_Metrics:
         with open(f"{self.homedir}/stdout.txt",'r') as f:
             result = yaml.load(f, Loader=yaml.FullLoader)
         result = pd.DataFrame(result).transpose()
-        pred = list(result['pred'])
-        label = list(result['label'])
+        pred = list(map(str, result['pred']))
+        label = list(map(str, result['label']))
         result=None
         return {'accuracy':acsr(pred, label)}
