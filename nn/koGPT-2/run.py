@@ -1,6 +1,6 @@
 if "__file__" in globals():
     import os, sys
-    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+    sys.path.append(os.path.join(os.path.dirname(__file__), "../.."))
 
 
 import os
@@ -28,10 +28,11 @@ np.random.seed(42)
 random.seed(42) 
 torch.cuda.manual_seed_all(42)
 
+homedir = input("Home dir: ")
 
 def prepare_train_features(examples):
-    for i, j in enumerate(examples['problem']):
-        examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
+    # for i, j in enumerate(examples['problem']):
+    #     examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
 
     tokenized_examples = tokenizer(
         text=examples['problem'],
@@ -51,22 +52,22 @@ tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>'
 
 model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-dataset = load_dataset('csv', data_files='../agutrain.csv', split='train')
-valdataset = load_dataset('csv', data_files='../Valtrain.csv', split='train')
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/Agutrain.csv', split='train')
+valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/Valtrain.csv', split='train')
 
 
 
 tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
 
-compute_metrics = GPT_Accuracy_Metrics(tokenizer, '/content', classi_class=True)
+compute_metrics = GPT_Accuracy_Metrics(tokenizer, f"{homedir}", classi_class=True)
 
 print(tokenizer.decode(tokenized_datasets[0]["input_ids"]))
 
 args = TrainingArguments(
-    output_dir='kogpt-finetune-batch20',
+    output_dir='kogpt-finetune-batch16',
     overwrite_output_dir = True,
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=14,
     per_device_eval_batch_size=1,
     # num_train_epochs = 25,
     warmup_steps=800,
@@ -113,7 +114,7 @@ def solve_problem(problem):
         print('error')
     print("")
 
-test = pd.read_csv('../../KMWP/data/test.csv')
+test = pd.read_csv(f'{homedir}/KMWP/data/test.csv')
 
 import random
 
