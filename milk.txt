@@ -7,11 +7,11 @@ apt update
 apt upgrade -y
 apt install openjdk-11-jdk -y
 echo "alias pip=pip3" >> ~/.bashrc
-. ~/bashrc
+. ~/.bashrc
 pip install -U Commitizen
 pip install sentencepiece
 pip install transformers
 apt install vim -y
 echo "alias push='. /${dirt}/CloudData/push'" >> ~/.bashrc
 pip install -r /${dirt}/CloudData/requirements
-. ~/bashrc
+. ~/.bashrc

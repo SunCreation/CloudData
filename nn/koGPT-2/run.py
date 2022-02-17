@@ -1,3 +1,7 @@
+if "__file__" in globals():
+    import os, sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 
 import os
 from os import path
@@ -69,11 +73,11 @@ args = TrainingArguments(
     weight_decay=0.1,
     max_steps=5000,
     logging_strategy='steps',
-    logging_steps=50,
+    logging_steps=100,
     save_strategy = 'steps',
-    save_steps=50,
+    save_steps=100,
     evaluation_strategy = 'steps',
-    eval_steps=50,
+    eval_steps=100,
     load_best_model_at_end = True,
     report_to="wandb"
 )
