@@ -18,7 +18,7 @@ from datasets import load_dataset
 import pandas as pd
 from datasets import load_metric
 import numpy as np
-from utils import GPT_Accuracy_Metrics, get_answer
+from utils import GPTAccuracyMetrics, get_answer
 import sys
 import time
 import random
@@ -63,7 +63,7 @@ tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remov
 # tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 # valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
 
-compute_metrics = GPT_Accuracy_Metrics(tokenizer, f"{homedir}", classi_class=True)
+compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
 print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 

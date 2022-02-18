@@ -56,7 +56,7 @@ def check_yaml(filedir):
             f.write(i)
 
 
-class T5_Accuracy_Metrics:
+class T5AccuracyMetrics:
     def __init__(self, tokenizer, homedir='~', classi_class=False):
         self.tokenizer = tokenizer
         self.homedir = homedir
@@ -128,7 +128,79 @@ class T5_Accuracy_Metrics:
         return {'accuracy':acsr(pred, label)}
 
 
-class GPT_Accuracy_Metrics:
+class GPTAccuracyMetrics:
+    def __init__(self, tokenizer, homedir='~', classi_class=False):
+        self.tokenizer = tokenizer
+        self.homedir = homedir
+        self.classi=classi_class
+
+    def __call__(self, eval_pred):
+        logits, labels = eval_pred
+        predictions = np.argmax(logits, axis=-1)
+        # print(get_answer(self.tokenizer.decode(predictions[0]))[0].replace('enter','\n'), self.classi)
+        # pred = []
+        # label = []
+        A = sys.stdout
+        B = sys.stdin
+        sys.stdout = open(f"{self.homedir}/stdout.txt","w")
+        # sys.stdin = open(f"{self.homedir}/stdout.txt","r")
+        count = 0 
+        if not self.classi:
+            for i, j in zip(predictions, labels):
+                count += 1
+                i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+                j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+                print(f"{count}: ")
+                print("  pred: ", end='')
+        
+                try: exec(get_answer(i, sep_token="<sys>", end_token="<pad>", classi_class=self.classi))
+                except: print("error")
+                finally: print("")
+                
+                print("  label: ", end='')
+                try: exec(get_answer(j, sep_token="<sys>", end_token="<pad>", classi_class=self.classi))
+                except: print("Error")
+                finally: print("")
+                
+            sys.stdout = A
+            check_yaml(f"{self.homedir}/stdout.txt")
+
+            with open(f"{self.homedir}/stdout.txt",'r') as f:
+                result = yaml.load(f, Loader=yaml.FullLoader)
+            result = pd.DataFrame(result).transpose()
+            pred = list(result['pred'])
+            label = list(result['label'])
+            result=None
+            return {'accuracy':acsr(pred, label)}
+
+        for i, j in zip(predictions, labels):
+            count += 1
+            i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+            j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+            print(f"{count}: ")
+            print("  pred: ", end='')
+            try: exec(get_answer(i, sep_token="<sys>", end_token="<pad>", classi_class=self.classi)[0])
+            except: print("error")
+            finally: print("")
+            
+            print("  label: ", end='')
+            try: exec(get_answer(j, sep_token="<sys>", end_token="<pad>", classi_class=self.classi)[0])
+            except: print("Error")
+            finally: print("")
+            
+        sys.stdout = A
+        check_yaml(f"{self.homedir}/stdout.txt")
+
+        with open(f"{self.homedir}/stdout.txt",'r') as f:
+            result = yaml.load(f, Loader=yaml.FullLoader)
+        result = pd.DataFrame(result).transpose()
+        pred = list(result['pred'])
+        label = list(result['label'])
+        result=None
+        return {'accuracy':acsr(pred, label)}
+
+
+class EncoderDecoderAccuracyMetrics:
     def __init__(self, tokenizer, homedir='~', classi_class=False):
         self.tokenizer = tokenizer
         self.homedir = homedir

@@ -1,6 +1,7 @@
 from utils.core import (
-    T5_Accuracy_Metrics,
-    GPT_Accuracy_Metrics,
+    T5AccuracyMetrics,
+    GPTAccuracyMetrics,
+    EncoderDecoderAccuracyMetrics,
     solve_problem2json,
     get_answer
 )
