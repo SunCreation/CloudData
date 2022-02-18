@@ -208,7 +208,7 @@ class EncoderDecoderAccuracyMetrics:
 
     def __call__(self, eval_pred):
         logits, labels = eval_pred
-        predictions = np.argmax(logits, axis=-1)
+        predictions = np.argmax(logits[0], axis=-1)
         # print(get_answer(self.tokenizer.decode(predictions[0]))[0].replace('enter','\n'), self.classi)
         # pred = []
         # label = []
@@ -225,12 +225,12 @@ class EncoderDecoderAccuracyMetrics:
                 print(f"{count}: ")
                 print("  pred: ", end='')
         
-                try: exec(get_answer(i, sep_token="<sys>", end_token="<pad>", classi_class=self.classi))
+                try: exec(get_answer(i, sep_token="[SEP]", end_token="<pad>", classi_class=self.classi))
                 except: print("error")
                 finally: print("")
                 
                 print("  label: ", end='')
-                try: exec(get_answer(j, sep_token="<sys>", end_token="<pad>", classi_class=self.classi))
+                try: exec(get_answer(j, sep_token="[SEP]", end_token="<pad>", classi_class=self.classi))
                 except: print("Error")
                 finally: print("")
                 

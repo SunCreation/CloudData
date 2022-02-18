@@ -19,6 +19,10 @@ from datasets import load_dataset
 import pandas as pd
 import random
 
+homedir = input("Home dir: ")
+
+
+
 tokenizer = AutoTokenizer.from_pretrained("kykim/bert-kor-base")
 model = EncoderDecoderModel.from_encoder_decoder_pretrained("kykim/bert-kor-base", "kykim/bert-kor-base")  # initialize Bert2Bert from pre-trained checkpoints
 
@@ -29,7 +33,7 @@ model.config.vocab_size = model.config.decoder.vocab_size
 
 dataset = load_dataset('csv', data_files='KMWP/data/train.csv', split='train')
 
-dictdataset = dataset.train_test_split()
+dictdataset = dataset.train_test_split(0.02)
 
 max_input_length = 118
 max_target_length = 169
@@ -56,17 +60,18 @@ args = Seq2SeqTrainingArguments(
     output_dir='enc-to-dec-finetune',
     # overwrite_output_dir = True,
     per_device_train_batch_size=8,
-    per_device_eval_batch_size=64,
+    per_device_eval_batch_size=1,
     num_train_epochs = 5,
     logging_strategy='epoch',
     save_strategy = 'epoch',
-    evaluation_strategy = 'epoch',
+    evaluation_strategy = 'steps',
+    eval_steps=30,
     # load_best_model_at_end = True,
 )
 
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
 
-compute_metrics = EncoderDecoderAccuracyMetrics(tokenizer, )
+compute_metrics = EncoderDecoderAccuracyMetrics(tokenizer, f"{homedir}", classi_class=False)
 
 
 trainer = Seq2SeqTrainer(
