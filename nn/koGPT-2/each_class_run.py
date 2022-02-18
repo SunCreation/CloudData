@@ -53,7 +53,7 @@ tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>'
 
 model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/train_half.csv', split='train')
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/clean_half_correct.csv', split='train')
 # valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/Valtrain.csv', split='train')
 
 dictdataset = dataset.train_test_split(0.06)

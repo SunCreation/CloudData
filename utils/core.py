@@ -6,13 +6,13 @@ import pandas as pd
 import re
 
 def get_answer(sent, sep_token="<sep>", end_token="</s>", classi_class=True):
+    sent_ = sent.split(sep_token)[-1]
     if classi_class:
-        sent_ = sent.split(sep_token)[-1]
         class_ = sent.split(sep_token)[0]
         sent = sent_.split(end_token)[0]
         sent = sent.strip()
         return sent, class_
-    sent = sent.split(end_token)[0]
+    sent = sent_.split(end_token)[0]
     sent = sent.strip()
     return sent
 
