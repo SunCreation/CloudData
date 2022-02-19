@@ -30,6 +30,8 @@ model = EncoderDecoderModel.from_encoder_decoder_pretrained("kykim/bert-kor-base
 model.config.decoder_start_token_id = 2
 model.config.pad_token_id = tokenizer.pad_token_id
 model.config.vocab_size = model.config.decoder.vocab_size
+model.config.max_length = 100
+
 
 dataset = load_dataset('csv', data_files='KMWP/data/train.csv', split='train')
 
@@ -39,6 +41,11 @@ max_input_length = 118
 max_target_length = 169
 
 def prepare_train_features(examples):
+    for i, x in enumerate(examples['code']):
+        new = x.replace('\n', 'enter').replace("{", "bra").replace("}", "cat").replace("    ", "들여")
+        examples['code'][i] = new
+
+
     tokenized_examples = tokenizer(
         text=examples['problem'],
         # text_pair=examples['code'],
@@ -46,8 +53,8 @@ def prepare_train_features(examples):
         max_length=216
     )
     tokenized_examples["labels"] = tokenizer(
-        text=examples['code'],
-        # text_pair=examples['code'],
+        text=examples['class'],
+        text_pair=examples['code'],
         padding='max_length',
         max_length=216
     )['input_ids']
@@ -71,7 +78,7 @@ args = Seq2SeqTrainingArguments(
 
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
 
-compute_metrics = EncoderDecoderAccuracyMetrics(tokenizer, f"{homedir}", classi_class=False)
+compute_metrics = EncoderDecoderAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
 
 trainer = Seq2SeqTrainer(

@@ -225,12 +225,12 @@ class EncoderDecoderAccuracyMetrics:
                 print(f"{count}: ")
                 print("  pred: ", end='')
         
-                try: exec(get_answer(i, sep_token="[SEP]", end_token="<pad>", classi_class=self.classi))
+                try: exec(get_answer(i, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi))
                 except: print("error")
                 finally: print("")
                 
                 print("  label: ", end='')
-                try: exec(get_answer(j, sep_token="[SEP]", end_token="<pad>", classi_class=self.classi))
+                try: exec(get_answer(j, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi))
                 except: print("Error")
                 finally: print("")
                 
@@ -251,12 +251,12 @@ class EncoderDecoderAccuracyMetrics:
             j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
             print(f"{count}: ")
             print("  pred: ", end='')
-            try: exec(get_answer(i, sep_token="<sys>", end_token="<pad>", classi_class=self.classi)[0])
+            try: exec(get_answer(i, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi)[0])
             except: print("error")
             finally: print("")
             
             print("  label: ", end='')
-            try: exec(get_answer(j, sep_token="<sys>", end_token="<pad>", classi_class=self.classi)[0])
+            try: exec(get_answer(j, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi)[0])
             except: print("Error")
             finally: print("")
             
