@@ -222,8 +222,8 @@ class EncoderDecoderAccuracyMetrics:
                 count += 1
                 i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
                 j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
-                i = re.sub(r'\s([\(\)\{\}\/])\s|\s([\(\)\{\}\/])|([\(\)\{\}\/])\s', r'\1\2\3', i)
-                j = re.sub(r'\s([\(\)\{\}\/])\s|\s([\(\)\{\}\/])|([\(\)\{\}\/])\s', r'\1\2\3', j)
+                i = re.sub(r'\s([\(\)\{\}\/\.])\s|\s([\(\)\{\}\/\.])|([\(\)\{\}\/\.])\s', r'\1\2\3', i)
+                j = re.sub(r'\s([\(\)\{\}\/\.])\s|\s([\(\)\{\}\/\.])|([\(\)\{\}\/\.])\s', r'\1\2\3', j)
 
                 print(f"{count}: ")
                 print("  pred: ", end='')
@@ -252,8 +252,8 @@ class EncoderDecoderAccuracyMetrics:
             count += 1
             i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
             j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
-            i = re.sub(r'\s([\(\)\{\}\/])\s|\s([\(\)\{\}\/])|([\(\)\{\}\/])\s', r'\1\2\3', i)
-            j = re.sub(r'\s([\(\)\{\}\/])\s|\s([\(\)\{\}\/])|([\(\)\{\}\/])\s', r'\1\2\3', j)
+            i = re.sub(r'\s([\(\)\{\}\/\.])\s|\s([\(\)\{\}\/\.])|([\(\)\{\}\/\.])\s', r'\1\2\3', i)
+            j = re.sub(r'\s([\(\)\{\}\/\.])\s|\s([\(\)\{\}\/\.])|([\(\)\{\}\/\.])\s', r'\1\2\3', j)
             print(f"{count}: ")
             print("  pred: ", end='')
             try: exec(i)
