@@ -201,10 +201,11 @@ class GPTAccuracyMetrics:
 
 
 class EncoderDecoderAccuracyMetrics:
-    def __init__(self, tokenizer, homedir='~', classi_class=False):
+    def __init__(self, tokenizer, homedir='~', classi_class=False, sep_token='[SEP]', start_token='[CLS]'):
         self.tokenizer = tokenizer
         self.homedir = homedir
         self.classi=classi_class
+        self.sep_token = sep_token
 
     def __call__(self, eval_pred):
         logits, labels = eval_pred
@@ -250,8 +251,10 @@ class EncoderDecoderAccuracyMetrics:
 
         for i, j in zip(predictions, labels):
             count += 1
-            i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
-            j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            i = self.tokenizer.decode(i).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            j = self.tokenizer.decode(j).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            i = i.split(self.sep_token)[1].strip()
+            j = j.split(self.sep_token)[1].strip()
             i = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', i)
             j = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', j)
             print(f"{count}: ")

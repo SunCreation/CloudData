@@ -18,7 +18,7 @@ from transformers import (
 from datasets import load_dataset
 import pandas as pd
 import random
-
+import re
 homedir = input("Home dir: ")
 
 
@@ -42,8 +42,11 @@ max_target_length = 169
 
 def prepare_train_features(examples):
     for i, x in enumerate(examples['code']):
-        new = x.replace('\n', 'enter').replace("{", "bra").replace("}", "cat").replace("    ", "들여")
+        new = x.replace('\n', 'enter').replace('   ','tab').replace('"', '따')
         examples['code'][i] = new
+    
+    for i, x in enumerate(examples['class']):
+        examples['class'][i] = str(examples['class'][i])
 
 
     tokenized_examples = tokenizer(
@@ -62,13 +65,21 @@ def prepare_train_features(examples):
 
 
 tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dictdataset["train"].column_names).remove_columns('token_type_ids')
+# for i in range(5):
+#     text = tokenizer.decode(tokenized_datasets["test"][i]['labels']).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+#     text = text.split('[SEP]')[1].strip()
+#     text = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', text)
 
+
+#     print(text)
+
+# exit()
 args = Seq2SeqTrainingArguments(
     output_dir='enc-to-dec-finetune',
     # overwrite_output_dir = True,
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=8,
     per_device_eval_batch_size=1,
-    num_train_epochs = 5,
+    max_steps = 2000,
     logging_strategy='steps',
     save_strategy = 'steps',
     evaluation_strategy = 'steps',
