@@ -66,13 +66,13 @@ tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remov
 args = Seq2SeqTrainingArguments(
     output_dir='enc-to-dec-finetune',
     # overwrite_output_dir = True,
-    per_device_train_batch_size=8,
+    per_device_train_batch_size=16,
     per_device_eval_batch_size=1,
     num_train_epochs = 5,
-    logging_strategy='epoch',
-    save_strategy = 'epoch',
+    logging_strategy='steps',
+    save_strategy = 'steps',
     evaluation_strategy = 'steps',
-    eval_steps=30,
+    eval_steps=100,
     # load_best_model_at_end = True,
 )
 
@@ -92,3 +92,18 @@ trainer = Seq2SeqTrainer(
 )
 
 trainer.train()
+
+device = torch.device('cpu')
+model = model.to(device)
+
+test = pd.read_csv('KMWP/data/test.csv')
+
+for i in test["problem"][:5]:
+    print(i)
+    input_ = tokenizer(i)
+    output = model.generate(input_)
+    output = tokenizer.decode(output, skip_special_token=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+    print(output)
+    try:
+        exec(output)
+    except: print('error')
