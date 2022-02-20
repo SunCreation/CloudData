@@ -220,17 +220,20 @@ class EncoderDecoderAccuracyMetrics:
         if not self.classi:
             for i, j in zip(predictions, labels):
                 count += 1
-                i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
-                j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+                i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+                j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+                i = re.sub(r'\s([\(\)\{\}])\s|\s([\(\)\{\}])|([\(\)\{\}])\s', r'\1\2\3', i)
+                j = re.sub(r'\s([\(\)\{\}])\s|\s([\(\)\{\}])|([\(\)\{\}])\s', r'\1\2\3', j)
+
                 print(f"{count}: ")
                 print("  pred: ", end='')
         
-                try: exec(get_answer(i, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi))
+                try: exec(i)
                 except: print("error")
                 finally: print("")
                 
                 print("  label: ", end='')
-                try: exec(get_answer(j, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi))
+                try: exec(j)
                 except: print("Error")
                 finally: print("")
                 
@@ -247,16 +250,18 @@ class EncoderDecoderAccuracyMetrics:
 
         for i, j in zip(predictions, labels):
             count += 1
-            i = self.tokenizer.decode(i).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
-            j = self.tokenizer.decode(j).replace('enter', '\n').replace("bra", "{").replace("cat","}").replace("들여", "    ")
+            i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            i = re.sub(r'\s([\(\)\{\}])\s|\s([\(\)\{\}])|([\(\)\{\}])\s', r'\1\2\3', i)
+            j = re.sub(r'\s([\(\)\{\}])\s|\s([\(\)\{\}])|([\(\)\{\}])\s', r'\1\2\3', j)
             print(f"{count}: ")
             print("  pred: ", end='')
-            try: exec(get_answer(i, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi)[0])
+            try: exec(i)
             except: print("error")
             finally: print("")
             
             print("  label: ", end='')
-            try: exec(get_answer(j, sep_token="[SEP]", end_token="[PAD]", classi_class=self.classi)[0])
+            try: exec(j)
             except: print("Error")
             finally: print("")
             
