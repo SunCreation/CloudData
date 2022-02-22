@@ -221,8 +221,8 @@ class EncoderDecoderAccuracyMetrics:
         if not self.classi:
             for i, j in zip(predictions, labels):
                 count += 1
-                i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
-                j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+                i = self.tokenizer.decode(i, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"').replace('작', "'")
+                j = self.tokenizer.decode(j, skip_special_tokens=True).replace('enter', '\n').replace("tab", "    ").replace('따', '"').replace('작', "'")
                 i = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', i)
                 j = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', j)
 
@@ -251,8 +251,8 @@ class EncoderDecoderAccuracyMetrics:
 
         for i, j in zip(predictions, labels):
             count += 1
-            i = self.tokenizer.decode(i).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
-            j = self.tokenizer.decode(j).replace('enter', '\n').replace("tab", "    ").replace('따', '"')
+            i = self.tokenizer.decode(i).replace('enter', '\n').replace("tab", "    ").replace('따', '"').replace('작', "'")
+            j = self.tokenizer.decode(j).replace('enter', '\n').replace("tab", "    ").replace('따', '"').replace('작', "'")
             i = i.split(self.sep_token)[1].strip()
             j = j.split(self.sep_token)[1].strip()
             i = re.sub(r'\s([\(\)\{\}\/\.=])\s|\s([\(\)\{\}\/\.=])|([\(\)\{\}\/\.=])\s', r'\1\2\3', i)

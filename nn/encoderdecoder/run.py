@@ -42,12 +42,11 @@ max_target_length = 169
 
 def prepare_train_features(examples):
     for i, x in enumerate(examples['code']):
-        new = x.replace('\n', 'enter').replace('   ','tab').replace('"', '따')
+        new = x.replace('\n', 'enter').replace('   ','tab').replace("'", '작').replace('"', '따')
         examples['code'][i] = new
     
     for i, x in enumerate(examples['class']):
         examples['class'][i] = str(examples['class'][i])
-
 
     tokenized_examples = tokenizer(
         text=examples['problem'],
