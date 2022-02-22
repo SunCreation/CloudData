@@ -29,7 +29,7 @@ np.random.seed(42)
 random.seed(42) 
 torch.cuda.manual_seed_all(42)
 
-homedir = input("Home dir: ")
+homedir = os.getcwd()
 
 def prepare_train_features(examples):
     for i, j in enumerate(examples['problem']):
@@ -47,13 +47,13 @@ def prepare_train_features(examples):
 
 
 
-wandb.init(project="kogpt2-pretrained-baseline", entity="math-solver")
+wandb.init(project="kogpt2_cleandata", entity="math-solver")
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
 model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/train_half.csv', split='train')
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/clean_all_correct.csv', split='train')
 # valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/Valtrain.csv', split='train')
 
 dictdataset = dataset.train_test_split(0.06)
@@ -68,14 +68,14 @@ compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 
 args = TrainingArguments(
-    output_dir='kogpt-finetune-batch14-clean',
+    output_dir='kogpt-finetune-batch20-clean',
     overwrite_output_dir = True,
-    per_device_train_batch_size=14,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=20,
+    per_device_eval_batch_size=8,
     # num_train_epochs = 25,
     warmup_steps=400,
     weight_decay=0.1,
-    max_steps=5000,
+    max_steps=6000,
     logging_strategy='steps',
     logging_steps=100,
     save_strategy = 'steps',
