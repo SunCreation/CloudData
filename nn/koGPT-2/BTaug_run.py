@@ -47,28 +47,28 @@ def prepare_train_features(examples):
 
 
 
-wandb.init(project="kogpt2_cleandata", entity="math-solver")
+wandb.init(project="kogpt2_cleandata_BT", entity="math-solver")
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
 model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/clean_all_correct.csv', split='train')
-# valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/Valtrain.csv', split='train')
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/BTaugdata.csv', split='train')
+valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/BTvaldata.csv', split='train')
 
-dictdataset = dataset.train_test_split(0.06)
+# dictdataset = dataset.train_test_split(0.06)
 
-tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+# tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 
-# tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
-# valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
+tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
 
 compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
 print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 
 args = TrainingArguments(
-    output_dir='kogpt-finetune-batch32-clean',
+    output_dir='kogpt-finetune-batch32-agu',
     overwrite_output_dir = True,
     per_device_train_batch_size=32,
     per_device_eval_batch_size=8,
@@ -89,9 +89,9 @@ args = TrainingArguments(
 trainer = Trainer(
     model,
     args,
-    train_dataset=tokenized_datasets['train'],
+    train_dataset=tokenized_datasets,
     # eval_dataset=valtokenized_datasets,
-    eval_dataset=tokenized_datasets['test'],
+    eval_dataset=valtokenized_datasets,
     compute_metrics=compute_metrics,
     # data_collator=data_collator,
 )
