@@ -65,7 +65,9 @@ valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, rem
 
 compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
-print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
+# print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
+print(tokenizer.decode(tokenized_datasets[0]["input_ids"]))
+
 
 args = TrainingArguments(
     output_dir='kogpt-finetune-batch32-agu',
