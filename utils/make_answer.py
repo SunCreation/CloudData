@@ -22,7 +22,8 @@ model = GPT2LMHeadModel.from_pretrained(f"{homedir}/{modelpath}").to(device)
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', eos_token='</s>', pad_token='<pad>')
 # model = checkpoint.gpt_model
-data = pd.read_csv(f"{homedir}/CloudData/math/data/test.csv")
+testfile = input('Which data test? filename: ')
+data = pd.read_csv(f"{homedir}/CloudData/math/data/{testfile}.csv")
 
 
 
@@ -58,7 +59,7 @@ def solve_problem(problem, i):
     print("")
 # for i in data["problem"][:5]:
 #     solve_problem(i)
-filename = input("What file?: ")
+filename = input("What is output_file?: ")
 import sys
 from tqdm import tqdm
 stdout_ = sys.stdout
