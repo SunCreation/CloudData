@@ -65,17 +65,19 @@ tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remov
 
 compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
-print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
+print(tokenizer.decode(tokenized_datasets['train'][0]["attention_mask"]))
+
+exit()
 
 args = TrainingArguments(
     output_dir='kogpt-finetune-batch16x4-clean',
     overwrite_output_dir = True,
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=32,
     per_device_eval_batch_size=8,
     # num_train_epochs = 25,
     warmup_steps=400,
     weight_decay=0.1,
-    max_steps=8000,
+    max_steps=10000,
     logging_strategy='steps',
     logging_steps=100,
     save_strategy = 'steps',
