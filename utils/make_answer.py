@@ -38,7 +38,7 @@ def solve_problem(problem, i):
     input_ids = tokenizer(problem+"<sys>",return_tensors='pt')['input_ids']
     # input_ids = tokenizer(problem,return_tensors='pt')['input_ids']
 
-    output = model.generate(input_ids, max_length = 216, do_sample=True, top_k=50, top_p=0.95, num_return_sequences=1)
+    output = model.generate(input_ids, max_length = 216) #, do_sample=True, top_k=50, top_p=0.95, num_return_sequences=1)
     sentence = tokenizer.decode(output[0].numpy().tolist())
     sentence, class_ = get_answer(sentence)
     # print(problem.rstrip("<sys>"))
