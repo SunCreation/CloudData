@@ -70,9 +70,9 @@ print(tokenizer.decode(tokenized_datasets[0]["input_ids"]))
 
 
 args = TrainingArguments(
-    output_dir='kogpt-finetune-batch16-agu',
+    output_dir='kogpt-finetune-batch32-agu',
     overwrite_output_dir = True,
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=32,
     per_device_eval_batch_size=4,
     # num_train_epochs = 25,
     warmup_steps=400,
