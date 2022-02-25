@@ -47,7 +47,7 @@ def prepare_train_features(examples):
 
 
 
-wandb.init(project="kogpt2_cleandata_BT", entity="math-solver")
+wandb.init(project="kogpt2_cleandata_BT", entity="math-solver", name='batch8*4')
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
@@ -70,14 +70,14 @@ print(tokenizer.decode(tokenized_datasets[0]["input_ids"]))
 
 
 args = TrainingArguments(
-    output_dir='kogpt-finetune-batch16-agu',
+    output_dir='kogpt-batch8*4-BT',
     overwrite_output_dir = True,
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=8,
     per_device_eval_batch_size=4,
     # num_train_epochs = 25,
     warmup_steps=400,
     weight_decay=0.1,
-    max_steps=8000,
+    max_steps=10000,
     logging_strategy='steps',
     logging_steps=100,
     save_strategy = 'steps',
@@ -102,36 +102,36 @@ trainer.train()
 
 
 
-device = torch.device('cpu')
-model = model.to(device)
-# model = GPT2LMHeadModel.from_pretrained('test-kogpt-trained-hchang').to(device)
+# device = torch.device('cpu')
+# model = model.to(device)
+# # model = GPT2LMHeadModel.from_pretrained('test-kogpt-trained-hchang').to(device)
 
-def solve_problem(problem):
-    input_ids = tokenizer(problem+"<sys>",return_tensors='pt')['input_ids']
-    output = model.generate(input_ids, max_length = 216)
-    sentence = tokenizer.decode(output[0].numpy().tolist())
-    sentence = get_answer(sentence, sep_token='<sys>', end_token='<pad>', classi_class=False)
-    print('=====')
-    print(f'{sentence}')
-    print('실행결과:')
-    try:
-        exec(sentence)
-    except:
-        print('error')
-    print("")
+# def solve_problem(problem):
+#     input_ids = tokenizer(problem+"<sys>",return_tensors='pt')['input_ids']
+#     output = model.generate(input_ids, max_length = 216)
+#     sentence = tokenizer.decode(output[0].numpy().tolist())
+#     sentence = get_answer(sentence, sep_token='<sys>', end_token='<pad>', classi_class=False)
+#     print('=====')
+#     print(f'{sentence}')
+#     print('실행결과:')
+#     try:
+#         exec(sentence)
+#     except:
+#         print('error')
+#     print("")
 
-test = pd.read_csv(f'{homedir}/KMWP/data/test.csv')
+# test = pd.read_csv(f'{homedir}/KMWP/data/test.csv')
 
-import random
+# import random
 
-for _ in range(5):
-    i = random.randint(0, 281)
-    p = test.iloc[i]['problem']
-    print(f'{p}')
-    solve_problem(p)
+# for _ in range(5):
+#     i = random.randint(0, 281)
+#     p = test.iloc[i]['problem']
+#     print(f'{p}')
+#     solve_problem(p)
 
-time.sleep(3)
-answer = input("저장 고?")
-if answer=="N": exit()
+# time.sleep(3)
+# answer = input("저장 고?")
+# if answer=="N": exit()
 
-trainer.save_model('test-kogpt-trained-hchang')
+# trainer.save_model('test-kogpt-trained-hchang')
