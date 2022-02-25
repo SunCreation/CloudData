@@ -31,19 +31,6 @@ torch.cuda.manual_seed_all(42)
 
 homedir = os.getcwd()
 
-def prepare_train_features(examples):
-    for i, j in enumerate(examples['problem']):
-        examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
-
-    tokenized_examples = tokenizer(
-        text=examples['problem'],
-        text_pair=examples['code'],
-        padding='max_length',
-        max_length=260
-    )
-    tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
-    return tokenized_examples
-
 parser = ap.ArgumentParser(description='hyper&input')
 parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
 parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
@@ -66,10 +53,25 @@ project = args.projectname
 
 device_num = torch.cuda.device_count()
 
+def prepare_train_features(examples):
+    for i, j in enumerate(examples['problem']):
+        examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
+
+    tokenized_examples = tokenizer(
+        text=examples['problem'],
+        text_pair=examples['code'],
+        padding='max_length',
+        max_length=260
+    )
+    tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
+    return tokenized_examples
+
 if filepath:
     filelist = os.listdir(f'{homedir}/CloudData/math/data/{filepath}')
     for filename in filelist:
-        wandb.init(project=project, entity="math-solver", name=filename.split()[0])
+        graph = filename.split()[0]
+        mname = modelname + '_' + graph
+        wandb.init(project=project, entity="math-solver", name=mname)
 
         tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
@@ -91,7 +93,7 @@ if filepath:
         # print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 
         args = TrainingArguments(
-            output_dir=modelname,
+            output_dir=mname,
             overwrite_output_dir = True,
             per_device_train_batch_size=args.batch_size//device_num,
             per_device_eval_batch_size=args.valbatch_size_perdevice,
@@ -113,20 +115,16 @@ if filepath:
                 model,
                 args,
                 train_dataset=tokenized_datasets,
-                # eval_dataset=valtokenized_datasets,
                 eval_dataset=valtokenized_datasets,
                 compute_metrics=compute_metrics,
-                # data_collator=data_collator,
             )
         else:
             trainer = Trainer(
                 model,
                 args,
                 train_dataset=tokenized_datasets['train'],
-                # eval_dataset=valtokenized_datasets,
                 eval_dataset=tokenized_datasets['test'],
                 compute_metrics=compute_metrics,
-                # data_collator=data_collator,
             )
 
         trainer.train()
