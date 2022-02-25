@@ -77,7 +77,7 @@ if filepath:
 
         model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-        dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filename}', split='train')
+        dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
         if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
         else: 
             dictdataset = dataset.train_test_split(0.06)
