@@ -45,7 +45,8 @@ def prepare_train_features(examples):
     return tokenized_examples
 
 parser = ap.ArgumentParser(description='hyper&input')
-parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without ')
+parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
+parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
 parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
 parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
 parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
@@ -57,102 +58,175 @@ args = parser.parse_args()
 
 val = args.validation_data
 
+filepath = args.input_path
+
+modelname = args.modelname
+
+project = args.projectname
+
 device_num = torch.cuda.device_count()
 
-wandb.init(project=args.projectname, entity="math-solver", name=args.modelname)
+if filepath:
+    filelist = os.listdir(f'{homedir}/CloudData/math/data/{filepath}')
+    for filename in filelist:
+        wandb.init(project=project, entity="math-solver", name=filename.split()[0])
 
-tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
+        tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
-model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+        model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{args.input_data}.csv', split='train')
-if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
-else: 
-    dictdataset = dataset.train_test_split(0.06)
-    tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+        dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filename}', split='train')
+        if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
+        else: 
+            dictdataset = dataset.train_test_split(0.06)
+            tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 
-# tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
-if val: 
-    tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
-    valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
+        # tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+        if val: 
+            tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+            valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
 
-compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
+        compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
 
-# print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
+        # print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 
-args = TrainingArguments(
-    output_dir='kogpt-finetune-batch16x4-clean',
-    overwrite_output_dir = True,
-    per_device_train_batch_size=args.batch_size//device_num,
-    per_device_eval_batch_size=args.valbatch_size_perdevice,
-    # num_train_epochs = 25,
-    warmup_steps=400,
-    weight_decay=0.1,
-    max_steps=10000,
-    logging_strategy='steps',
-    logging_steps=100,
-    save_strategy = 'steps',
-    save_steps=100,
-    evaluation_strategy = 'steps',
-    eval_steps=100,
-    load_best_model_at_end = True,
-    report_to="wandb"
-)
-if val:
-    trainer = Trainer(
-        model,
-        args,
-        train_dataset=tokenized_datasets,
-        # eval_dataset=valtokenized_datasets,
-        eval_dataset=valtokenized_datasets,
-        compute_metrics=compute_metrics,
-        # data_collator=data_collator,
-    )
+        args = TrainingArguments(
+            output_dir=modelname,
+            overwrite_output_dir = True,
+            per_device_train_batch_size=args.batch_size//device_num,
+            per_device_eval_batch_size=args.valbatch_size_perdevice,
+            # num_train_epochs = 25,
+            warmup_steps=400,
+            weight_decay=0.1,
+            max_steps=10000,
+            logging_strategy='steps',
+            logging_steps=100,
+            save_strategy = 'steps',
+            save_steps=100,
+            evaluation_strategy = 'steps',
+            eval_steps=100,
+            load_best_model_at_end = True,
+            report_to="wandb"
+        )
+        if val:
+            trainer = Trainer(
+                model,
+                args,
+                train_dataset=tokenized_datasets,
+                # eval_dataset=valtokenized_datasets,
+                eval_dataset=valtokenized_datasets,
+                compute_metrics=compute_metrics,
+                # data_collator=data_collator,
+            )
+        else:
+            trainer = Trainer(
+                model,
+                args,
+                train_dataset=tokenized_datasets['train'],
+                # eval_dataset=valtokenized_datasets,
+                eval_dataset=tokenized_datasets['test'],
+                compute_metrics=compute_metrics,
+                # data_collator=data_collator,
+            )
+
+        trainer.train()
+        wandb.finish()
+
 else:
-    trainer = Trainer(
-        model,
-        args,
-        train_dataset=tokenized_datasets['train'],
-        # eval_dataset=valtokenized_datasets,
-        eval_dataset=tokenized_datasets['test'],
-        compute_metrics=compute_metrics,
-        # data_collator=data_collator,
+    wandb.init(project=args.projectname, entity="math-solver", name=modelname)
+
+    tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
+
+    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+
+    dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{args.input_data}.csv', split='train')
+    if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
+    else: 
+        dictdataset = dataset.train_test_split(0.06)
+        tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+
+    # tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+    if val: 
+        tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+        valtokenized_datasets = valdataset.map(prepare_train_features, batched=True, remove_columns=valdataset.column_names)
+
+    compute_metrics = GPTAccuracyMetrics(tokenizer, f"{homedir}", classi_class=True)
+
+    # print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
+
+    args = TrainingArguments(
+        output_dir=modelname,
+        overwrite_output_dir = True,
+        per_device_train_batch_size=args.batch_size//device_num,
+        per_device_eval_batch_size=args.valbatch_size_perdevice,
+        # num_train_epochs = 25,
+        warmup_steps=400,
+        weight_decay=0.1,
+        max_steps=10000,
+        logging_strategy='steps',
+        logging_steps=100,
+        save_strategy = 'steps',
+        save_steps=100,
+        evaluation_strategy = 'steps',
+        eval_steps=100,
+        load_best_model_at_end = True,
+        report_to="wandb"
     )
+    if val:
+        trainer = Trainer(
+            model,
+            args,
+            train_dataset=tokenized_datasets,
+            # eval_dataset=valtokenized_datasets,
+            eval_dataset=valtokenized_datasets,
+            compute_metrics=compute_metrics,
+            # data_collator=data_collator,
+        )
+    else:
+        trainer = Trainer(
+            model,
+            args,
+            train_dataset=tokenized_datasets['train'],
+            # eval_dataset=valtokenized_datasets,
+            eval_dataset=tokenized_datasets['test'],
+            compute_metrics=compute_metrics,
+            # data_collator=data_collator,
+        )
 
-trainer.train()
+    trainer.train()
 
 
 
-device = torch.device('cpu')
-model = model.to(device)
-# model = GPT2LMHeadModel.from_pretrained('test-kogpt-trained-hchang').to(device)
+# device = torch.device('cpu')
+# model = model.to(device)
+# # model = GPT2LMHeadModel.from_pretrained('test-kogpt-trained-hchang').to(device)
 
-def solve_problem(problem):
-    input_ids = tokenizer(problem+"<sys>",return_tensors='pt')['input_ids']
-    output = model.generate(input_ids, max_length = 216)
-    sentence = tokenizer.decode(output[0].numpy().tolist())
-    sentence = get_answer(sentence, sep_token='<sys>', end_token='<pad>', classi_class=False)
-    print('=====')
-    print(f'{sentence}')
-    print('실행결과:')
-    try:
-        exec(sentence)
-    except:
-        print('error')
-    print("")
+# def solve_problem(problem):
+#     input_ids = tokenizer(problem+"<sys>",return_tensors='pt')['input_ids']
+#     output = model.generate(input_ids, max_length = 216)
+#     sentence = tokenizer.decode(output[0].numpy().tolist())
+#     sentence = get_answer(sentence, sep_token='<sys>', end_token='<pad>', classi_class=False)
+#     print('=====')
+#     print(f'{sentence}')
+#     print('실행결과:')
+#     try:
+#         exec(sentence)
+#     except:
+#         print('error')
+#     print("")
 
-test = pd.read_csv(f'{homedir}/KMWP/data/test.csv')
+# test = pd.read_csv(f'{homedir}/KMWP/data/test.csv')
 
-import random
+# import random
 
-for _ in range(5):
-    i = random.randint(0, 281)
-    p = test.iloc[i]['problem']
-    print(f'{p}')
-    solve_problem(p)
+# for _ in range(5):
+#     i = random.randint(0, 281)
+#     p = test.iloc[i]['problem']
+#     print(f'{p}')
+#     solve_problem(p)
 
-time.sleep(3)
-answer = input("저장 고?")
-if answer=="N": exit()
+# time.sleep(3)
+# answer = input("저장 고?")
+# if answer=="N": exit()
 
-trainer.save_model('test-kogpt-trained-hchang')
+# trainer.save_model('test-kogpt-trained-hchang')
