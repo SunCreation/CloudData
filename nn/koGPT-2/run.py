@@ -69,7 +69,7 @@ def prepare_train_features(examples):
 if filepath:
     filelist = os.listdir(f'{homedir}/CloudData/math/data/{filepath}')
     for filename in filelist:
-        graph = filename.split()[0]
+        graph = filename.split('.')[0]
         mname = modelname + '_' + graph
         wandb.init(project=project, entity="math-solver", name=mname)
 
