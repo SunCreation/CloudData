@@ -51,6 +51,10 @@ modelname = args.modelname
 
 project = args.projectname
 
+batch_size = args.batch_size
+
+valbatch_size_perdevice = args.valbatch_size_perdevice
+
 device_num = torch.cuda.device_count()
 
 def prepare_train_features(examples):
@@ -95,9 +99,8 @@ if filepath:
         args = TrainingArguments(
             output_dir=mname,
             overwrite_output_dir = True,
-            per_device_train_batch_size=args.batch_size//device_num,
-            per_device_eval_batch_size=args.valbatch_size_perdevice,
-            # num_train_epochs = 25,
+            per_device_train_batch_size=batch_size//device_num,
+            per_device_eval_batch_size=valbatch_size_perdevice,
             warmup_steps=400,
             weight_decay=0.1,
             max_steps=10000,
@@ -131,13 +134,17 @@ if filepath:
         wandb.finish()
 
 else:
-    wandb.init(project=args.projectname, entity="math-solver", name=modelname)
-
     tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-    dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{args.input_data}.csv', split='train')
+    input_data = args.input_data
+    filename = input_data.split('/')[-1]
+    mname = modelname+'_'+filename.split('.')[0]
+    wandb.init(project=args.projectname, entity="math-solver", name=mname)
+
+    dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{input_data}.csv', split='train')
+    
     if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
     else: 
         dictdataset = dataset.train_test_split(0.06)
@@ -153,10 +160,10 @@ else:
     # print(tokenizer.decode(tokenized_datasets['train'][0]["input_ids"]))
 
     args = TrainingArguments(
-        output_dir=modelname,
+        output_dir=mname,
         overwrite_output_dir = True,
-        per_device_train_batch_size=args.batch_size//device_num,
-        per_device_eval_batch_size=args.valbatch_size_perdevice,
+        per_device_train_batch_size=batch_size//device_num,
+        per_device_eval_batch_size=valbatch_size_perdevice,
         # num_train_epochs = 25,
         warmup_steps=400,
         weight_decay=0.1,
