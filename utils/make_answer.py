@@ -1,6 +1,5 @@
 
-from transformers import AutoTokenizer
-from transformers import TFGPT2LMHeadModel
+
 from transformers import (
     AutoTokenizer, 
     GPT2LMHeadModel,

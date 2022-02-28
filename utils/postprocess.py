@@ -10,19 +10,23 @@ def postprocess(ans):
     else: return str(ans)
 
 
-filename = input('Enter only filename: ')
-with open(f'{filename}.json', "r") as f:
-    data = json.load(f)
 
-# print(data["1"])
 
-data = pd.DataFrame(data).transpose()
-data['answer'] = data['answer'].apply(postprocess)
-data = data.transpose()
-data = data.to_dict()
+if '__main__'==__name__:
+    filename = input('Enter only filename: ')
+    
+    with open(f'{filename}.json', "r") as f:
+        data = json.load(f)
 
-data = json.dumps(data, indent=4)
-with open(f"{filename}_postprocess.json", "w") as f:
-    f.write(data)
+    # print(data["1"])
 
-print(data)
+    data = pd.DataFrame(data).transpose()
+    data['answer'] = data['answer'].apply(postprocess)
+    data = data.transpose()
+    data = data.to_dict()
+
+    data = json.dumps(data, indent=4)
+    with open(f"{filename}_postprocess.json", "w") as f:
+        f.write(data)
+
+    print(data)
