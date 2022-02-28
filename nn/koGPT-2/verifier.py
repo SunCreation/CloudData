@@ -31,31 +31,31 @@ torch.cuda.manual_seed_all(42)
 
 homedir = os.getcwd()
 
-parser = ap.ArgumentParser(description='hyper&input')
-parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
-parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
-parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
-parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
-parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
-parser.add_argument('-s','--valbatch_size_perdevice', type=int, default=8, help='default8')
-parser.add_argument('-n','--modelname', type=str, default='PowerfulMyModel', help='Enter model name')
-parser.add_argument('-p','--projectname', type=str, default='kogpt2', help='Enter model name')
+# parser = ap.ArgumentParser(description='hyper&input')
+# parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
+# parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
+# parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
+# parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
+# parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
+# parser.add_argument('-s','--valbatch_size_perdevice', type=int, default=8, help='default8')
+# parser.add_argument('-n','--modelname', type=str, default='PowerfulMyModel', help='Enter model name')
+# parser.add_argument('-p','--projectname', type=str, default='kogpt2', help='Enter model name')
 
-args = parser.parse_args()
+# args = parser.parse_args()
 
-val = args.validation_data
+# val = args.validation_data
 
-filepath = args.input_path
+# filepath = args.input_path
 
-modelname = args.modelname
+# modelname = args.modelname
 
-project = args.projectname
+# project = args.projectname
 
-batch_size = args.batch_size
+# batch_size = args.batch_size
 
-valbatch_size_perdevice = args.valbatch_size_perdevice
+# valbatch_size_perdevice = args.valbatch_size_perdevice
 
-device_num = torch.cuda.device_count()
+# device_num = torch.cuda.device_count()
 
 def prepare_train_features(examples):
     for i, j in enumerate(examples['problem']):
