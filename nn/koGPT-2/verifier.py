@@ -77,11 +77,15 @@ verifier = Verifier()
 
 def train():
     global verifier
+    print('hihi')
     verifier.train()
+    print('123')
     output = verifier(data)
+    print('hhhhh')
     mse_loss = nn.MSELoss()
+    print(1423)
     output = mse_loss(output, data['labels'])
-    output = output * data['attention_mask']
+    output = output * data['attention_mask'].type(torch.FloatTensor)
     loss = torch.sum(output)
     loss.backward()
     
