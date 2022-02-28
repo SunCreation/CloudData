@@ -97,6 +97,7 @@ def train():
     optimizer.zero_grad()
 
     loss.backward()
+    optimizer.step()
     # loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
     # print(loss)
     # loss.backward()
