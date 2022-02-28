@@ -90,19 +90,19 @@ def train():
 
     mse_loss = nn.MSELoss(reduction='sum')
     output = output * data['attention_mask'].unsqueeze(0).unsqueeze(2) #.type(torch.FloatTensor)
-    # loss = (output - data['labels'].unsqueeze(0).unsqueeze(2))**2
-    # print(loss)
-    # loss = torch.sum(loss)
-    # print(loss)
-    # optimizer.zero_grad()
+    loss = (output - data['labels'].unsqueeze(0).unsqueeze(2))**2
+    print(loss)
+    loss = torch.sum(loss)
+    print(loss)
+    optimizer.zero_grad()
 
+    loss.backward()
+    # loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
+    # print(loss)
     # loss.backward()
-    loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
-    print(loss)
-    loss.backward()
-    loss = torch.sum(output)
-    print(loss)
-    loss.backward()
+    # loss = torch.sum(output)
+    # print(loss)
+    # loss.backward()
     
 train()
 
