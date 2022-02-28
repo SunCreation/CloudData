@@ -34,7 +34,7 @@ for i, j in data.items():
             attention_mask = masks+codes
 
             j[k]['attention_mask'] = attention_mask
-            j[k]['lables'] = attention_mask
+            j[k]['labels'] = attention_mask
         else:
             A = tokenizer.encode(answer['problem'][i-1]+'<sys> 1<sys>', return_tensors='np')
             B = tokenizer.encode(j[k]['code'], return_tensors='np')
@@ -45,7 +45,7 @@ for i, j in data.items():
             labels = masks + labels
 
             j[k]['attention_mask'] = attention_mask
-            j[k]['lables'] = labels
+            j[k]['labels'] = labels
 
 data = json.dumps(data, indent=4)
 with open('CloudData/math/data/inputdata.json', "w") as f:

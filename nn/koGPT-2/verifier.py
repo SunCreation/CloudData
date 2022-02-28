@@ -21,7 +21,7 @@ import sys
 import time
 import random
 import argparse as ap
-from torch import nn
+from torch import nn, optim
 import torch.nn.functional as F
 import json
 
@@ -32,7 +32,7 @@ torch.cuda.manual_seed_all(42)
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
-model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2', output_hidden_states=True)
+# model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2', output_hidden_states=True)
 
 with open('CloudData/math/data/inputdata.json','r') as f:
     testdata = json.load(f)
@@ -45,13 +45,15 @@ data = tokenizer(
     padding='max_length',
     max_length=260
     )
-data['attention_mask'] = testdata['1']['1']['attention_mask']
-data['labels'] = testdata['1']['1']['lables']
+data['attention_mask'] = torch.tensor(testdata['1']['1']['attention_mask'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
+data['labels'] = torch.tensor(testdata['1']['1']['labels'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
 # print(data)
 # data['labels'] = data['input_ids']
 # print(data)
 # output = model(**data)
 # print(output[2][-1][-1].shape)
+
+# exit()
 
 class Verifier(nn.Module):
     def __init__(self):
@@ -61,7 +63,7 @@ class Verifier(nn.Module):
         self.linear2 = nn.Linear(64,1)
         self.sigmoid = torch.sigmoid
 
-    def forward(self, data):
+    def forward(self, **data):
         self.kogpt.train()
         output = self.kogpt(**data)
         batch, n_head, senlen, emb = output[2][-1][-1].shape
@@ -73,21 +75,36 @@ class Verifier(nn.Module):
 
 verifier = Verifier()
 
+learning_rate = 0.0001
+
+optimizer = optim.Adam(verifier.parameters(), lr=learning_rate)
 
 
 def train():
     global verifier
     print('hihi')
     verifier.train()
-    print('123')
-    output = verifier(data)
-    print('hhhhh')
-    mse_loss = nn.MSELoss()
-    print(1423)
-    output = mse_loss(output, data['labels'])
-    output = output * data['attention_mask'].type(torch.FloatTensor)
-    loss = torch.sum(output)
+    verifier.zero_grad()
+    output = verifier(**data)
+    print(f'output: {output}')
+    print(f'len: {len(output[0])}')
+
+    mse_loss = nn.MSELoss(reduction='sum')
+    output = output * data['attention_mask'].unsqueeze(0).unsqueeze(2) #.type(torch.FloatTensor)
+    loss = (output - data['labels'].unsqueeze(0).unsqueeze(2))**2
+    print(loss)
+    loss = torch.sum(loss)
+    print(loss)
+    optimizer.zero_grad()
+
     loss.backward()
+    optimizer.step()
+    # loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
+    # print(loss)
+    # loss.backward()
+    # loss = torch.sum(output)
+    # print(loss)
+    # loss.backward()
     
 train()
 
