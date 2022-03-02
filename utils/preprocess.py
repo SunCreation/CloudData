@@ -10,23 +10,31 @@ from transformers import (
     GPT2LMHeadModel,
 )
 
+    
 
-with open('CloudData/math/data/inputdata.yaml', "r") as f:
+
+
+filename = input('Enter input filename: ')
+with open(f'CloudData/math/data/verifier_data/{filename}.yaml', "r") as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
 # data = pd.DataFrame(data)
 
 
-answer = pd.read_csv('CloudData/math/data/randint/val.csv')
+answer = pd.read_csv('CloudData/math/data/clean_all_correct.csv')
 
 # print(data)
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', eos_token='</s>', pad_token='<pad>')
 
 
+bins = pd.DataFrame()
+
+
+
 for i, j in data.items():
-    for k in range(10):
-        if postprocess(answer['answer'][i-1])==postprocess(j[k]['answer']):
-            A = tokenizer.encode(answer['problem'][i-1]+'<sys> 1<sys>', return_tensors='np')
+    for k in range(100):
+        if postprocess(answer['answer'][i])==postprocess(j[k]['answer']):
+            A = tokenizer.encode(answer['problem'][i]+'<sys> 1<sys>', return_tensors='np')
             B = tokenizer.encode(j[k]['code'], return_tensors='np')
             
             masks = np.zeros(A[0].shape, dtype=np.int32).tolist()
@@ -36,7 +44,7 @@ for i, j in data.items():
             j[k]['attention_mask'] = attention_mask
             j[k]['labels'] = attention_mask
         else:
-            A = tokenizer.encode(answer['problem'][i-1]+'<sys> 1<sys>', return_tensors='np')
+            A = tokenizer.encode(answer['problem'][i]+'<sys> 1<sys>', return_tensors='np')
             B = tokenizer.encode(j[k]['code'], return_tensors='np')
             masks = np.zeros(A[0].shape, dtype=np.int32).tolist()
             codes = np.ones(B[0].shape, dtype=np.int32).tolist()
@@ -46,7 +54,11 @@ for i, j in data.items():
 
             j[k]['attention_mask'] = attention_mask
             j[k]['labels'] = labels
+    bins = pd.concat([bins,j], axis=1)
 
-data = json.dumps(data, indent=4)
-with open('CloudData/math/data/inputdata.json', "w") as f:
-    f.write(data)
+bins.to_csv('testsample.csv',encoding='utf-8-sig')
+
+# data = json.dumps(data, indent=4)
+
+# with open('CloudData/math/data/inputdata.json', "w") as f:
+#     f.write(data)
