@@ -50,10 +50,11 @@ def solve_problem_gen_samples(problem, i):
         print(f'    code: "{newsentence}"')
         # print('실행결과:')
         try:
-            print("    answer:",end=' ')
+            print('    answer: "',end='')
             exec(sentence)
+            print('"')
         except:
-            print('error')
+            print('error"')
         print("")
 
 import sys
