@@ -36,6 +36,7 @@ parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', 
 parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
 parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
 parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
+parser.add_argument('--val_dir', type=str, default=None, help='Optional')
 parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
 parser.add_argument('-s','--valbatch_size_perdevice', type=int, default=8, help='default8')
 parser.add_argument('-n','--modelname', type=str, default='PowerfulMyModel', help='Enter model name')
@@ -44,6 +45,8 @@ parser.add_argument('-p','--projectname', type=str, default='kogpt2', help='Ente
 args = parser.parse_args()
 
 val = args.validation_data
+
+val_dir = args.val_dir
 
 filepath = args.input_path
 
@@ -82,6 +85,8 @@ if filepath:
         model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
         dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
+
+        if val_dir: val = val_dir + filename
         if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
         else: 
             dictdataset = dataset.train_test_split(0.06)
@@ -103,7 +108,7 @@ if filepath:
             per_device_eval_batch_size=valbatch_size_perdevice,
             warmup_steps=400,
             weight_decay=0.1,
-            max_steps=10000,
+            max_steps=5000,
             logging_strategy='steps',
             logging_steps=100,
             save_strategy = 'steps',
