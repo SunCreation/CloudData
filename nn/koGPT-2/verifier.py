@@ -30,23 +30,61 @@ np.random.seed(42)
 random.seed(42) 
 torch.cuda.manual_seed_all(42)
 
+def prepare_train_features(examples):
+    for i, j in enumerate(examples['problem']):
+        examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
+
+    tokenized_examples = tokenizer(
+        text=examples['problem'],
+        text_pair=examples['code'],
+        padding='max_length',
+        max_length=260
+    )
+    tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
+    for i in range(len(examples['attention_mask'])):
+        tokenized_examples["attention_mask"][i] = torch.tensor(list(map(int,examples['attention_mask'][i].split()))+[0]*(260-len(examples['attention_mask'][i].split())))
+        tokenized_examples["labels"][i] = torch.tensor(list(map(int,examples['labels'][i].split()))+[0]*(260-len(examples['labels'][i].split())))
+    
+     
+    return tokenized_examples
+
+
+
+filepath = 'verifier_data'
+filename = 'verifier_data.csv'
+homedir = os.getcwd()
+
+
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
 # model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2', output_hidden_states=True)
 
-with open('CloudData/math/data/inputdata.json','r') as f:
-    testdata = json.load(f)
-problem = testdata['1']['1']['problem'] + '<sys> 1<sys>'
-code = testdata['1']['1']['code']
-data = tokenizer(
-    text=problem,
-    text_pair=code,
-    return_tensors='pt',
-    padding='max_length',
-    max_length=260
-    )
-data['attention_mask'] = torch.tensor(testdata['1']['1']['attention_mask'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
-data['labels'] = torch.tensor(testdata['1']['1']['labels'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
+# with open('CloudData/math/data/inputdata.json','r') as f:
+#     testdata = json.load(f)
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
+
+dictdataset = dataset.train_test_split(0.06)
+
+tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda:0')
+
+# dataloader = torch.utils.data.DataLoader(dataset, batch_size=32)
+# for i in tokenized_datasets['train']:
+#     print(i)
+#     break
+# exit()
+
+# problem = testdata['1']['1']['problem'] + '<sys> 1<sys>'
+# code = testdata['1']['1']['code']
+# data = tokenizer(
+#     text=problem,
+#     text_pair=code,
+#     return_tensors='pt',
+#     padding='max_length',
+#     max_length=260
+#     )
+# data['attention_mask'] = torch.tensor(testdata['1']['1']['attention_mask'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
+# data['labels'] = torch.tensor(testdata['1']['1']['labels'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
 # print(data)
 # data['labels'] = data['input_ids']
 # print(data)
@@ -73,32 +111,40 @@ class Verifier(nn.Module):
         output = self.sigmoid(output)
         return output
 
-verifier = Verifier()
+verifier = Verifier().to('cuda')
 
-learning_rate = 0.0001
+learning_rate = 0.00001
 
 optimizer = optim.Adam(verifier.parameters(), lr=learning_rate)
-
+BATCH_SIZE = 32
 
 def train():
-    global verifier
-    print('hihi')
-    verifier.train()
-    verifier.zero_grad()
-    output = verifier(**data)
-    print(f'output: {output}')
-    print(f'len: {len(output[0])}')
+    for i in range(0,10000,BATCH_SIZE):
+        global verifier
+        # print('hihi')
+        verifier.train()
+        verifier.zero_grad()
+        # print(tokenized_datasets['train'][i:i+64])
+        output = verifier(**tokenized_datasets['train'][i:i+BATCH_SIZE])
+        # print(f'output: {output}')
+        # print(f'len: {len(output[0])}')
 
-    mse_loss = nn.MSELoss(reduction='sum')
-    output = output * data['attention_mask'].unsqueeze(0).unsqueeze(2) #.type(torch.FloatTensor)
-    loss = (output - data['labels'].unsqueeze(0).unsqueeze(2))**2
-    print(loss)
-    loss = torch.sum(loss)
-    print(loss)
-    optimizer.zero_grad()
+        # mse_loss = nn.MSELoss(reduction='sum')
+        # print(output.squeeze().size())
+        # print(tokenized_datasets['train']['attention_mask'][i:i+64].size())
+        output = output.squeeze() * tokenized_datasets['train']['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
+        # print(output.size())
+        loss = (output - tokenized_datasets['train']['labels'][i:i+BATCH_SIZE])**2
+        # print(loss.size())
+        loss = torch.sum(loss)
+        # print(loss.size())
+        print(loss)
 
-    loss.backward()
-    optimizer.step()
+        optimizer.zero_grad()
+
+        loss.backward()
+        optimizer.step()
+
     # loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
     # print(loss)
     # loss.backward()
