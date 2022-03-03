@@ -1,0 +1,1412 @@
+{
+    "1": {
+        "Unnamed: 0": 0,
+        "code": "None",
+        "answer": "None"
+    },
+    "2": {
+        "Unnamed: 0": 1,
+        "code": "None",
+        "answer": "None"
+    },
+    "3": {
+        "Unnamed: 0": 2,
+        "code": "x=8-2900",
+        "answer": "-2892"
+    },
+    "4": {
+        "Unnamed: 0": 3,
+        "code": "x=12000/20",
+        "answer": "600.0"
+    },
+    "5": {
+        "Unnamed: 0": 4,
+        "code": "None",
+        "answer": "None"
+    },
+    "6": {
+        "Unnamed: 0": 5,
+        "code": "None",
+        "answer": "None"
+    },
+    "7": {
+        "Unnamed: 0": 6,
+        "code": "x=18-(3*3)",
+        "answer": "9"
+    },
+    "8": {
+        "Unnamed: 0": 7,
+        "code": "x=(6/16)*7",
+        "answer": "2.625"
+    },
+    "9": {
+        "Unnamed: 0": 8,
+        "code": "None",
+        "answer": "None"
+    },
+    "10": {
+        "Unnamed: 0": 9,
+        "code": "x=30/3",
+        "answer": "10.0"
+    },
+    "11": {
+        "Unnamed: 0": 10,
+        "code": "x=100+100",
+        "answer": "200"
+    },
+    "12": {
+        "Unnamed: 0": 11,
+        "code": "None",
+        "answer": "None"
+    },
+    "13": {
+        "Unnamed: 0": 12,
+        "code": "None",
+        "answer": "None"
+    },
+    "14": {
+        "Unnamed: 0": 13,
+        "code": "x=1350+2620",
+        "answer": "3970"
+    },
+    "15": {
+        "Unnamed: 0": 14,
+        "code": "x=13*11",
+        "answer": "143"
+    },
+    "16": {
+        "Unnamed: 0": 15,
+        "code": "x=82*6",
+        "answer": "492"
+    },
+    "17": {
+        "Unnamed: 0": 16,
+        "code": "x=(39*4)-(25*7)",
+        "answer": "-19"
+    },
+    "18": {
+        "Unnamed: 0": 17,
+        "code": "None",
+        "answer": "None"
+    },
+    "19": {
+        "Unnamed: 0": 18,
+        "code": "None",
+        "answer": "None"
+    },
+    "20": {
+        "Unnamed: 0": 19,
+        "code": "None",
+        "answer": "None"
+    },
+    "21": {
+        "Unnamed: 0": 20,
+        "code": "None",
+        "answer": "None"
+    },
+    "22": {
+        "Unnamed: 0": 21,
+        "code": "None",
+        "answer": "None"
+    },
+    "23": {
+        "Unnamed: 0": 22,
+        "code": "None",
+        "answer": "None"
+    },
+    "24": {
+        "Unnamed: 0": 23,
+        "code": "x=22/5",
+        "answer": "4.4"
+    },
+    "25": {
+        "Unnamed: 0": 24,
+        "code": "None",
+        "answer": "None"
+    },
+    "26": {
+        "Unnamed: 0": 25,
+        "code": "x=((30+40)/7)/2",
+        "answer": "5.0"
+    },
+    "27": {
+        "Unnamed: 0": 26,
+        "code": "None",
+        "answer": "None"
+    },
+    "28": {
+        "Unnamed: 0": 27,
+        "code": "x=9*24",
+        "answer": "216"
+    },
+    "29": {
+        "Unnamed: 0": 28,
+        "code": "x=1.42*4",
+        "answer": "5.68"
+    },
+    "30": {
+        "Unnamed: 0": 29,
+        "code": "None",
+        "answer": "None"
+    },
+    "31": {
+        "Unnamed: 0": 30,
+        "code": "None",
+        "answer": "None"
+    },
+    "32": {
+        "Unnamed: 0": 31,
+        "code": "None",
+        "answer": "None"
+    },
+    "33": {
+        "Unnamed: 0": 32,
+        "code": "x=26+9",
+        "answer": "35"
+    },
+    "34": {
+        "Unnamed: 0": 33,
+        "code": "None",
+        "answer": "None"
+    },
+    "35": {
+        "Unnamed: 0": 34,
+        "code": "None",
+        "answer": "None"
+    },
+    "36": {
+        "Unnamed: 0": 35,
+        "code": "None",
+        "answer": "None"
+    },
+    "37": {
+        "Unnamed: 0": 36,
+        "code": "None",
+        "answer": "None"
+    },
+    "38": {
+        "Unnamed: 0": 37,
+        "code": "None",
+        "answer": "None"
+    },
+    "39": {
+        "Unnamed: 0": 38,
+        "code": "x=152-12",
+        "answer": "140"
+    },
+    "40": {
+        "Unnamed: 0": 39,
+        "code": "None",
+        "answer": "None"
+    },
+    "41": {
+        "Unnamed: 0": 40,
+        "code": "None",
+        "answer": "None"
+    },
+    "42": {
+        "Unnamed: 0": 41,
+        "code": "None",
+        "answer": "None"
+    },
+    "43": {
+        "Unnamed: 0": 42,
+        "code": "None",
+        "answer": "None"
+    },
+    "44": {
+        "Unnamed: 0": 43,
+        "code": "x=252*28",
+        "answer": "7056"
+    },
+    "45": {
+        "Unnamed: 0": 44,
+        "code": "None",
+        "answer": "None"
+    },
+    "46": {
+        "Unnamed: 0": 45,
+        "code": "x=(8/7)/14",
+        "answer": "0.08163265306122448"
+    },
+    "47": {
+        "Unnamed: 0": 46,
+        "code": "None",
+        "answer": "None"
+    },
+    "48": {
+        "Unnamed: 0": 47,
+        "code": "None",
+        "answer": "None"
+    },
+    "49": {
+        "Unnamed: 0": 48,
+        "code": "x=",
+        "answer": "0"
+    },
+    "50": {
+        "Unnamed: 0": 49,
+        "code": "None",
+        "answer": "None"
+    },
+    "51": {
+        "Unnamed: 0": 50,
+        "code": "x=(15+230)-8",
+        "answer": "237"
+    },
+    "52": {
+        "Unnamed: 0": 51,
+        "code": "None",
+        "answer": "None"
+    },
+    "53": {
+        "Unnamed: 0": 52,
+        "code": "None",
+        "answer": "None"
+    },
+    "54": {
+        "Unnamed: 0": 53,
+        "code": "None",
+        "answer": "None"
+    },
+    "55": {
+        "Unnamed: 0": 54,
+        "code": "None",
+        "answer": "None"
+    },
+    "56": {
+        "Unnamed: 0": 55,
+        "code": "None",
+        "answer": "None"
+    },
+    "57": {
+        "Unnamed: 0": 56,
+        "code": "None",
+        "answer": "None"
+    },
+    "58": {
+        "Unnamed: 0": 57,
+        "code": "None",
+        "answer": "None"
+    },
+    "59": {
+        "Unnamed: 0": 58,
+        "code": "x=7*5",
+        "answer": "35"
+    },
+    "60": {
+        "Unnamed: 0": 59,
+        "code": "x=20/4500",
+        "answer": "0.0044444444444444444"
+    },
+    "61": {
+        "Unnamed: 0": 60,
+        "code": "None",
+        "answer": "None"
+    },
+    "62": {
+        "Unnamed: 0": 61,
+        "code": "None",
+        "answer": "None"
+    },
+    "63": {
+        "Unnamed: 0": 62,
+        "code": "x=7*2.5",
+        "answer": "17.5"
+    },
+    "64": {
+        "Unnamed: 0": 63,
+        "code": "None",
+        "answer": "None"
+    },
+    "65": {
+        "Unnamed: 0": 64,
+        "code": "x=455+(455*3)",
+        "answer": "1820"
+    },
+    "66": {
+        "Unnamed: 0": 65,
+        "code": "None",
+        "answer": "None"
+    },
+    "67": {
+        "Unnamed: 0": 66,
+        "code": "x=8/146",
+        "answer": "0.0547945205479452"
+    },
+    "68": {
+        "Unnamed: 0": 67,
+        "code": "x=3000-(500*5)",
+        "answer": "500"
+    },
+    "69": {
+        "Unnamed: 0": 68,
+        "code": "None",
+        "answer": "None"
+    },
+    "70": {
+        "Unnamed: 0": 69,
+        "code": "None",
+        "answer": "None"
+    },
+    "71": {
+        "Unnamed: 0": 70,
+        "code": "None",
+        "answer": "None"
+    },
+    "72": {
+        "Unnamed: 0": 71,
+        "code": "x=(((3*5)+(7*100))+(4*100))+(16*10)",
+        "answer": "1275"
+    },
+    "73": {
+        "Unnamed: 0": 72,
+        "code": "None",
+        "answer": "None"
+    },
+    "74": {
+        "Unnamed: 0": 73,
+        "code": "x=(60*1200)/100",
+        "answer": "720.0"
+    },
+    "75": {
+        "Unnamed: 0": 74,
+        "code": "None",
+        "answer": "None"
+    },
+    "76": {
+        "Unnamed: 0": 75,
+        "code": "None",
+        "answer": "None"
+    },
+    "77": {
+        "Unnamed: 0": 76,
+        "code": "x=(31/2.45)/100",
+        "answer": "0.12653061224489795"
+    },
+    "78": {
+        "Unnamed: 0": 77,
+        "code": "None",
+        "answer": "None"
+    },
+    "79": {
+        "Unnamed: 0": 78,
+        "code": "x=100+100",
+        "answer": "200"
+    },
+    "80": {
+        "Unnamed: 0": 79,
+        "code": "x=3200-(3300*1650)",
+        "answer": "-5441800"
+    },
+    "81": {
+        "Unnamed: 0": 80,
+        "code": "x=((8000/8000)/35000)*35000",
+        "answer": "1.0"
+    },
+    "82": {
+        "Unnamed: 0": 81,
+        "code": "None",
+        "answer": "None"
+    },
+    "83": {
+        "Unnamed: 0": 82,
+        "code": "None",
+        "answer": "None"
+    },
+    "84": {
+        "Unnamed: 0": 83,
+        "code": "x=(356/25)/25",
+        "answer": "0.5696"
+    },
+    "85": {
+        "Unnamed: 0": 84,
+        "code": "None",
+        "answer": "None"
+    },
+    "86": {
+        "Unnamed: 0": 85,
+        "code": "None",
+        "answer": "None"
+    },
+    "87": {
+        "Unnamed: 0": 86,
+        "code": "None",
+        "answer": "None"
+    },
+    "88": {
+        "Unnamed: 0": 87,
+        "code": "None",
+        "answer": "None"
+    },
+    "89": {
+        "Unnamed: 0": 88,
+        "code": "x=675+316",
+        "answer": "991"
+    },
+    "90": {
+        "Unnamed: 0": 89,
+        "code": "x=(520*1)/13",
+        "answer": "40.0"
+    },
+    "91": {
+        "Unnamed: 0": 90,
+        "code": "x=(32*8)-28",
+        "answer": "228"
+    },
+    "92": {
+        "Unnamed: 0": 91,
+        "code": "None",
+        "answer": "None"
+    },
+    "93": {
+        "Unnamed: 0": 92,
+        "code": "None",
+        "answer": "None"
+    },
+    "94": {
+        "Unnamed: 0": 93,
+        "code": "None",
+        "answer": "None"
+    },
+    "95": {
+        "Unnamed: 0": 94,
+        "code": "None",
+        "answer": "None"
+    },
+    "96": {
+        "Unnamed: 0": 95,
+        "code": "None",
+        "answer": "None"
+    },
+    "97": {
+        "Unnamed: 0": 96,
+        "code": "x=1-(40*6)",
+        "answer": "-239"
+    },
+    "98": {
+        "Unnamed: 0": 97,
+        "code": "x=142+183",
+        "answer": "325"
+    },
+    "99": {
+        "Unnamed: 0": 98,
+        "code": "None",
+        "answer": "None"
+    },
+    "100": {
+        "Unnamed: 0": 99,
+        "code": "None",
+        "answer": "None"
+    },
+    "101": {
+        "Unnamed: 0": 100,
+        "code": "x=((12*7)/4)/6",
+        "answer": "3.5"
+    },
+    "102": {
+        "Unnamed: 0": 101,
+        "code": "None",
+        "answer": "None"
+    },
+    "103": {
+        "Unnamed: 0": 102,
+        "code": "None",
+        "answer": "None"
+    },
+    "104": {
+        "Unnamed: 0": 103,
+        "code": "None",
+        "answer": "None"
+    },
+    "105": {
+        "Unnamed: 0": 104,
+        "code": "None",
+        "answer": "None"
+    },
+    "106": {
+        "Unnamed: 0": 105,
+        "code": "None",
+        "answer": "None"
+    },
+    "107": {
+        "Unnamed: 0": 106,
+        "code": "None",
+        "answer": "None"
+    },
+    "108": {
+        "Unnamed: 0": 107,
+        "code": "None",
+        "answer": "None"
+    },
+    "109": {
+        "Unnamed: 0": 108,
+        "code": "x=85-(36+12)",
+        "answer": "37"
+    },
+    "110": {
+        "Unnamed: 0": 109,
+        "code": "None",
+        "answer": "None"
+    },
+    "111": {
+        "Unnamed: 0": 110,
+        "code": "None",
+        "answer": "None"
+    },
+    "112": {
+        "Unnamed: 0": 111,
+        "code": "x=2/3",
+        "answer": "0.6666666666666666"
+    },
+    "113": {
+        "Unnamed: 0": 112,
+        "code": "x=(24+25)-28",
+        "answer": "21"
+    },
+    "114": {
+        "Unnamed: 0": 113,
+        "code": "None",
+        "answer": "None"
+    },
+    "115": {
+        "Unnamed: 0": 114,
+        "code": "None",
+        "answer": "None"
+    },
+    "116": {
+        "Unnamed: 0": 115,
+        "code": "None",
+        "answer": "None"
+    },
+    "117": {
+        "Unnamed: 0": 116,
+        "code": "None",
+        "answer": "None"
+    },
+    "118": {
+        "Unnamed: 0": 117,
+        "code": "x=22/98",
+        "answer": "0.22448979591836735"
+    },
+    "119": {
+        "Unnamed: 0": 118,
+        "code": "x=(621-102)+158",
+        "answer": "677"
+    },
+    "120": {
+        "Unnamed: 0": 119,
+        "code": "None",
+        "answer": "None"
+    },
+    "121": {
+        "Unnamed: 0": 120,
+        "code": "None",
+        "answer": "None"
+    },
+    "122": {
+        "Unnamed: 0": 121,
+        "code": "x=(239+1)-1",
+        "answer": "239"
+    },
+    "123": {
+        "Unnamed: 0": 122,
+        "code": "None",
+        "answer": "None"
+    },
+    "124": {
+        "Unnamed: 0": 123,
+        "code": "None",
+        "answer": "None"
+    },
+    "125": {
+        "Unnamed: 0": 124,
+        "code": "None",
+        "answer": "None"
+    },
+    "126": {
+        "Unnamed: 0": 125,
+        "code": "None",
+        "answer": "None"
+    },
+    "127": {
+        "Unnamed: 0": 126,
+        "code": "None",
+        "answer": "None"
+    },
+    "128": {
+        "Unnamed: 0": 127,
+        "code": "x=(35-1)*40",
+        "answer": "1360"
+    },
+    "129": {
+        "Unnamed: 0": 128,
+        "code": "None",
+        "answer": "None"
+    },
+    "130": {
+        "Unnamed: 0": 129,
+        "code": "None",
+        "answer": "None"
+    },
+    "131": {
+        "Unnamed: 0": 130,
+        "code": "x=(2-6)+2",
+        "answer": "-2"
+    },
+    "132": {
+        "Unnamed: 0": 131,
+        "code": "None",
+        "answer": "None"
+    },
+    "133": {
+        "Unnamed: 0": 132,
+        "code": "None",
+        "answer": "None"
+    },
+    "134": {
+        "Unnamed: 0": 133,
+        "code": "x=184*(4*2)",
+        "answer": "1472"
+    },
+    "135": {
+        "Unnamed: 0": 134,
+        "code": "None",
+        "answer": "None"
+    },
+    "136": {
+        "Unnamed: 0": 135,
+        "code": "None",
+        "answer": "None"
+    },
+    "137": {
+        "Unnamed: 0": 136,
+        "code": "None",
+        "answer": "None"
+    },
+    "138": {
+        "Unnamed: 0": 137,
+        "code": "x=((3/5)*2)+8",
+        "answer": "9.2"
+    },
+    "139": {
+        "Unnamed: 0": 138,
+        "code": "x=(45.6/2.4)/2.4",
+        "answer": "7.916666666666667"
+    },
+    "140": {
+        "Unnamed: 0": 139,
+        "code": "None",
+        "answer": "None"
+    },
+    "141": {
+        "Unnamed: 0": 140,
+        "code": "None",
+        "answer": "None"
+    },
+    "142": {
+        "Unnamed: 0": 141,
+        "code": "None",
+        "answer": "None"
+    },
+    "143": {
+        "Unnamed: 0": 142,
+        "code": "x=1-(5/12)",
+        "answer": "0.5833333333333333"
+    },
+    "144": {
+        "Unnamed: 0": 143,
+        "code": "x=(240/37)/240",
+        "answer": "0.02702702702702703"
+    },
+    "145": {
+        "Unnamed: 0": 144,
+        "code": "None",
+        "answer": "None"
+    },
+    "146": {
+        "Unnamed: 0": 145,
+        "code": "x=24.48/8",
+        "answer": "3.06"
+    },
+    "147": {
+        "Unnamed: 0": 146,
+        "code": "None",
+        "answer": "None"
+    },
+    "148": {
+        "Unnamed: 0": 147,
+        "code": "x=3*2",
+        "answer": "6"
+    },
+    "149": {
+        "Unnamed: 0": 148,
+        "code": "None",
+        "answer": "None"
+    },
+    "150": {
+        "Unnamed: 0": 149,
+        "code": "x=(56/2)/2",
+        "answer": "14.0"
+    },
+    "151": {
+        "Unnamed: 0": 150,
+        "code": "x=(63/9)/2",
+        "answer": "3.5"
+    },
+    "152": {
+        "Unnamed: 0": 151,
+        "code": "x=45*8",
+        "answer": "360"
+    },
+    "153": {
+        "Unnamed: 0": 152,
+        "code": "None",
+        "answer": "None"
+    },
+    "154": {
+        "Unnamed: 0": 153,
+        "code": "x=(15.24/1.8)/100",
+        "answer": "0.08466666666666667"
+    },
+    "155": {
+        "Unnamed: 0": 154,
+        "code": "None",
+        "answer": "None"
+    },
+    "156": {
+        "Unnamed: 0": 155,
+        "code": "None",
+        "answer": "None"
+    },
+    "157": {
+        "Unnamed: 0": 156,
+        "code": "None",
+        "answer": "None"
+    },
+    "158": {
+        "Unnamed: 0": 157,
+        "code": "None",
+        "answer": "None"
+    },
+    "159": {
+        "Unnamed: 0": 158,
+        "code": "None",
+        "answer": "None"
+    },
+    "160": {
+        "Unnamed: 0": 159,
+        "code": "None",
+        "answer": "None"
+    },
+    "161": {
+        "Unnamed: 0": 160,
+        "code": "None",
+        "answer": "None"
+    },
+    "162": {
+        "Unnamed: 0": 161,
+        "code": "None",
+        "answer": "None"
+    },
+    "163": {
+        "Unnamed: 0": 162,
+        "code": "x=(385200/10000)/10",
+        "answer": "3.8520000000000003"
+    },
+    "164": {
+        "Unnamed: 0": 163,
+        "code": "x=(3*23)-23",
+        "answer": "46"
+    },
+    "165": {
+        "Unnamed: 0": 164,
+        "code": "None",
+        "answer": "None"
+    },
+    "166": {
+        "Unnamed: 0": 165,
+        "code": "None",
+        "answer": "None"
+    },
+    "167": {
+        "Unnamed: 0": 166,
+        "code": "None",
+        "answer": "None"
+    },
+    "168": {
+        "Unnamed: 0": 167,
+        "code": "None",
+        "answer": "None"
+    },
+    "169": {
+        "Unnamed: 0": 168,
+        "code": "None",
+        "answer": "None"
+    },
+    "170": {
+        "Unnamed: 0": 169,
+        "code": "x=28*35",
+        "answer": "980"
+    },
+    "171": {
+        "Unnamed: 0": 170,
+        "code": "x=(16+19)-10",
+        "answer": "25"
+    },
+    "172": {
+        "Unnamed: 0": 171,
+        "code": "None",
+        "answer": "None"
+    },
+    "173": {
+        "Unnamed: 0": 172,
+        "code": "None",
+        "answer": "None"
+    },
+    "174": {
+        "Unnamed: 0": 173,
+        "code": "None",
+        "answer": "None"
+    },
+    "175": {
+        "Unnamed: 0": 174,
+        "code": "None",
+        "answer": "None"
+    },
+    "176": {
+        "Unnamed: 0": 175,
+        "code": "None",
+        "answer": "None"
+    },
+    "177": {
+        "Unnamed: 0": 176,
+        "code": "None",
+        "answer": "None"
+    },
+    "178": {
+        "Unnamed: 0": 177,
+        "code": "None",
+        "answer": "None"
+    },
+    "179": {
+        "Unnamed: 0": 178,
+        "code": "None",
+        "answer": "None"
+    },
+    "180": {
+        "Unnamed: 0": 179,
+        "code": "None",
+        "answer": "None"
+    },
+    "181": {
+        "Unnamed: 0": 180,
+        "code": "x=8/6500",
+        "answer": "0.0012307692307692308"
+    },
+    "182": {
+        "Unnamed: 0": 181,
+        "code": "None",
+        "answer": "None"
+    },
+    "183": {
+        "Unnamed: 0": 182,
+        "code": "x=((1400/1)*8)-((150/8)*5)",
+        "answer": "11106.25"
+    },
+    "184": {
+        "Unnamed: 0": 183,
+        "code": "None",
+        "answer": "None"
+    },
+    "185": {
+        "Unnamed: 0": 184,
+        "code": "None",
+        "answer": "None"
+    },
+    "186": {
+        "Unnamed: 0": 185,
+        "code": "None",
+        "answer": "None"
+    },
+    "187": {
+        "Unnamed: 0": 186,
+        "code": "None",
+        "answer": "None"
+    },
+    "188": {
+        "Unnamed: 0": 187,
+        "code": "None",
+        "answer": "None"
+    },
+    "189": {
+        "Unnamed: 0": 188,
+        "code": "x=(1250/4)*36",
+        "answer": "11250.0"
+    },
+    "190": {
+        "Unnamed: 0": 189,
+        "code": "x=(12000*3)/2",
+        "answer": "18000.0"
+    },
+    "191": {
+        "Unnamed: 0": 190,
+        "code": "None",
+        "answer": "None"
+    },
+    "192": {
+        "Unnamed: 0": 191,
+        "code": "None",
+        "answer": "None"
+    },
+    "193": {
+        "Unnamed: 0": 192,
+        "code": "None",
+        "answer": "None"
+    },
+    "194": {
+        "Unnamed: 0": 193,
+        "code": "x=21/52",
+        "answer": "0.40384615384615385"
+    },
+    "195": {
+        "Unnamed: 0": 194,
+        "code": "x=15+100",
+        "answer": "115"
+    },
+    "196": {
+        "Unnamed: 0": 195,
+        "code": "None",
+        "answer": "None"
+    },
+    "197": {
+        "Unnamed: 0": 196,
+        "code": "None",
+        "answer": "None"
+    },
+    "198": {
+        "Unnamed: 0": 197,
+        "code": "None",
+        "answer": "None"
+    },
+    "199": {
+        "Unnamed: 0": 198,
+        "code": "x=32.7/5",
+        "answer": "6.540000000000001"
+    },
+    "200": {
+        "Unnamed: 0": 199,
+        "code": "None",
+        "answer": "None"
+    },
+    "201": {
+        "Unnamed: 0": 200,
+        "code": "None",
+        "answer": "None"
+    },
+    "202": {
+        "Unnamed: 0": 201,
+        "code": "None",
+        "answer": "None"
+    },
+    "203": {
+        "Unnamed: 0": 202,
+        "code": "None",
+        "answer": "None"
+    },
+    "204": {
+        "Unnamed: 0": 203,
+        "code": "None",
+        "answer": "None"
+    },
+    "205": {
+        "Unnamed: 0": 204,
+        "code": "None",
+        "answer": "None"
+    },
+    "206": {
+        "Unnamed: 0": 205,
+        "code": "x=3300*5",
+        "answer": "16500"
+    },
+    "207": {
+        "Unnamed: 0": 206,
+        "code": "x=(82/82)/82",
+        "answer": "0.012195121951219513"
+    },
+    "208": {
+        "Unnamed: 0": 207,
+        "code": "None",
+        "answer": "None"
+    },
+    "209": {
+        "Unnamed: 0": 208,
+        "code": "None",
+        "answer": "None"
+    },
+    "210": {
+        "Unnamed: 0": 209,
+        "code": "None",
+        "answer": "None"
+    },
+    "211": {
+        "Unnamed: 0": 210,
+        "code": "x=1/100",
+        "answer": "0.01"
+    },
+    "212": {
+        "Unnamed: 0": 211,
+        "code": "x=(7/238)/1000",
+        "answer": "2.9411764705882354e-05"
+    },
+    "213": {
+        "Unnamed: 0": 212,
+        "code": "x=600-((100*1000)+50)",
+        "answer": "-99450"
+    },
+    "214": {
+        "Unnamed: 0": 213,
+        "code": "x=31*18",
+        "answer": "558"
+    },
+    "215": {
+        "Unnamed: 0": 214,
+        "code": "x=24-(6*1000)",
+        "answer": "-5976"
+    },
+    "216": {
+        "Unnamed: 0": 215,
+        "code": "x=3.2*(0.3+1)",
+        "answer": "4.16"
+    },
+    "217": {
+        "Unnamed: 0": 216,
+        "code": "None",
+        "answer": "None"
+    },
+    "218": {
+        "Unnamed: 0": 217,
+        "code": "None",
+        "answer": "None"
+    },
+    "219": {
+        "Unnamed: 0": 218,
+        "code": "None",
+        "answer": "None"
+    },
+    "220": {
+        "Unnamed: 0": 219,
+        "code": "None",
+        "answer": "None"
+    },
+    "221": {
+        "Unnamed: 0": 220,
+        "code": "None",
+        "answer": "None"
+    },
+    "222": {
+        "Unnamed: 0": 221,
+        "code": "None",
+        "answer": "None"
+    },
+    "223": {
+        "Unnamed: 0": 222,
+        "code": "x=24-(3*3)",
+        "answer": "15"
+    },
+    "224": {
+        "Unnamed: 0": 223,
+        "code": "None",
+        "answer": "None"
+    },
+    "225": {
+        "Unnamed: 0": 224,
+        "code": "x=8235/32",
+        "answer": "257.34375"
+    },
+    "226": {
+        "Unnamed: 0": 225,
+        "code": "None",
+        "answer": "None"
+    },
+    "227": {
+        "Unnamed: 0": 226,
+        "code": "None",
+        "answer": "None"
+    },
+    "228": {
+        "Unnamed: 0": 227,
+        "code": "x=(((5.85/5)+(4/4))*1)*60",
+        "answer": "130.2"
+    },
+    "229": {
+        "Unnamed: 0": 228,
+        "code": "None",
+        "answer": "None"
+    },
+    "230": {
+        "Unnamed: 0": 229,
+        "code": "None",
+        "answer": "None"
+    },
+    "231": {
+        "Unnamed: 0": 230,
+        "code": "None",
+        "answer": "None"
+    },
+    "232": {
+        "Unnamed: 0": 231,
+        "code": "x=((1*5)/8)/2",
+        "answer": "0.3125"
+    },
+    "233": {
+        "Unnamed: 0": 232,
+        "code": "None",
+        "answer": "None"
+    },
+    "234": {
+        "Unnamed: 0": 233,
+        "code": "x=(295/20)/20",
+        "answer": "0.7375"
+    },
+    "235": {
+        "Unnamed: 0": 234,
+        "code": "None",
+        "answer": "None"
+    },
+    "236": {
+        "Unnamed: 0": 235,
+        "code": "x=0.3*23",
+        "answer": "6.8999999999999995"
+    },
+    "237": {
+        "Unnamed: 0": 236,
+        "code": "None",
+        "answer": "None"
+    },
+    "238": {
+        "Unnamed: 0": 237,
+        "code": "x=25*50",
+        "answer": "1250"
+    },
+    "239": {
+        "Unnamed: 0": 238,
+        "code": "x=(9*5)/9",
+        "answer": "5.0"
+    },
+    "240": {
+        "Unnamed: 0": 239,
+        "code": "None",
+        "answer": "None"
+    },
+    "241": {
+        "Unnamed: 0": 240,
+        "code": "x=(1*120)-(40*220)",
+        "answer": "-8680"
+    },
+    "242": {
+        "Unnamed: 0": 241,
+        "code": "None",
+        "answer": "None"
+    },
+    "243": {
+        "Unnamed: 0": 242,
+        "code": "x=(8.3/2000)*1",
+        "answer": "0.00415"
+    },
+    "244": {
+        "Unnamed: 0": 243,
+        "code": "x=0.4*0.6",
+        "answer": "0.24"
+    },
+    "245": {
+        "Unnamed: 0": 244,
+        "code": "x=(5.2/0.24)/5.2",
+        "answer": "4.166666666666667"
+    },
+    "246": {
+        "Unnamed: 0": 245,
+        "code": "None",
+        "answer": "None"
+    },
+    "247": {
+        "Unnamed: 0": 246,
+        "code": "None",
+        "answer": "None"
+    },
+    "248": {
+        "Unnamed: 0": 247,
+        "code": "None",
+        "answer": "None"
+    },
+    "249": {
+        "Unnamed: 0": 248,
+        "code": "None",
+        "answer": "None"
+    },
+    "250": {
+        "Unnamed: 0": 249,
+        "code": "None",
+        "answer": "None"
+    },
+    "251": {
+        "Unnamed: 0": 250,
+        "code": "None",
+        "answer": "None"
+    },
+    "252": {
+        "Unnamed: 0": 251,
+        "code": "x=32+(7*1)",
+        "answer": "39"
+    },
+    "253": {
+        "Unnamed: 0": 252,
+        "code": "None",
+        "answer": "None"
+    },
+    "254": {
+        "Unnamed: 0": 253,
+        "code": "None",
+        "answer": "None"
+    },
+    "255": {
+        "Unnamed: 0": 254,
+        "code": "None",
+        "answer": "None"
+    },
+    "256": {
+        "Unnamed: 0": 255,
+        "code": "None",
+        "answer": "None"
+    },
+    "257": {
+        "Unnamed: 0": 256,
+        "code": "x=",
+        "answer": "0"
+    },
+    "258": {
+        "Unnamed: 0": 257,
+        "code": "x=1250*6",
+        "answer": "7500"
+    },
+    "259": {
+        "Unnamed: 0": 258,
+        "code": "None",
+        "answer": "None"
+    },
+    "260": {
+        "Unnamed: 0": 259,
+        "code": "None",
+        "answer": "None"
+    },
+    "261": {
+        "Unnamed: 0": 260,
+        "code": "None",
+        "answer": "None"
+    },
+    "262": {
+        "Unnamed: 0": 261,
+        "code": "None",
+        "answer": "None"
+    },
+    "263": {
+        "Unnamed: 0": 262,
+        "code": "None",
+        "answer": "None"
+    },
+    "264": {
+        "Unnamed: 0": 263,
+        "code": "None",
+        "answer": "None"
+    },
+    "265": {
+        "Unnamed: 0": 264,
+        "code": "None",
+        "answer": "None"
+    },
+    "266": {
+        "Unnamed: 0": 265,
+        "code": "None",
+        "answer": "None"
+    },
+    "267": {
+        "Unnamed: 0": 266,
+        "code": "None",
+        "answer": "None"
+    },
+    "268": {
+        "Unnamed: 0": 267,
+        "code": "None",
+        "answer": "None"
+    },
+    "269": {
+        "Unnamed: 0": 268,
+        "code": "None",
+        "answer": "None"
+    },
+    "270": {
+        "Unnamed: 0": 269,
+        "code": "None",
+        "answer": "None"
+    },
+    "271": {
+        "Unnamed: 0": 270,
+        "code": "x=120+55",
+        "answer": "175"
+    },
+    "272": {
+        "Unnamed: 0": 271,
+        "code": "None",
+        "answer": "None"
+    },
+    "273": {
+        "Unnamed: 0": 272,
+        "code": "x=38-((38/18)+1)",
+        "answer": "34.888888888888886"
+    },
+    "274": {
+        "Unnamed: 0": 273,
+        "code": "None",
+        "answer": "None"
+    },
+    "275": {
+        "Unnamed: 0": 274,
+        "code": "x=15*21",
+        "answer": "315"
+    },
+    "276": {
+        "Unnamed: 0": 275,
+        "code": "None",
+        "answer": "None"
+    },
+    "277": {
+        "Unnamed: 0": 276,
+        "code": "None",
+        "answer": "None"
+    },
+    "278": {
+        "Unnamed: 0": 277,
+        "code": "x=(35/5)/2",
+        "answer": "3.5"
+    },
+    "279": {
+        "Unnamed: 0": 278,
+        "code": "None",
+        "answer": "None"
+    },
+    "280": {
+        "Unnamed: 0": 279,
+        "code": "None",
+        "answer": "None"
+    },
+    "281": {
+        "Unnamed: 0": 280,
+        "code": "x=883.22-12.86",
+        "answer": "870.36"
+    },
+    "282": {
+        "Unnamed: 0": 281,
+        "code": "x=(320*4)+5",
+        "answer": "1285"
+    }
+}
