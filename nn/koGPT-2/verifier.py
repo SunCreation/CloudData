@@ -57,10 +57,6 @@ homedir = os.getcwd()
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
-# model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2', output_hidden_states=True)
-
-# with open('CloudData/math/data/inputdata.json','r') as f:
-#     testdata = json.load(f)
 dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
 
 dictdataset = dataset.train_test_split(0.06)
@@ -68,30 +64,7 @@ dictdataset = dataset.train_test_split(0.06)
 tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda:0')
 
-# dataloader = torch.utils.data.DataLoader(dataset, batch_size=32)
-# for i in tokenized_datasets['train']:
-#     print(i)
-#     break
-# exit()
 
-# problem = testdata['1']['1']['problem'] + '<sys> 1<sys>'
-# code = testdata['1']['1']['code']
-# data = tokenizer(
-#     text=problem,
-#     text_pair=code,
-#     return_tensors='pt',
-#     padding='max_length',
-#     max_length=260
-#     )
-# data['attention_mask'] = torch.tensor(testdata['1']['1']['attention_mask'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
-# data['labels'] = torch.tensor(testdata['1']['1']['labels'] + [0]*(260-len(testdata['1']['1']['attention_mask'])))
-# print(data)
-# data['labels'] = data['input_ids']
-# print(data)
-# output = model(**data)
-# print(output[2][-1][-1].shape)
-
-# exit()
 
 class Verifier(nn.Module):
     def __init__(self):
