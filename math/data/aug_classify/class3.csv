@@ -1,0 +1,4402 @@
+﻿,class,problem,code,answer
+0,3,"숫자 카드 1, 5, 7, 8, 6을 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰 수를 구하시오.","from itertools import permutations
+
+a = ['1', '5', '7', '8', '6']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",87651
+1,3,"4장의 숫자 카드 3, 5, 2, 7가 있습니다. 카드를 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['3', '5', '2', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",925
+2,3,"4장의 수 카드 2 , 5 , 6 , 9가 있습니다. 이중에서, 2장을 뽑아 A.B 형태의 소수를 만들려고 한다면, 만들 수 있는 소수 중에서 가장 큰 수와 가장 작은 수의 합을 구하세요.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = int(max(map(''.join, permutations(a, 2)))) / 10
+c = int(min(map(''.join, permutations(a, 2)))) / 10
+y = b + c
+print(y)",12.1
+3,3,"숫자 카드 1, 3, 5, 6, 8, 2 중에서, 카드를 각각 한 번씩 사용하여 만들 수 있는 수 중 가장 큰 수를 구해 보시오.","a = [1, 3, 5, 6, 8, 2]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865321
+4,3,50부터 100까지의 수 중에서 4로 나누었을 때 나머지가 3이 되는 수는 모두 몇 개입니까?,"a = 50
+b = 100
+c = 4
+d = 3
+y = 0
+for i in range(a, b + 1):
+    if i % c == d:
+        y += 1
+print(y)",13
+5,3,"숫자 카드 1, 5, 6을 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하시오.","a = ['1', '5', '6']
+a.sort()
+b = int(''.join(a))
+a.sort(reverse=True)
+c = int(''.join(a))
+y = c - b
+print(y)",495
+6,3,"숫자 카드 2, 4, 6, 8가 있습니다. 이를 한 번씩만 사용하여 2개의 두 자리 수를 만들었을 때, 두 수의 가장 큰 곱을 구하세요.","from itertools import permutations
+
+a = ['2', '4', '6', '8']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",5248
+7,3,"4장의 수 카드 2, 3, 8, 9가 있습니다. 카드를 한 번씩 모두 사용하여 만들 수 있는 가장 큰 네 자리 수를 구하시오","from itertools import permutations
+
+a = ['2', '3', '8', '9']
+y = int(max(map(''.join, permutations(a, 4))))
+print(y)",9832
+8,3,"3 장의 숫자 카드 2, 3, 4 가 있습니다. 카드를 한 번씩만 사용하여 두자리수 / 한자리수와 같은 나눗셈식중에서, 가장 작은 몫은 얼마입니까?","a = [2, 3, 4]
+a.sort()
+y = (10 * a[0] + a[1]) // a[2]
+print(y)",5
+9,3,"수식 75*10<A<16*52이 있습니다. 이를, 만족하는 세 자리 수A 의 개수를 구하시오.","a = 75
+b = 10
+c = 16
+d = 52
+y = 0
+for i in range(100,999+1) :
+    if (i > a * b) and (i < c * d):
+        y += 1
+print(y)",81
+10,3,"4장의 숫자 카드 1, 3, 6, 5를 모두 사용하여 만들 수 있는 네자리수 중 1423보다 큰 숫자는 몇 개 일까요?","from itertools import permutations
+
+a = ['1', '3', '6', '5']
+b = map(''.join, permutations(a, 4))
+b = list(b)
+y = 0
+for i in b:
+    if int(i) > 1423:
+        y += 1
+print(y)",22
+11,3,"3 장의 숫자 카드 9, 2, 1가 있습니다. 이를, 한 번씩만 사용하여 두 자리 수와 한 자리 수를 만들고 나눗셈을 하려고 합니다. 몫이 가장 작을 때의 몫과 나머지의 합을 구하시오.","a = [9, 2, 1]
+a.sort()
+c = 10*a[0] + a[1]
+d = a[2]
+y = c // d + c % d
+print(y)",4
+12,3,"3장의 카드 2, 5, 6 를 한 번씩 모두 사용하여 소수 두 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합은 얼마인가요? ","from itertools import permutations
+
+a = ['2', '5', '6']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 2)
+print(y)",9.080000000000002
+13,3,"숫자 카드 5, 6, 9, 1, 3를 한 번씩 사용하여 만들 수 있는 수중에서 가장 작은 수를 구하시오.","a = [5, 6, 9, 1, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13569
+14,3,"숫자 카드 5, 7, 9, 2, 3를 한 번씩 사용하여 만들 수 있는 가장 작은 수는 무엇인가요?","a = [5, 7, 9, 2, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",23579
+15,3,"숫자 카드 9, 8, 7, 5, 3를 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중에서 가장 큰 수를 각각 구하시오.","a = [9, 8, 7, 5, 3]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98753
+16,3,1000부터 2000까지의 수를 쓸 때 숫자 0는 몇 번 써야하나요?,"a = 1000
+b = 2000
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",303
+17,3,"123부터 456까지 수를 모두 한번씩 적는다면, 숫자 1은 몇 번 등장하는지 구해보세요.","a = 123
+b = 456
+c = '1'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",140
+18,3,"숫자 카드 7, 5, 9 중에서 서로 다른 숫자 2개를 뽑아 만들 수 있는 가장 큰 두 자리 수를 구하시오.","from itertools import permutations
+
+a = ['7', '5', '9']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",97
+19,3,"수 카드 5, 1, 2를 3장을 모두 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수보다 212만큼 작은 수는 얼마인지 답을 구해 보세요.","from itertools import permutations
+
+a = ['5', '1', '2']
+b = 212
+y = int(max(map(''.join, permutations(a, 3)))) - b
+print(y)",309
+20,3,"숫자 카드 2, 5, 6를 한 번씩만 사용하여 만들 수 있는 수 중에서 만들 수 있는 가장 작은 세자리 수는 얼마인지 구하세요.","from itertools import permutations
+
+a = ['2', '5', '6']
+y = int(min(map(''.join, permutations(a))))
+print(y)",256
+21,3,20 이상 50 이하인 자연수는 모두 몇 개인지 구하시오.,"a = 20
+b = 50
+y = b - a + 1
+print(y)",31
+22,3,"4장의 숫자 카드 3, 1, 5, 9가 있습니다. 이를, 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['3', '1', '5', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",585
+23,3,"4개의 숫자카드 1, 5, 9, 2 에서, 가장 큰 수와 가장 작은 수의 차를 구하시오.","a = [1, 5, 9, 2]
+y = max(a) - min(a)
+print(y)",8
+24,3,"수 카드 2, 5, 1, 4, 8 중에서, 3장을 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합은 얼마일까요?","from itertools import permutations
+
+a = ['2', '5', '1', '4', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",978
+25,3,"숫자 카드 2, 7, 9가 있습니다. 카드를 한 번씩만 사용하여 한 자리 수 A와 두 자리 수 B를 만들었을 때 식 8 * A = B 을 만족하는 B를 구하세요.","from itertools import permutations
+
+a = [2, 7, 9]
+b = 8
+c = list(permutations(a, 3))
+for i in c:
+    if b * i[0] == (i[1] * 10 + i[2]):
+        y = i[1] * 10 + i[2]
+print(y)",72
+26,3,"6장의 숫자 카드 0, 9, 8, 7, 2, 1가 있습니다. 이를, 한 번씩 사용하여 가장 큰 여섯 자리 수를 만들어 쓰시오.","from itertools import permutations
+
+a = ['0', '9', '8', '7', '2', '1']
+y = max(list(map(''.join, permutations(a, 6))))
+print(y)",987210
+27,3,7개의 점 중에서 2개의 점을 이용하여 그을 수 있는 선분은 모두 몇 개인가요?,"from itertools import combinations
+a = list(range(1,7+1))
+b = 2
+y = len(list(combinations(a, b)))
+print(y)",21
+28,3,"3장의 수 카드 2, 9, 8가 있습니다. 이를, 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하세요.","from itertools import permutations
+
+a = ['2', '9', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",693
+29,3,A * 9 > 56를 만족하는 1부터 9까지의 수 는 몇 개인가요?,"a = 1
+b = 9
+c = 9
+d = 56
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+30,3,"숫자 카드 2, 5, 9, 1, 8가 있습니다. 카드를 한 번씩 사용하여 만들 수 있는 가장 작은 수를 구하시오.","a = [2, 5, 9, 1, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12589
+31,3,1부터 9까지의 수 중에서 다음 식 5 * A > 30 을 만족하는 수는 모두 몇 개입니까? ,"a = 1
+b = 9
+c = 5
+d = 30
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+32,3,"숫자 카드 1, 5, 9, 2, 3을 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰 수를 구하시오.","from itertools import permutations
+
+a = ['1', '5', '9', '2', '3']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",95321
+33,3,"3 장의 수 카드 5, 3, 7가 있습니다. 이를, 한 번씩만 사용하여 두 자리 수와 한 자리 수를 만들었습니다. 만들 수 있는 작은 곱은 얼마일까요?","from itertools import permutations
+
+a = ['5', '3', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = min(c)
+print(y)",171
+34,3,다음 식 6*13>A*21이 있습니다. 이를 만족하는 한 자리 수 A 중에서 가장 큰 수는 얼마인지 구해 보시오.,"a = 6
+b = 13
+c = 21
+y = 0
+for i in range(1,9) :
+    if i < a * b / c :
+        y = i
+print(y)",3
+35,3,"4장의 숫자 카드 3, 5, 7, 9를 한 번씩만 사용하여 3자리 수 * 1 자리수 의 식을 만드려고 합니다. 이때, 가장 작은 곱을 구하시오.","from itertools import permutations
+
+a = ['3', '5', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = min(c)
+print(y)",1737
+36,3,"4 장의 수 카드 1, 2, 9, 8가 있습니다. 이중에서, 2 장을 골라 만들 수 있는 가분수와 진분수의 개수의 차를 구하시오.","from itertools import permutations
+
+a = [1, 2, 9, 8]
+b = list(permutations(a, 2))
+c = 0
+d = 0
+b = set(b)
+for i in b:
+    if i[0] >= i[1]:
+        c += 1
+    elif i[0] < i[1]:
+        d += 1
+y = c - d
+print(y)",0
+37,3,"승민이는 숫자 카드 1, 3, 5을 갖고 있고, 서현이는 숫자 카드 2, 4, 6을 갖고 있습니다. 승민이와 서현이는 각자의 수 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 승민이는 가장 작은 수를, 서현이는 가장 큰 수를 만들었다면 두 사람이 만든 수의 합은 얼마입니까?","from itertools import permutations
+a = ['1', '3', '5']
+b = ['2', '4', '6']
+d = int(min(map(''.join, permutations(a))))
+e = int(max(map(''.join, permutations(b))))
+y = d + e
+print(y)",777
+38,3,1부터 9까지의 수 중에서 다음 식 25*4>55*A를 만족하는 수는 모두 몇 개입니까?,"a = 1
+b = 9
+c = 25
+d = 4
+e = 55
+y = 0
+for i in range(a,b+1) :
+    if i < c * d / e:
+        y += 1 
+print(y)",1
+39,3,"숫자 카드 1, 5, 8, 2가 있습니다. 이중에서 3 장을 골라 한 번씩 사용하여 세 자리 수를 각각 만들 때, 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '8', '2']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",977
+40,3,"3장의 수 카드 1, 9, 2를 한 번씩 사용하여 만들 수 있는 가장 큰 세 자리 수와 가장 작은 세 자리 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '9', '2']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+41,3,"4장의 숫자 카드 1, 5, 9, 3를 한 번씩만 사용하여 만든 가장 큰 네자리 수를 반올림하여 백의 자리까지 나타내보세요.","from itertools import permutations
+a = ['1', '5', '9', '3']
+b = int(max(map(''.join, permutations(a, 4))))
+y = round(b, -2)
+print(y)",9500
+42,3,"숫자 6, 4, 1, 0, 9가 있습니다. 이중에서 서로 다른 숫자 4개를 뽑아 만들 수 있는 네 자리 수 중에서 가장 작은 수를 쓰시오.","from itertools import permutations
+
+a = ['6', '4', '1', '0', '9']
+b = 4
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",1046
+43,3,"숫자 카드 1, 9, 2, 3, 4가 있습니다. 이를 한 번씩 사용하여 가장 큰 다섯 자리 수를 만들 때 숫자 2가 나타내는 수는 얼마입니까?","a = [1, 9, 2, 3, 4]
+a.sort(reverse=True)
+b = 1
+c = 2
+for i in range(len(a)-1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",20
+44,3,"숫자 카드 1,4,2를 한 번씩 모두 사용하여 몫이 가장 작은 나눗셈식을 만들려고 합니다. 만든 나눗셈식의 몫을 구하시오. ","from itertools import permutations
+
+a = ['1', '4', '2']
+b = int(min(map(''.join, permutations(a, 2))))
+c = int(max(a))
+y = b // c
+print(y)",3
+45,3,1/2보다 크고 7/9보다 작은 분수 중에서 분모가 20인 분수는 모두 몇 개일까요?,"a = 1 / 2
+b = 7 / 9
+c = 20
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",5
+46,3,"200부터 500까지 자연수를 한 번씩 쓴다고 할 때, 숫자 0은 모두 몇 번 나오는지 구해보시오.","a = 200
+b = 500
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",62
+47,3,"숫자 카드 1, 0, 9, 2, 5를 한 번씩만 써서 가장 큰 다섯 자리 수를 만들어 보시오.","a = [1, 0, 9, 2, 5]
+a.sort()
+y = 10000*a[4] + 1000*a[3]+ 100*a[2] + 10*a[1] + a[0]
+
+print(y)",95210
+48,3,"숫자 카드 2, 3, 7를 한 번씩 사용하여 두 자리 수와 한 자리 수를 만들었습니다. 두 수의 나눗셈에서 나머지가 가장 작은 경우의 몫과 나머지의 합을 구하세요.","from itertools import permutations
+
+a = ['2', '3', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+d = []
+for i in b:
+    e = int(i[:2])
+    f = int(i[2:])
+    c.append(e % f)
+    d.append(e // f + e % f)
+y = d[c.index(min(c))]
+print(y)",9
+49,3,"4 장의 숫자 카드 8, 2, 3, 9 가 있습니다. 이중에서, 2 장을 골라 한 번씩만 사용하여 분수를 만들려고 합니다. 만들 수 있는 분수 중에서 3 보다 큰 분수는 몇 개입니까?","from itertools import permutations
+
+a = [8, 2, 3, 9]
+b = list(permutations(a, 2))
+c = 3
+y = 0
+for i in b:
+    if i[0]/i[1] > c:
+        y += 1
+print(y)",2
+50,3,"숫자 카드 2, 3, 4, 7, 8가 있습니다. 숫자 카드를 한 번씩 사용하여 가장 큰 다섯 자리 수를 만들 때 숫자 7이 나타내는 수는 얼마입니까?","a = [2, 3, 4, 7, 8]
+a.sort(reverse=True)
+b = 1
+c = 7
+for i in range(len(a) - 1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",7000
+51,3,"4장의 수 카드 1, 3, 7, 9가 있습니다. 카드를 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",663
+52,3,"3 장의 숫자 카드 2, 3, 5 중에서 2장을 뽑아 두 수의 곱을 구하려고 합니다. 가장 작은 곱을 구해보시오.","a = [2, 3, 5]
+a.sort()
+y = a[0] * a[1]
+print(y)",6
+53,3,"숫자 5, 6, 9, 1, 2 가 있습니다. 각 숫자를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중 가장 큰 수와 가장 작은 수의 차를 구하시오.","from itertools import permutations
+a = ['5', '6', '9', '1', '2']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",840
+54,3,"4장의 숫자 카드 3, 5, 7, 2 중에서, 3장을 뽑아 한 번씩만 사용하여 AB/C와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 작을 때의 몫을 구하시오.","from itertools import permutations
+
+a = ['3', '5', '7', '2']
+b = 3
+c = int(min(map(''.join, permutations(a, b - 1))))
+d = int(max(map(''.join, permutations(a, b - 2))))
+y = c // d
+print(y)",3
+55,3,80보다 크고 100보다 작은 두 자리 수 중에서 8로 나누었을 때 나머지가 4인 수는 모두 몇 개인가요?,"a = 80
+b = 100
+c = 8
+d = 4
+y = 0
+for i in range(a, b):
+    if i % c == 7:
+        y = y + 1
+print(y)",2
+56,3,"4장의 숫자 카드 2, 5, 6, 9 중에서 2장만 사용하여 가장 큰 분수를 만들었을 때, 분자와 분모의 합을 구하시오.","a = [2, 5, 6, 9]
+a.sort()
+y = a[3] + a[0]
+print(y)",11
+57,3,"숫자 카드 2, 1, 6, 8, 7를 모두 한 번씩만 사용하여 가장 큰 수를 만들어 보세요.","a = [2, 1, 6, 8, 7]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87621
+58,3,"숫자 카드 1, 3, 5, 8, 9를 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중에서 가장 큰 수를 만들어 보시오.","a = [1, 3, 5, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98531
+59,3,"3 숫자 카드 2, 4, 6가 있습니다. 카드를 2장을 뽑아 두 자리 수를 만들려고 합니다. 만들 수 있는 4의 배수는 모두 몇 개인지구하세요.","from itertools import permutations
+a = ['2', '4', '6']
+b = 4
+c = list(map(''.join, permutations(a, 2)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",2
+60,3,1부터 9까지의 수 중에서 다음 식 10 * A > 88을 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 9
+c = 88
+d = 10
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",1
+61,3,"숫자 카드 1, 2, 3, 4, 5가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수와 두 자리 수를 만들었습니다. 세 자리 수에서 두 자리 수를 나눌 때, 가장 작은 몫을 구하세요.","from itertools import permutations
+
+a = ['1', '2', '3', '4', '5']
+a.sort()
+b = int("""".join(a[:3]))
+c = int("""".join(a[-2:][::-1]))
+y = b // c
+print(y)",2
+62,3,"5장의 수 카드 1, 5, 9, 4, 6가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수 2개를 만들고 나눗셈을 할 다면, 가장 큰 몫은 얼마일까요?","from itertools import permutations
+
+a = ['1', '5', '9', '4', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",6
+63,3,"숫자 7, 9, 3이 있습니다. 세 수를 사용하여 가장 큰 수를 만들어보세요.","a = [7, 9, 3]
+a.sort(reverse=True)
+a = list(map(str, a))
+y = int("""".join(a))
+print(y)",973
+64,3,20부터 99까지의 수 중에서 1과 자기 자신만 약수로 가지는 수의 개수를 구하시오,"import math
+
+a = 20
+b = 99
+y = 0
+for i in range(a, b + 1):
+    for j in range(2, int(math.sqrt(i)) + 1):
+        if i % j == 0:
+            break
+    else:
+        y += 1
+print(y)",17
+65,3,10보다 크고 55보다 작은 수 중에서 3으로 나누면 나머지가 1이고 8로 나누면 나누어떨어지는 수는 모두 몇 개일까요?,"a = 10
+b = 55
+c = 3
+d = 1
+e = 8
+y = 0
+for i in range(a+1, b):
+    if i % c == d and i % e == 0:
+        y = y + 1
+print(y)",2
+66,3,다음 식 9 * A > 20 을 만족하는 1부터 9까지의 수는 모두 몇 개인가요?,"a = 1
+b = 9
+c = 9
+d = 20
+y = 0
+for i in range(a, b + 1):
+    if i > d / c:
+        y += 1
+print(y)",7
+67,3,"숫자 카드 2, 3, 5, 9가 있습니다. 카드를 3개를 골라 한 번씩만 사용하여 세 자리 수 두개를 만들어 차를 구하려고 합니다. 차가 가장 큰 뺄셈식의 차를 구하시오.","from itertools import permutations
+
+a = ['2', '3', '5', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d - e
+print(y)",718
+68,3,"4장의 숫자 카드 1, 2, 4, 8를 한 번씩만 사용하여 3자리 수 * 1자리 수의 식을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '2', '4', '8']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",3368
+69,3,1에서 7까지의 숫자가 있습니다. 이 숫자들을 각각 한 번씩 사용하여 만들 수 있는 수 중에서 가장 작은 수를 구하시오.,"a = [1, 2, 3, 4, 5, 6, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234567
+70,3,"숫자 카드 9, 1, 5 을 모두 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수 에서 123을 뺀 수는 얼마인지 답을 구해 보세요.","from itertools import permutations
+
+a = ['9', '1', '5']
+b = 123
+y = int(max(map(''.join, permutations(a, 3)))) - b
+print(y)",828
+71,3,"숫자 2, 3, 6, 9, 1 가 있습니다. 이중에서, 3개의 숫자를 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['2', '3', '6', '9', '1']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1086
+72,3,"숫자 카드 2, 5, 6, 7, 1, 8 가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 4보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [2, 5, 6, 7, 1, 8]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",20
+73,3,"숫자 카드 9, 5, 1, 2, 3 중에서, 카드를 모두 한 번씩만 사용하여 만들 수 있는 네 자리 수 중에서 가장 작은 수를 얼마입니까?","from itertools import permutations
+
+a = ['9', '5', '1', '2', '3']
+y = int(min(map(''.join, permutations(a, 4))))
+print(y)",1235
+74,3,"숫자 1, 2, 3, 4, 5가 있습니다. 이중에서 24/86을 약분하려고 할 때 분모와 분자를 나눌 수 없는 수의 개수를 구하세요.","a = [1, 2, 3, 4, 5]
+b = 24
+c = 86
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+75,3,1부터 5까지의 수를 한 번씩 사용하여 만들 수 있는 가장 큰 수를 구해 보시오.,"a = [1, 2, 3, 4, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",54321
+76,3,"숫자 카드 1, 5, 9, 2, 8를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중 가장 큰 수와 가장 작은 수의 차는 얼마입니까?","from itertools import permutations
+
+a = ['1', '5', '9', '2', '8']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",860
+77,3,"숫자 1, 3, 9, 8 중에서, 서로 다른 두 수를 뽑아 만들 수 있는 두자리 수 중에 가장 큰 수는 무엇인가요?","from itertools import permutations
+
+a = ['1', '3', '9', '8']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",98
+78,3,다음 식 123*A < 1000 이 있습니다. 이를 만족하는 한 자리 수A 중에서 가장 큰 수를 구해 보시오.,"a = 123
+b = 1000
+y = 0
+for i in range(1,9+1) :
+    if i < b / a  :
+        y = i
+print(y)",8
+79,3,"4장의 카드 3, 1, 7, 9를 한 번씩 모두 사용하여 만들 수 있는 가장 큰 소수 세자리수와 가장 작은 소수 세자리수의 합은 얼마인가요?","from itertools import permutations
+
+a = ['3', '1', '7', '9']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 3)
+print(y)",11.110000000000003
+80,3,"숫자 카드 2, 3, 7 를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구해 보시오.","from itertools import permutations
+
+a = ['2', '3', '7']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",969
+81,3,"4장의 숫자 카드 1, 8, 6, 2 중에서 2장을 골라 한 번씩만 사용하여 AB/2 와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 작을 때의 몫을 구하시오.","from itertools import permutations
+
+a = ['1', '8', '6', '2']
+b = int(min(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",6
+82,3,"4장의 숫자 카드 2, 4, 5, 6를 한 번씩 모두 사용하여 두 자리수 두개의 곱을 구하려고 합니다. 가장 큰 곱과 가장 작은 곱의 합을 구하시오.","from itertools import permutations
+
+a = ['2', '4', '5', '6']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c) + min(c)
+print(y)",4498
+83,3,1부터 9까지의 자연수 중에서 다음 식 50－9÷3＋40＞A 을 만족하는 수는 모두 몇 개인가요?,"a = 50 - (9/3) + 40
+b = 1
+c = 9
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",9
+84,3,"숫자 카드 2, 4, 6, 8, 5를 모두 한 번씩만 사용하여 만들 수 있는 가장 큰 수는 무엇인가요?","a = [2, 4, 6, 8, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",86542
+85,3,1부터 9까지의 자연수 중에서 다음 식 17－80÷5＋3＞A를 만족하는 수는 모두 몇 개일까요?,"a = 17 - 80/5 + 3
+b = 1
+c = 9
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",3
+86,3,"1부터 30까지 자연수를 쓰려고 할때, 숫자 2은 모두 몇 번 써야 합니까?","a = 1
+b = 30
+c = '2'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",13
+87,3,"숫자 카드 1, 2, 5, 7가 있습니다. 카드를 한 번씩 사용하여 만들 수 있는 두 자리 수 중에서 4으로 나눠지는 수는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '2', '5', '7']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] == '0':
+        continue
+    if int(i) % 4 == 0:
+        y += 1
+print(y)",3
+88,3,"5장의 수 카드 5, 6, 7, 8, 9를 한 번씩 사용하여 만들 수 있는 가장 큰 세 자리 수와 가장 작은 세 자리 수의 차를 구하세요.","from itertools import permutations
+
+a = ['5', '6', '7', '8', '9']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c - d
+print(y)",420
+89,3,"숫자 카드 1, 3, 9가 있습니다. 카드를 한 번씩만 사용하여 만들 수 있는 두 자리 수 AB와 한 자리수 C에 대해 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '3', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",279
+90,3,"숫자 1, 3, 5, 9가 있습니다. 숫자 2개를 뽑아 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 차를 구하시오.","from itertools import permutations
+
+a = ['1', '3', '5', '9']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = abs(c - d)
+print(y)",82
+91,3,"숫자 카드 3, 2, 0, 5, 8, 6를 한 번만 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?","a = [3, 2, 0, 5, 8, 6]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865320
+92,3,"4장의 수 카드 2, 5, 7, 6 가 있습니다. 이중에서 2장을 뽑아 만들 수 있는 A.B 형태의  소수 중에서 가장 큰 수와 가장 작은 수의 차를 구하세요","from itertools import permutations
+
+a = ['2', '5', '7', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b)))) / 10
+d = int(min(map(''.join, permutations(a, b)))) / 10
+y = c - d
+print(y)",5.1
+93,3,"4장의 숫자 카드 3, 5, 6, 8 에서 2장을 한 번씩만 사용하여 두 자리 수를 만드려고 합니다. 이중, 가장 큰 수와 가장 작은 수의 곱을 구해보시오.","from itertools import permutations
+
+a = ['3', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3010
+94,3,"숫자 카드 1, 5, 9가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구해 보시오.","from itertools import permutations
+
+a = ['1', '5', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1110
+95,3,"4 장의 수 카드 2, 3, 7, 9 가 있습니다. 카드를 3 장을 골라 한 번씩만 사용하여 만들 수 있는 가장 큰 세 자리 수와 남은 수 카드의 수의 곱은 얼마입니까?","from itertools import permutations
+
+a = ['2', '3', '7', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+for i in d:
+    a.remove(i)
+e = a[0]
+y = int(d) * int(e)
+print(y)",1946
+96,3,1부터 4까지의 수를 하나씩 사용하여 가장 작은 수를 만들어 보시오.,"a = [1, 2, 3, 4]
+a.sort(reverse=False)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234
+97,3,"4장의 숫자 카드 2, 4, 6, 8를 한 번씩만 사용하여 만든 가장 큰 네자리 수를 반올림하여 백의 자리까지 나타내면 얼마입니까?","from itertools import permutations
+
+a = ['2', '4', '6', '8']
+b = int(max(map(''.join, permutations(a, 4))))
+y = round(b, -2)
+print(y)",8600
+98,3,"숫자 카드 1, 9, 2, 8가 있습니다. 이중에서, 3장을 한 번씩만 사용하여 만들 수 있는 가장 큰 세 자리 수를 구하시오","from itertools import permutations
+
+a = ['1', '9', '2', '8']
+y = int(max(map(''.join, permutations(a, 3))))
+print(y)",982
+99,3,"4장의 숫자 카드 2, 3, 7, 9가 있습니다. 카드를 2장을 골라 한 번씩만 사용하여 3보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [2, 3, 7, 9]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",12
+100,3,1부터 9까지의 수를 한 번씩 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?,"a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",987654321
+101,3,"수 카드 1, 5, 9를 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '5', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+102,3,"5장의 수 카드 3,4,5,1,8가 있습니다. 이중에서, A 안에 2장을 한 번씩만 넣어 0.AA와 같은 소수 두 자리 수를 만들었습니다. 만들 수 있는 수 중 가장 큰 수와 가장 작은 수의 곱을 구해보세요.","from itertools import permutations
+
+a = ['3', '4', '5', '1', '8']
+b = list(permutations(a, 2))
+c = []
+for i in b:
+    c.append(int(i[0]) * 10 + int(i[1]))
+y = max(c) * min(c) * 0.0001
+print(y)",0.1105
+103,3,"사과, 복숭아, 배, 참외 중에서 3가지의 과일을 골라서 사는 경우의 수를 모두 구하시오.","from itertools import combinations
+
+a = ['사과', '복숭아', '배', '참외']
+b = 3
+y = len(list(combinations(a, b)))
+print(y)",4
+104,3,"3장의 수 카드 1, 7, 9 를 한 번씩 사용하여 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '7', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+105,3,1부터 9까지의 수 중에서 다음 식 7 * A > 40 을 만족하는 수는 모두 몇 개일까요?,"a = 1
+b = 9
+c = 7
+d = 40
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",4
+106,3,"4장의 숫자 카드 0, 4, 5, 7 를 한 번씩 모두 사용하여 두자리 수 두개의 곱셈식을 만들려고 한다면, 가장 작은 곱은 얼마입니까?","from itertools import permutations
+
+a = ['0', '4', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        e = int(i[2:])
+        c.append(d * e)
+y = min(c)
+print(y)",2280
+107,3,"4장의 수 카드 1, 3, 9, 5가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수 2개를 만들고 나눗셈을 할 때, 가장 큰 몫은 얼마입니까?","from itertools import permutations
+
+a = ['1', '3', '9', '5']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",7
+108,3,1부터 9까지의 수 중에서 다음 식 6*5>11*A 을 만족하는 수는 모두 몇 개입니까?,"a = 1 
+b = 9
+c = 6
+d = 5
+e = 11
+y = 0
+for i in range(a,b+1):
+    if c * d > e * i:
+        y += 1
+print(y)",2
+109,3,"4장의 숫자 카드 9, 3, 4, 7 중에서, 2장을 한 번씩만 사용하여 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 곱을 구해보시오.","from itertools import permutations
+
+a = ['9', '3', '4', '7']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3298
+110,3,"숫자 카드 2, 4, 6, 5, 7를 한 번 사용하여 다섯 자리 수를 만들려고 합니다. 가장 큰 수를 구해보시오.","from itertools import permutations
+
+a = ['2', '4', '6', '5', '7']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",76542
+111,3,10보다 크고 98보다 작은 두 자리 수 중에서 9로 나누었을 때 나머지가 3인 수는 모두 몇 개일까요? ,"a = 10
+b = 98
+c = 9
+d = 3
+y = 0
+for i in range(a, b):
+    if i % c == d:
+        y = y + 1
+print(y)",10
+112,3,3/21과 크기가 같은 분수 중에서 분모가 20보다 크고 90보다 작은 분수는 모두 몇 개인가요?,"import math
+
+a = 3
+b = 21
+c = 20
+d = 90
+e = math.gcd(a,b)
+y = math.ceil(d / (b // e)) - c // (b // e) - 1
+print(y)",10
+113,3,"숫자 카드 2, 5, 6가 있습니다. 이 카드를 한 번씩 모두 사용하여 소수 두 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['2', '5', '6']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = (c + d) * (0.01)
+print(y)",9.08
+114,3,1부터 9까지의 수 중에서 다음 식 33 > 5 * A 을 만족하는 가장 큰 수는 얼마입니까? ,"a = 33
+b = 5
+c = a // b
+d = 9
+y = c if c < 10 else d
+print(y)",6
+115,3,"숫자 카드 1, 2, 3, 4, 6 를 모두 한 번씩만 사용하여 가장 큰 수를 만들어 보세요.","a = [1, 2, 3, 4, 6]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",64321
+116,3,"숫자 카드 5, 1, 9, 6 가 있습니다. 카드 2장을 뽑아 한 번씩만 사용하여 만든 두 자리 수를 5로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해보시오.","from itertools import permutations
+
+a = ['5', '1', '9', '6']
+b = 5
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+117,3,"5장의 수 카드 8, 5, 2, 3, 4를 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['8', '5', '2', '3', '4']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",620
+118,3,"숫자 카드 8, 2, 3, 1, 4를 한 번만 사용하여 만들 수 있는 가장 큰 수는 얼마인가요?","from itertools import permutations
+
+a = ['8', '2', '3', '1', '4']
+y = int(max(map(''.join, permutations(a, len(a)))))
+print(y)",84321
+119,3,"숫자 카드 1, 2, 3, 4가 있습니다. 카드를 2장을 골라 한 번씩만 사용하여 2보다 큰 한자리 수 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [1, 2, 3, 4]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",9
+120,3,"4장의 숫자 카드 1,2,7,9가 있습니다. 이중에서 2장을 뽑아 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 4로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해보시오.","from itertools import permutations
+
+a = ['1', '2', '7', '9']
+b = 4
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+121,3,"4장의 숫자 카드 0,2,5,7가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수를 만들 때 가장 큰 두 자리 수와 가장 작은 두 자리 수의 곱을 구하시오.","from itertools import permutations
+
+a = ['0', '2', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        c.append(d)
+y = min(c) * max(c)
+print(y)",1500
+122,3,"3장의 숫자 카드 4,8,6 중에서, 2장을 골라 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 2로 나누었을 때 몫이 가장 큰 나눗셈식의 몫을 구하시오.","from itertools import permutations
+
+a = ['4', '8', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",43
+123,3,"4장의 숫자 카드 2, 5, 6, 9가 있습니다. 이중에서, 한 번씩만 사용하여 (100*A+10*B+C)*D의 식을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",5868
+124,3,"숫자 카드0, 7, 2, 9 네장을 한 번씩 모두 사용하여 합이 가장 큰 덧셈식의 합을 구하시오.","from itertools import permutations
+
+a = ['0', '7', '2', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d + e)
+y = max(c)
+print(y)",162
+125,3,어떤 수는 60의 약수이면서 6의 배수가 아닙니다. 조건을 만족하는 수는 모두 몇 개 인가요?,"a = 60
+b = 6
+y = 0
+for i in range(1, a + 1):
+    if a % i == 0 and i % b != 0:
+        y += 1
+print(y)",8
+126,3,"숫자 카드 2, 1, 5, 9, 8, 7 중에서, 카드를 각각 한 번씩 사용하여 만들 수 있는 수 중 가장 작은 수를 구하시오.","a = [2, 1, 5, 9, 8, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",125789
+127,3,"4개의 숫자 카드 0, 3, 8, 9 가 있습니다. 이중에서, 3개를 골라 한 번씩만 사용하여 세 자리 수를 만들 때, 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['0', '3', '8', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+if '0' in a:
+    while True:
+        e = min(c)
+        if e[0] == '0':
+            c.remove(e)
+        else:
+            break
+y = int(d) + int(e)
+print(y)",1291
+128,3,1부터 9까지의 수 중에서 다음 식 42 < 6 * A 을 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 9
+c = 42
+d = 6
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",2
+129,3,"4장의 숫자 카드 1, 5, 6, 8가 있습니다. 이 숫자카드를 한 번씩만 사용하여 두 자리 수 2개를 만들었습니다. 두 수를 나눌 때, 가장 큰 몫을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '6', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+
+print(y)",5
+130,3,다음 식 800 - A < 123 + 456 안에 들어갈 수 있는 수 중에서 가장 작은 수를 구하시오. ,"a = 800
+b = 123
+c = 456
+y = a - (b + c) + 1
+print(y)",222
+131,3,"1부터 9까지의 수 중에서, 다음 식 60 * A < 33 * 11을 만족하는 수는 모두 몇 개입니까?","a = 1
+b = 9
+c = 60
+d = 33 * 11
+y = 0
+for i in range(a, b + 1):
+    if i < d / c:
+        y += 1
+print(y)",6
+132,3,"숫자 카드 8, 1, 7를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 작은 수는 얼마인가요?","from itertools import permutations
+
+a = ['8', '1', '7']
+y = int(min(map(''.join, permutations(a, 3))))
+print(y)",178
+133,3,"숫자 카드 1, 2, 3, 4, 5, 6, 7, 8를 한 번씩 모두 사용하여 가장 작은 수를 만들어보시오.","a = [2, 4, 5, 6, 9, 1, 7, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12456789
+134,3,"숫자 3, 5, 1, 8, 9가 있습니다. 3개의 숫자를 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['3', '5', '1', '8', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1120
+135,3,"숫자카드 2, 5, 6, 8가 있습니다. 이중에서, 서로 다른 숫자 3개를 뽑아 만들 수 있는 세 자리 수 중에서 가장 작은 수를 쓰시오.","from itertools import permutations
+
+a = ['2', '5', '6', '8']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",256
+136,3,"숫자 카드 1, 3, 5, 7, 9 중에서, 숫자 카드를 모두 한 번씩만 사용한다면 만들 수 있는 가장 큰 수는 무엇인가요?","a = [1, 3, 5, 7, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",97531
+137,3,"4장의 수 카드 8, 2, 3, 4 가 있습니다. 이를, 한 번씩만 사용하여 만든 2개의 두 자리 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['8', '2', '3', '4']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",912
+138,3,"숫자 카드 1, 3, 5, 7, 9를 모두 한 번씩만 사용하여 만들 수 있는 가장 작은 다섯 자리 수를 구하시오.","a = [1, 3, 5, 7, 9]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+139,3,3/20과 크기가 같은 분수 중에서 분모가 10보다 크고 100보다 작은 분수는 모두 몇 개인가요? ,"import math
+
+a = 3
+b = 20
+c = 10
+d = 100
+e = math.gcd(a,b)
+y = math.ceil(d / (b / e)) - c // (b / e) - 1
+print(y)",4.0
+140,3,"20부터 60까지 자연수를 쓸 때, 숫자 0은 모두 몇 번 써야 합니까?","a = 20
+b = 60
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",5
+141,3,1부터 10까지의 자연수 중에서 약수의 개수가 2개인 수는 몇 개인가요?,"a = 1
+b = 10
+c = 2
+d = 0
+for i in range(a, b + 1):
+    e = 0
+    for j in range(1, i + 1):
+        if i % j == 0:
+            e += 1
+    if e == c:
+        d += 1
+y = d
+print(y)",4
+142,3,"4장의 숫자 카드 1, 5, 6, 8 중에서, 2장을 한 번씩만 사용하여 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",1290
+143,3,"숫자 카드 5, 1, 8, 9가 있습니다. 이중에서, 3 장을 뽑아 두 자리 수와 한 자리 수 하나씩을 만들었을 때, 곱이 가장 큰 경우의 값을 구하시오.","from itertools import permutations
+
+a = ['5', '1', '8', '9']
+b = list(map(''.join, permutations(a, 3)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",765
+144,3,"3장의 숫자 2,4,6 중에서, 이를 한 번씩만 사용하여 몫이 가장 큰 나눗셈식을 만들려고 합니다. 몫은 얼마인가요?","from itertools import permutations
+
+a = ['2', '4', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b - 1))))
+y = c // d
+print(y)",32
+145,3,"숫자 카드 1, 8, 9, 6 중에서, 카드를 한 번씩만 사용하여 만들 수 있는 가장 큰 네 자리 수는 얼마입니까?","from itertools import permutations
+
+a = ['1', '8', '9', '6']
+b = 4
+y = int(max(map(''.join, permutations(a, b))))
+print(y)",9861
+146,3,"숫자 1, 5, 9, 8, 7가 있습니다. 이중에서 50/60을 약분하려고 할 때 분모와 분자를 나눌 수 없는 수의 개수는 몇 개입니까?","a = [1, 5, 9, 8, 7]
+b = 50
+c = 60
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+147,3,"숫자 카드 1, 3, 5, 6, 8, 7를 한 번씩 사용하여 만들 수 있는 가장 작은 수는 몇인지 구하시오.","a = [1, 3, 5, 6, 8, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",135678
+148,3,"숫자 1, 2, 5, 9를 한번씩만 사용하여 만들 수 있는 가장 큰 네 자리 수는 무엇인가요?","from itertools import permutations
+
+a = ['1', '2', '5', '9']
+y = int(max(map(''.join, permutations(a, 4))))
+print(y)",9521
+149,3,"4장의 숫자 카드 0,1,2,8이 있습니다. 이중에서, 2장을 뽑아 한 번씩만 사용하여 가장 큰 두 자리 수를 만들었습니다. 이 수를 2로 나눈 몫은 얼마입니까?","from itertools import permutations
+
+a = ['0', '1', '2', '8']
+b = 2
+c = 2
+y = int(max(map(''.join, permutations(a, b)))) / c 
+print(y)",41.0
+150,3,"숫자 카드 3, 2, 7, 4가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 4보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [3, 2, 7, 4]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",6
+151,3,"4장의 숫자 카드 1, 2, 3, 4 중에서 3장을 한 번씩만 사용하여 (10*A+B)*C의 식을 만들때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '2', '3', '4']
+b = 1
+c = max(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 2
+e = int(max(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",128
+152,3,3/9와 크기가 같은 분수 중에서 분모가 10보다 크고 30보다 작은 분수는 모두 몇 개인가요?,"from math import ceil
+
+a = 9
+b = 10
+c = 30
+y = ceil(c / a) - b // a - 1
+print(y)",2
+153,3,"숫자 카드 1, 3, 5, 7, 9 를 한 번 사용하여 수를 만들려고 합니다. 가장 작은 수를 구해보시오.","a = [1, 3, 5, 7, 9]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+154,3,12/8보다 크고 52/3보다 작은 자연수는 모두 몇 개일까요?,"from math import ceil
+
+a = 12 // 8
+b = ceil(52 / 3)
+y = b - a - 1
+print(y)",16
+155,3,"3장의 숫자카드 6,2,4를 한 번씩만 사용하여 두자리수와 한자리수를 만들어 나눗셈식을 만들려고 합니다. 몫이 가장 크게 될때의 나머지를 구하시오.","from itertools import permutations
+
+a = ['6', '2', '4']
+b = 2
+c = 1
+d = int(max(map(''.join, permutations(a, b))))
+e = int(min(map(''.join, permutations(a, c))))
+y = d % e
+print(y)",0
+156,3,"숫자 카드 5, 9, 4, 6를 모두 한 번씩만 사용하여 만들 수 있는 네 자리 수 중 가장 작은 수를 구해보시오.","a = [5, 9, 4, 6]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",4569
+157,3,1부터 9까지의 수 중에서 다음 식 9 * A < 55 를 만족하는 A의 개수를 구하시오.,"a = 1
+b = 9
+c = 9
+d = 55
+y = 0
+for i in range(a, b + 1):
+    if i < (d / c):
+        y += 1
+print(y)",6
+158,3,"숫자 카드 1, 5, 6, 8중에서 3장을 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+a = ['1', '5', '6', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1021
+159,3,"숫자 카드 7, 8, 9  중에서 2장을 뽑아 만들 수 있는 가장 작은 곱은 얼마일까요?","a = [7, 8, 9]
+a.sort()
+y = a[0] * a[1]
+print(y)",56
+160,3,"4장의 숫자 카드 1, 3, 5, 7중 한 장씩만 사용하여 만들 수 있는 두 자리 수 두개의 곱 중에서 가장 큰 곱을 구하시오","from itertools import permutations
+
+a = ['1', '3', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",3763
+161,3,"숫자 7, 29, 3, 56, 12가 있습니다. 이중에서, 가장 작은 두 자리 수와 가장 작은 한 자리 수의 곱은?","a = [7, 29, 3, 56, 12]
+b = []
+c = []
+for i in a:
+    if i < 10:
+        c.append(i)
+    else:
+        b.append(i)
+y = min(b) * min(c)
+print(y)",36
+162,3,"수 카드 3, 4, 7, 0중에서,카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['3', '4', '7', '0']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",709
+163,3,"숫자카드 2, 3, 4, 5, 6, 7, 8, 9가 있습니다. 6으로 나누었을 때, 나머지가 될 수 없는 수를 모두 찾아 더하시오.","a = (2, 3, 4, 5, 6, 7, 8, 9)
+b = []
+for i in a:
+    if i >= 6:
+        b.append(i)
+y = sum(b)
+print(y)",30
+164,3,"숫자 1, 2, 3, 8 가 있습니다. 숫자를 3개 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['1', '2', '3', '8']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",955
+165,3,1부터 9까지의 수 중에서 다음 식 55 > 9 * A 를 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 9
+c = 55
+d = 9
+y = 0
+for i in range(a, b + 1):
+    if i < c / d:
+        y += 1
+print(y)",6
+166,3,"숫자 1, 3, 7, 9, 5가 있습니다. 이중에서 서로 다른 숫자 3개를 뽑아 만들 수 있는 세 자리 수 중에서 가장 큰 수를 쓰시오.","from itertools import permutations
+
+a = ['1', '3', '7', '9', '5']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort(reverse=True)
+y = c[0]
+print(y)",975
+167,3,"4장의 숫자 카드 1, 5, 7, 8 중에서, 2장을 뽑아 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 10으로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해 보시오.","from itertools import permutations
+
+a = ['1', '5', '7', '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 10
+y = c // d
+print(y)",8
+168,3,"숫자 카드 1, 2, 3, 4, 5, 8가 있습니다. 이를 한번 씩만 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰수는 얼마인가요?","from itertools import permutations
+
+a = ['1', '2', '3', '4', '5', '8']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",85432
+169,3,6부터 9까지의 수를 하나씩 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?,"a = [6, 7, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",9876
+170,3,"수 카드 1, 4, 2를 한 번씩만 사용하여 만들 수 있는 두 자리 수를 만들려고 합니다. 이중에서 3으로 나누어지는 수는 모두 몇 개일까요?","from itertools import permutations
+
+a = ['1', '4', '2']
+b = 3
+y = 0
+for c in permutations(a, 2):
+    if not int(''.join(c)) % b:
+        y += 1
+print(y)",4
+171,3,"숫자 카드 1, 3, 7 가있습니다. 2장의 카드를 사용하여 만들 수 있는 가장 큰 분수와 가장 작은 분수의 곱을 구하세요.","a = [1, 3, 7]
+y = (max(a) / min(a)) * (min(a) / max(a))
+print(y)",1.0
+172,3,"숫자 카드 7, 8, 5, 6, 1, 4를 한 번씩 사용하여 만들 수 있는 여섯 자리 수 중에서 가장 큰 수를 구하시오.","a = [7, 8, 5, 6, 1, 4]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",876541
+173,3,"숫자 카드 4, 3, 8이 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 4보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [4, 3, 8]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",4
+174,3,"숫자 카드 4, 6, 8를 한 번씩만 사용하여 가장 큰 대분수를 만들려고 합니다. 이 대분수를 가분수로 바꾸었을 때 분자의 값을 구하세요.","a = [4, 6, 8]
+a = sorted(a)
+y = a[0] + a[1] * a[2]
+print(y)",52
+175,3,"숫자 카드 2, 3, 5, 9, 8가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수와 두 자리 수를 만들었습니다. 세 자리 수에서 두 자리 수를 나눌 때, 가장 작은 몫을 구하세요.","from itertools import permutations
+
+a = ['2', '3', '5', '9', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = c // b
+print(y)",2
+176,3,"숫자 8, 7, 1가 있습니다. 이중에서, 2개를 뽑아 만들 수 있는 가장 큰 두 자리 수를 구하시오.","from itertools import permutations
+
+a = ['8', '7', '1']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",87
+177,3,"4 장의 숫자 카드 2, 8, 0, 5가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 7보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [2, 8, 0, 5]
+b = 2
+c = list(permutations(a, b))
+y = 0
+for i in c:
+    if i[0] >= 7:
+        y += 1
+if 0 in a:
+    y -= 1
+print(y)",2
+178,3,"4장의 숫자 카드 1, 3, 7, 9 중에서 카드를 한 번씩 모두 사용하여 (A*100+B*10+C)*D의 곱셈식을 만들려고 합니다. 가장 작은 곱은 얼마입니까?","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = 1
+c = min(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 3
+e = int(min(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",379
+179,3,"숫자 카드 2,5,6이 있습니다. 카드를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중에서 2의 배수는 모두 몇 개인가요?","from itertools import permutations
+
+a = ['2', '5', '6']
+b = 2
+c = list(map(''.join, permutations(a, 3)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",4
+180,3,1/5보다 크고 5/8보다 작은 분수 중에서 분모가 40인 분수는 모두 몇 개인지 구하시오.,"a = 1 / 5
+b = 5 / 8
+c = 40
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",16
+181,3,"4장의 숫자 카드 1, 3, 7, 9를 한 번씩만 사용하여 3자리 수 * 한자리 수의 곱셈을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",6579
+182,3,"숫자 카드 3, 8, 6, 1 가 있습니다. 이중에서 3개의 숫자를 뽑아 한 번씩만 사용하여 만들 수 있는 가장 큰 세자리 수와 가장 작은 세자리 수의 합을 구하시오","from itertools import permutations
+
+a = ['3', '8', '6', '1']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",999
+183,3,"숫자 카드 5, 3, 1, 7, 8를 한 번씩 사용하여 가장 큰 수를 만들어 보세요.","a = [5, 3, 1, 7, 8]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87531
+184,3,"4장의 숫자 카드 1, 5, 8, 9 중에서, 2장을 골라 한 번씩만 사용하여 AB/2 와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 클 때의 몫을 구하시오. ","from itertools import permutations
+
+a = ['1', '5', '8', '9']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 2
+y = c // d
+print(y)",49
+185,3,"승현이는 숫자 카드 1, 3, 7을 갖고 있고, 서현이는 숫자 카드 2, 4, 6을 갖고 있습니다. 승현이와 서현이는 각자의 수 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 승현이는 가장 작은 수를, 서현이는 가장 큰 수를 만들었습니다. 두 사람이 만든 숫자의 합을 구해보세요.","from itertools import permutations
+a = ['1', '3', '7']
+b = ['2', '4', '6']
+d = int(min(map(''.join, permutations(a, 3))))
+e = int(max(map(''.join, permutations(b, 3))))
+y = d + e
+print(y)",779
+186,3,50보다 크고 88보다 작은 두 자리 수 중에서 8로 나누어떨어지는 수는 모두 몇 개일까요?,"a = 50
+b = 88
+c = 8
+y = 0
+for i in range(a + 1, b):
+    if i % c == 0:
+        y += 1
+print(y)",4
+187,3,"숫자 1, 9, 2, 3, 5가 있습니다. 이중에서, 서로 다른 3개의 숫자를 뽑아서 만들 수 있는 세 자리 수는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '9', '2', '3', '5']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] != '0':
+        y += 1
+print(y)",60
+188,3,"숫자 카드 1, 2, 9, 6, 4을 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰 수를 구하시오.","from itertools import permutations
+
+a = ['1', '2', '9', '6', '4']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",87651
+189,3,"4장의 숫자 카드 3, 5, 2, 7가 있습니다. 카드를 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['3', '5', '2', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",925
+190,3,"4장의 수 카드 2 , 5 , 6 , 9가 있습니다. 이중에서, 2장을 뽑아 A.B 형태의 소수를 만들려고 한다면, 만들 수 있는 소수 중에서 가장 큰 수와 가장 작은 수의 합을 구하세요.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = int(max(map(''.join, permutations(a, 2)))) / 10
+c = int(min(map(''.join, permutations(a, 2)))) / 10
+y = b + c
+print(y)",12.10
+191,3,"숫자 카드 1, 2, 4, 9, 8, 3 중에서, 카드를 각각 한 번씩 사용하여 만들 수 있는 수 중 가장 큰 수를 구해 보시오.","a = [1, 2, 4, 9, 8, 3]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865321
+192,3,26부터 405까지의 수 중에서 5로 나누었을 때 나머지가 5이 되는 수는 모두 몇 개입니까?,"a = 26
+b = 405
+c = 5
+d = 5
+y = 0
+for i in range(a, b + 1):
+    if i % c == d:
+        y += 1
+print(y)",13
+193,3,"숫자 카드 1, 7, 4을 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하시오.","a = ['1', '7', '4']
+a.sort()
+b = int(''.join(a))
+a.sort(reverse=True)
+c = int(''.join(a))
+y = c - b
+print(y)",495
+194,3,"숫자 카드 1, 6, 2, 5가 있습니다. 이를 한 번씩만 사용하여 2개의 두 자리 수를 만들었을 때, 두 수의 가장 큰 곱을 구하세요.","from itertools import permutations
+
+a = ['1', '6', '2', '5']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",5248
+195,3,"1장의 수 카드 2, 7, 9, 9가 있습니다. 카드를 한 번씩 모두 사용하여 만들 수 있는 가장 큰 네 자리 수를 구하시오","from itertools import permutations
+
+a = ['1', '7', '9', '9']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",9832
+196,3,"2 장의 숫자 카드 3, 3, 8 가 있습니다. 카드를 한 번씩만 사용하여 두자리수 / 한자리수와 같은 나눗셈식중에서, 가장 작은 몫은 얼마입니까?","a = [2, 3, 8]
+a.sort()
+y = (10 * a[0] + a[1]) // a[2]
+print(y)",5
+197,3,"수식 79*21<A<43*55이 있습니다. 이를, 만족하는 세 자리 수A 의 개수를 구하시오.","a = 79
+b = 21
+c = 43
+d = 55
+y = 0
+for i in range(100,999+1) :
+    if (i > a * b) and (i < c * d):
+        y += 1
+print(y)",81
+198,3,"9장의 숫자 카드 1, 3, 8, 9를 모두 사용하여 만들 수 있는 네자리수 중 5138보다 큰 숫자는 몇 개 일까요?","from itertools import permutations
+
+a = ['1', '3', '8', '9']
+b = map(''.join, permutations(a, 9))
+b = list(b)
+y = 0
+for i in b:
+    if int(i) > 5138:
+        y += 1
+print(y)",22
+199,3,"3 장의 숫자 카드 9, 2, 1가 있습니다. 이를, 한 번씩만 사용하여 두 자리 수와 한 자리 수를 만들고 나눗셈을 하려고 합니다. 몫이 가장 작을 때의 몫과 나머지의 합을 구하시오.","a = [9, 2, 1]
+a.sort()
+c = 10*a[0] + a[1]
+d = a[2]
+y = c // d + c % d
+print(y)",4
+200,3,"3장의 카드 2, 5, 6 를 한 번씩 모두 사용하여 소수 두 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합은 얼마인가요? ","from itertools import permutations
+
+a = ['2', '5', '6']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 2)
+print(y)",9.08
+201,3,"숫자 카드 8, 2, 7, 1, 3를 한 번씩 사용하여 만들 수 있는 수중에서 가장 작은 수를 구하시오.","a = [8, 2, 7, 1, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13569
+202,3,"숫자 카드 2, 3, 7, 3, 3를 한 번씩 사용하여 만들 수 있는 가장 작은 수는 무엇인가요?","a = [2, 3, 7, 3, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",23579
+203,3,"숫자 카드 9, 9, 6, 9, 4를 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중에서 가장 큰 수를 각각 구하시오.","a = [9, 9, 6, 9, 4]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98753
+204,3,1179부터 2050까지의 수를 쓸 때 숫자 0는 몇 번 써야하나요?,"a = 1179
+b = 2050
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",303
+205,3,"171부터 965까지 수를 모두 한번씩 적는다면, 숫자 1은 몇 번 등장하는지 구해보세요.","a = 171
+b = 965
+c = '1'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",140
+206,3,"숫자 카드 5, 3, 9 중에서 서로 다른 숫자 3개를 뽑아 만들 수 있는 가장 큰 두 자리 수를 구하시오.","from itertools import permutations
+
+a = ['5', '3', '9']
+y = int(max(map(''.join, permutations(a, 3))))
+print(y)",97
+207,3,"수 카드 7, 1, 1를 6장을 모두 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수보다 934만큼 작은 수는 얼마인지 답을 구해 보세요.","from itertools import permutations
+
+a = ['7', '1', '1']
+b = 934
+y = int(max(map(''.join, permutations(a, 5)))) - b
+print(y)",309
+208,3,"숫자 카드 1, 2, 7를 한 번씩만 사용하여 만들 수 있는 수 중에서 만들 수 있는 가장 작은 세자리 수는 얼마인지 구하세요.","from itertools import permutations
+
+a = ['1', '2', '7']
+y = int(min(map(''.join, permutations(a))))
+print(y)",256
+209,3,37 이상 78 이하인 자연수는 모두 몇 개인지 구하시오.,"a = 37
+b = 78
+y = b - a + 1
+print(y)",31
+210,3,"4장의 숫자 카드 3, 1, 5, 9가 있습니다. 이를, 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['3', '1', '5', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",585
+211,3,"4개의 숫자카드 1, 5, 9, 2 에서, 가장 큰 수와 가장 작은 수의 차를 구하시오.","a = [1, 5, 9, 2]
+y = max(a) - min(a)
+print(y)",8
+212,3,"수 카드 4, 2, 1, 3, 8 중에서, 2장을 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합은 얼마일까요?","from itertools import permutations
+
+a = ['4', '2', '1', '3', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",978
+213,3,"숫자 카드 2, 8, 9가 있습니다. 카드를 한 번씩만 사용하여 한 자리 수 A와 두 자리 수 B를 만들었을 때 식 5 * A = B 을 만족하는 B를 구하세요.","from itertools import permutations
+
+a = [2, 8, 9]
+b = 5
+c = list(permutations(a, 3))
+for i in c:
+    if b * i[0] == (i[1] * 10 + i[2]):
+        y = i[1] * 10 + i[2]
+print(y)",72
+214,3,"8장의 숫자 카드 0, 9, 9, 9, 1, 1가 있습니다. 이를, 한 번씩 사용하여 가장 큰 여섯 자리 수를 만들어 쓰시오.","from itertools import permutations
+
+a = ['0', '9', '9', '9', '1', '1']
+y = max(list(map(''.join, permutations(a, 8))))
+print(y)",987210
+215,3,8개의 점 중에서 1개의 점을 이용하여 그을 수 있는 선분은 모두 몇 개인가요?,"from itertools import combinations
+a = list(range(1,8+1))
+b = 1
+y = len(list(combinations(a, b)))
+print(y)",21
+216,3,"5장의 수 카드 2, 4, 7가 있습니다. 이를, 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하세요.","from itertools import permutations
+
+a = ['2', '4', '7']
+b = int(max(map(''.join, permutations(a, 5))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",693
+217,3,A * 9 > 53를 만족하는 1부터 8까지의 수 는 몇 개인가요?,"a = 1
+b = 9
+c = 8
+d = 53
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+218,3,"숫자 카드 2, 5, 9, 1, 7가 있습니다. 카드를 한 번씩 사용하여 만들 수 있는 가장 작은 수를 구하시오.","a = [2, 5, 9, 1, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12589
+219,3,1부터 5까지의 수 중에서 다음 식 7 * A > 24 을 만족하는 수는 모두 몇 개입니까? ,"a = 1
+b = 5
+c = 7
+d = 24
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+220,3,"숫자 카드 1, 5, 6, 2, 2을 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰 수를 구하시오.","from itertools import permutations
+
+a = ['1', '5', '6', '2', '2']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",95321
+221,3,"4 장의 수 카드 4, 3, 7가 있습니다. 이를, 한 번씩만 사용하여 두 자리 수와 한 자리 수를 만들었습니다. 만들 수 있는 작은 곱은 얼마일까요?","from itertools import permutations
+
+a = ['4', '4', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = min(c)
+print(y)",171
+222,3,다음 식 5*31>A*74이 있습니다. 이를 만족하는 한 자리 수 A 중에서 가장 큰 수는 얼마인지 구해 보시오.,"a = 5
+b = 31
+c = 74
+y = 0
+for i in range(1,9) :
+    if i < a * b / c :
+        y = i
+print(y)",3
+223,3,"4장의 숫자 카드 3, 5, 7, 9를 한 번씩만 사용하여 3자리 수 * 1 자리수 의 식을 만드려고 합니다. 이때, 가장 작은 곱을 구하시오.","from itertools import permutations
+
+a = ['3', '5', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = min(c)
+print(y)",1737
+224,3,"4 장의 수 카드 1, 2, 9, 8가 있습니다. 이중에서, 2 장을 골라 만들 수 있는 가분수와 진분수의 개수의 차를 구하시오.","from itertools import permutations
+
+a = [1, 2, 9, 8]
+b = list(permutations(a, 2))
+c = 0
+d = 0
+b = set(b)
+for i in b:
+    if i[0] >= i[1]:
+        c += 1
+    elif i[0] < i[1]:
+        d += 1
+y = c - d
+print(y)",0
+225,3,"승민이는 숫자 카드 1, 1, 3을 갖고 있고, 서현이는 숫자 카드 2, 9, 4을 갖고 있습니다. 승민이와 서현이는 각자의 수 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 승민이는 가장 작은 수를, 서현이는 가장 큰 수를 만들었다면 두 사람이 만든 수의 합은 얼마입니까?","from itertools import permutations
+a = ['1', '1', '3']
+b = ['2', '9', '4']
+d = int(min(map(''.join, permutations(a))))
+e = int(max(map(''.join, permutations(b))))
+y = d + e
+print(y)",777
+226,3,1부터 9까지의 수 중에서 다음 식 62*3>86*A를 만족하는 수는 모두 몇 개입니까?,"a = 1
+b = 9
+c = 62
+d = 3
+e = 86
+y = 0
+for i in range(a,b+1) :
+    if i < c * d / e:
+        y += 1 
+print(y)",1
+227,3,"숫자 카드 1, 5, 8, 1가 있습니다. 이중에서 2 장을 골라 한 번씩 사용하여 세 자리 수를 각각 만들 때, 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '8', '1']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",977
+228,3,"2장의 수 카드 1, 5, 2를 한 번씩 사용하여 만들 수 있는 가장 큰 세 자리 수와 가장 작은 세 자리 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '5', '2']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+229,3,"3장의 숫자 카드 1, 2, 3, 3를 한 번씩만 사용하여 만든 가장 큰 네자리 수를 반올림하여 백의 자리까지 나타내보세요.","from itertools import permutations
+a = ['1', '3', '3', '3']
+b = int(max(map(''.join, permutations(a, 2))))
+y = round(b, -2)
+print(y)",9500
+230,3,"숫자 8, 2, 1, 0, 7가 있습니다. 이중에서 서로 다른 숫자 3개를 뽑아 만들 수 있는 네 자리 수 중에서 가장 작은 수를 쓰시오.","from itertools import permutations
+
+a = ['8', '2', '1', '0', '7']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",1046
+231,3,"숫자 카드 1, 9, 1, 7, 7가 있습니다. 이를 한 번씩 사용하여 가장 큰 다섯 자리 수를 만들 때 숫자 1가 나타내는 수는 얼마입니까?","a = [1, 9, 1, 7, 7]
+a.sort(reverse=True)
+b = 1
+c = 1
+for i in range(len(a)-1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",20
+232,3,"숫자 카드 1,1,3를 한 번씩 모두 사용하여 몫이 가장 작은 나눗셈식을 만들려고 합니다. 만든 나눗셈식의 몫을 구하시오. ","from itertools import permutations
+
+a = ['1', '1', '3']
+b = int(min(map(''.join, permutations(a, 2))))
+c = int(max(a))
+y = b // c
+print(y)",3
+233,3,1/1보다 크고 9/8보다 작은 분수 중에서 분모가 53인 분수는 모두 몇 개일까요?,"a = 1 / 1
+b = 9 / 8
+c = 53
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",5
+234,3,"288부터 219까지 자연수를 한 번씩 쓴다고 할 때, 숫자 0은 모두 몇 번 나오는지 구해보시오.","a = 288
+b = 219
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",62
+235,3,"숫자 카드 1, 0, 7, 2, 2를 한 번씩만 써서 가장 큰 다섯 자리 수를 만들어 보시오.","a = [1, 0, 7, 2, 2]
+a.sort()
+y = 10000*a[4] + 1000*a[3]+ 100*a[2] + 10*a[1] + a[0]
+
+print(y)",95210
+236,3,"숫자 카드 1, 2, 7를 한 번씩 사용하여 두 자리 수와 한 자리 수를 만들었습니다. 두 수의 나눗셈에서 나머지가 가장 작은 경우의 몫과 나머지의 합을 구하세요.","from itertools import permutations
+
+a = ['1', '2', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+d = []
+for i in b:
+    e = int(i[:2])
+    f = int(i[2:])
+    c.append(e % f)
+    d.append(e // f + e % f)
+y = d[c.index(min(c))]
+print(y)",9
+237,3,"4 장의 숫자 카드 8, 2, 3, 9 가 있습니다. 이중에서, 2 장을 골라 한 번씩만 사용하여 분수를 만들려고 합니다. 만들 수 있는 분수 중에서 3 보다 큰 분수는 몇 개입니까?","from itertools import permutations
+
+a = [8, 2, 3, 9]
+b = list(permutations(a, 2))
+c = 3
+y = 0
+for i in b:
+    if i[0]/i[1] > c:
+        y += 1
+print(y)",2
+238,3,"숫자 카드 2, 6, 8, 8, 8가 있습니다. 숫자 카드를 한 번씩 사용하여 가장 큰 다섯 자리 수를 만들 때 숫자 8이 나타내는 수는 얼마입니까?","a = [2, 6, 8, 8, 8]
+a.sort(reverse=True)
+b = 1
+c = 8
+for i in range(len(a) - 1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",7000
+239,3,"4장의 수 카드 1, 3, 7, 9가 있습니다. 카드를 한 번씩만 사용하여 2개의 두 자리 수를 만들었습니다. 두 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",663
+240,3,"4 장의 숫자 카드 3, 3, 7 중에서 2장을 뽑아 두 수의 곱을 구하려고 합니다. 가장 작은 곱을 구해보시오.","a = [3, 4, 7]
+a.sort()
+y = a[0] * a[1]
+print(y)",6
+241,3,"숫자 2, 8, 9, 1, 1 가 있습니다. 각 숫자를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중 가장 큰 수와 가장 작은 수의 차를 구하시오.","from itertools import permutations
+a = ['2', '8', '9', '1', '1']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",840
+242,3,"4장의 숫자 카드 3, 5, 7, 2 중에서, 3장을 뽑아 한 번씩만 사용하여 AB/C와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 작을 때의 몫을 구하시오.","from itertools import permutations
+
+a = ['3', '5', '7', '2']
+b = 3
+c = int(min(map(''.join, permutations(a, b - 1))))
+d = int(max(map(''.join, permutations(a, b - 2))))
+y = c // d
+print(y)",3
+243,3,65보다 크고 182보다 작은 두 자리 수 중에서 9로 나누었을 때 나머지가 6인 수는 모두 몇 개인가요?,"a = 65
+b = 182
+c = 9
+d = 6
+y = 0
+for i in range(a, b):
+    if i % c == 7:
+        y = y + 1
+print(y)",2
+244,3,"4장의 숫자 카드 2, 5, 6, 9 중에서 2장만 사용하여 가장 큰 분수를 만들었을 때, 분자와 분모의 합을 구하시오.","a = [2, 5, 6, 9]
+a.sort()
+y = a[3] + a[0]
+print(y)",11
+245,3,"숫자 카드 1, 1, 8, 8, 8를 모두 한 번씩만 사용하여 가장 큰 수를 만들어 보세요.","a = [1, 1, 8, 8, 8]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87621
+246,3,"숫자 카드 1, 4, 4, 7, 4를 한 번씩 사용하여 만들 수 있는 다섯 자리 수 중에서 가장 큰 수를 만들어 보시오.","a = [1, 4, 4, 7, 4]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98531
+247,3,"3 숫자 카드 2, 4, 6가 있습니다. 카드를 2장을 뽑아 두 자리 수를 만들려고 합니다. 만들 수 있는 4의 배수는 모두 몇 개인지구하세요.","from itertools import permutations
+a = ['2', '4', '6']
+b = 4
+c = list(map(''.join, permutations(a, 2)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",2
+248,3,1부터 6까지의 수 중에서 다음 식 23 * A > 88을 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 6
+c = 88
+d = 23
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",1
+249,3,"숫자 카드 1, 2, 3, 6, 2가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수와 두 자리 수를 만들었습니다. 세 자리 수에서 두 자리 수를 나눌 때, 가장 작은 몫을 구하세요.","from itertools import permutations
+
+a = ['1', '2', '3', '6', '2']
+a.sort()
+b = int("""".join(a[:3]))
+c = int("""".join(a[-2:][::-1]))
+y = b // c
+print(y)",2
+250,3,"2장의 수 카드 1, 6, 8, 7, 5가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수 1개를 만들고 나눗셈을 할 다면, 가장 큰 몫은 얼마일까요?","from itertools import permutations
+
+a = ['1', '2', '8', '7', '6']
+b = int(max(map(''.join, permutations(a, 1))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",6
+251,3,"숫자 2, 3, 4이 있습니다. 세 수를 사용하여 가장 큰 수를 만들어보세요.","a = [2, 3, 4]
+a.sort(reverse=True)
+a = list(map(str, a))
+y = int("""".join(a))
+print(y)",973
+252,3,36부터 89까지의 수 중에서 1과 자기 자신만 약수로 가지는 수의 개수를 구하시오,"import math
+
+a = 36
+b = 89
+y = 0
+for i in range(a, b + 1):
+    for j in range(2, int(math.sqrt(i)) + 1):
+        if i % j == 0:
+            break
+    else:
+        y += 1
+print(y)",17
+253,3,12보다 크고 84보다 작은 수 중에서 7으로 나누면 나머지가 1이고 8로 나누면 나누어떨어지는 수는 모두 몇 개일까요?,"a = 12
+b = 84
+c = 7
+d = 1
+e = 8
+y = 0
+for i in range(a+1, b):
+    if i % c == d and i % e == 0:
+        y = y + 1
+print(y)",2
+254,3,다음 식 6 * A > 60 을 만족하는 1부터 9까지의 수는 모두 몇 개인가요?,"a = 1
+b = 6
+c = 9
+d = 60
+y = 0
+for i in range(a, b + 1):
+    if i > d / c:
+        y += 1
+print(y)",7
+255,3,"숫자 카드 2, 7, 2, 6가 있습니다. 카드를 2개를 골라 한 번씩만 사용하여 세 자리 수 두개를 만들어 차를 구하려고 합니다. 차가 가장 큰 뺄셈식의 차를 구하시오.","from itertools import permutations
+
+a = ['2', '7', '2', '6']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d - e
+print(y)",718
+256,3,"6장의 숫자 카드 1, 1, 4, 7를 한 번씩만 사용하여 5자리 수 * 1자리 수의 식을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '1', '6', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:5])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",3368
+257,3,1에서 7까지의 숫자가 있습니다. 이 숫자들을 각각 한 번씩 사용하여 만들 수 있는 수 중에서 가장 작은 수를 구하시오.,"a = [1, 2, 3, 4, 5, 6, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234567
+258,3,"숫자 카드 8, 1, 3 을 모두 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수 에서 154을 뺀 수는 얼마인지 답을 구해 보세요.","from itertools import permutations
+
+a = ['8', '1', '3']
+b = 154
+y = int(max(map(''.join, permutations(a, 3)))) - b
+print(y)",828
+259,3,"숫자 1, 2, 6, 9, 1 가 있습니다. 이중에서, 5개의 숫자를 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['1', '2', '6', '9', '1']
+b = 5
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1086
+260,3,"숫자 카드 1, 9, 2, 7, 1, 9 가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 2보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [1, 9, 2, 7, 1, 9]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",20
+261,3,"숫자 카드 5, 3, 1, 4, 1 중에서, 카드를 모두 한 번씩만 사용하여 만들 수 있는 네 자리 수 중에서 가장 작은 수를 얼마입니까?","from itertools import permutations
+
+a = ['5', '3', '1', '4', '1']
+y = int(min(map(''.join, permutations(a, 4))))
+print(y)",1235
+262,3,"숫자 1, 3, 2, 9, 3가 있습니다. 이중에서 27/92을 약분하려고 할 때 분모와 분자를 나눌 수 없는 수의 개수를 구하세요.","a = [1, 3, 2, 9, 3]
+b = 27
+c = 92
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+263,3,1부터 9까지의 수를 한 번씩 사용하여 만들 수 있는 가장 큰 수를 구해 보시오.,"a = [1, 2, 3, 4, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",54321
+264,3,"숫자 카드 1, 7, 6, 1, 8를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중 가장 큰 수와 가장 작은 수의 차는 얼마입니까?","from itertools import permutations
+
+a = ['1', '7', '6', '1', '8']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",860
+265,3,"숫자 1, 2, 7, 3 중에서, 서로 다른 두 수를 뽑아 만들 수 있는 두자리 수 중에 가장 큰 수는 무엇인가요?","from itertools import permutations
+
+a = ['1', '2', '7', '3']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",98
+266,3,다음 식 282*A < 1000 이 있습니다. 이를 만족하는 한 자리 수A 중에서 가장 큰 수를 구해 보시오.,"a = 282
+b = 1000
+y = 0
+for i in range(1,9+1) :
+    if i < b / a  :
+        y = i
+print(y)",8
+267,3,"4장의 카드 3, 1, 7, 9를 한 번씩 모두 사용하여 만들 수 있는 가장 큰 소수 세자리수와 가장 작은 소수 세자리수의 합은 얼마인가요?","from itertools import permutations
+
+a = ['3', '1', '7', '9']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 3)
+print(y)",11.11
+268,3,"숫자 카드 4, 1, 8 를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구해 보시오.","from itertools import permutations
+
+a = ['4', '1', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",969
+269,3,"4장의 숫자 카드 1, 8, 6, 2 중에서 2장을 골라 한 번씩만 사용하여 AB/2 와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 작을 때의 몫을 구하시오.","from itertools import permutations
+
+a = ['1', '8', '6', '2']
+b = int(min(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",6
+270,3,"6장의 숫자 카드 2, 4, 6, 9를 한 번씩 모두 사용하여 두 자리수 두개의 곱을 구하려고 합니다. 가장 큰 곱과 가장 작은 곱의 합을 구하시오.","from itertools import permutations
+
+a = ['2', '6', '6', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c) + min(c)
+print(y)",4498
+271,3,1부터 5까지의 자연수 중에서 다음 식 96－9÷3＋52＞A 을 만족하는 수는 모두 몇 개인가요?,"a = 56 - (9/3) + 52
+b = 1
+c = 9
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",9
+272,3,"숫자 카드 1, 2, 5, 4, 9를 모두 한 번씩만 사용하여 만들 수 있는 가장 큰 수는 무엇인가요?","a = [1, 2, 5, 4, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",86542
+273,3,1부터 6까지의 자연수 중에서 다음 식 25－64÷7＋5＞A를 만족하는 수는 모두 몇 개일까요?,"a = 25 - 64/7 + 5
+b = 1
+c = 8
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",3
+274,3,"1부터 13까지 자연수를 쓰려고 할때, 숫자 3은 모두 몇 번 써야 합니까?","a = 1
+b = 13
+c = '3'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",13
+275,3,"숫자 카드 1, 1, 9, 8가 있습니다. 카드를 한 번씩 사용하여 만들 수 있는 두 자리 수 중에서 3으로 나눠지는 수는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '1', '9', '8']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] == '0':
+        continue
+    if int(i) % 2 == 0:
+        y += 1
+print(y)",3
+276,3,"9장의 수 카드 2, 4, 5, 8, 9를 한 번씩 사용하여 만들 수 있는 가장 큰 세 자리 수와 가장 작은 세 자리 수의 차를 구하세요.","from itertools import permutations
+
+a = ['9', '4', '2', '8', '9']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c - d
+print(y)",420
+277,3,"숫자 카드 1, 6, 6가 있습니다. 카드를 한 번씩만 사용하여 만들 수 있는 두 자리 수 AB와 한 자리수 C에 대해 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '6', '6']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",279
+278,3,"숫자 1, 5, 4, 9가 있습니다. 숫자 1개를 뽑아 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 차를 구하시오.","from itertools import permutations
+
+a = ['1', '5', '4', '9']
+b = 1
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = abs(c - d)
+print(y)",82
+279,3,"숫자 카드 2, 5, 0, 2, 9, 9를 한 번만 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?","a = [2, 5, 0, 2, 9, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865320
+280,3,"4장의 수 카드 2, 5, 7, 6 가 있습니다. 이중에서 2장을 뽑아 만들 수 있는 A.B 형태의  소수 중에서 가장 큰 수와 가장 작은 수의 차를 구하세요","from itertools import permutations
+
+a = ['2', '5', '7', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b)))) / 10
+d = int(min(map(''.join, permutations(a, b)))) / 10
+y = c - d
+print(y)",5.10
+281,3,"4장의 숫자 카드 3, 5, 6, 8 에서 2장을 한 번씩만 사용하여 두 자리 수를 만드려고 합니다. 이중, 가장 큰 수와 가장 작은 수의 곱을 구해보시오.","from itertools import permutations
+
+a = ['3', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3010
+282,3,"숫자 카드 1, 2, 3가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구해 보시오.","from itertools import permutations
+
+a = ['1', '2', '3']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1110
+283,3,"4 장의 수 카드 2, 3, 7, 9 가 있습니다. 카드를 3 장을 골라 한 번씩만 사용하여 만들 수 있는 가장 큰 세 자리 수와 남은 수 카드의 수의 곱은 얼마입니까?","from itertools import permutations
+
+a = ['2', '3', '7', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+for i in d:
+    a.remove(i)
+e = a[0]
+y = int(d) * int(e)
+print(y)",1946
+284,3,1부터 3까지의 수를 하나씩 사용하여 가장 작은 수를 만들어 보시오.,"a = [1, 2, 3, 3]
+a.sort(reverse=False)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234
+285,3,"1장의 숫자 카드 1, 2, 9, 6를 한 번씩만 사용하여 만든 가장 큰 네자리 수를 반올림하여 백의 자리까지 나타내면 얼마입니까?","from itertools import permutations
+
+a = ['1', '1', '9', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+y = round(b, -2)
+print(y)",8600
+286,3,"숫자 카드 1, 9, 3, 6가 있습니다. 이중에서, 5장을 한 번씩만 사용하여 만들 수 있는 가장 큰 세 자리 수를 구하시오","from itertools import permutations
+
+a = ['1', '9', '3', '6']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",982
+287,3,"4장의 숫자 카드 2, 3, 7, 9가 있습니다. 카드를 2장을 골라 한 번씩만 사용하여 3보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [2, 3, 7, 9]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",12
+288,3,1부터 5까지의 수를 한 번씩 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?,"a = [1, 2, 3, 4, 5, 6, 7, 8, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",987654321
+289,3,"수 카드 1, 3, 9를 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '3', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+290,3,"1장의 수 카드 4,4,5,1,5가 있습니다. 이중에서, A 안에 1장을 한 번씩만 넣어 0.AA와 같은 소수 두 자리 수를 만들었습니다. 만들 수 있는 수 중 가장 큰 수와 가장 작은 수의 곱을 구해보세요.","from itertools import permutations
+
+a = ['4', '4', '1', '1', '5']
+b = list(permutations(a, 1))
+c = []
+for i in b:
+    c.append(int(i[0]) * 10 + int(i[1]))
+y = max(c) * min(c) * 0.0001
+print(y)",0.11
+291,3,"사과, 복숭아, 배, 참외 중에서 3가지의 과일을 골라서 사는 경우의 수를 모두 구하시오.","from itertools import combinations
+
+a = ['사과', '복숭아', '배', '참외']
+b = 3
+y = len(list(combinations(a, b)))
+print(y)",4
+292,3,"9장의 수 카드 1, 7, 5 를 한 번씩 사용하여 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['1', '9', '7']
+b = int(max(map(''.join, permutations(a, 5))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+293,3,1부터 5까지의 수 중에서 다음 식 4 * A > 79 을 만족하는 수는 모두 몇 개일까요?,"a = 1
+b = 5
+c = 4
+d = 79
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",4
+294,3,"3장의 숫자 카드 0, 5, 4, 4 를 한 번씩 모두 사용하여 두자리 수 두개의 곱셈식을 만들려고 한다면, 가장 작은 곱은 얼마입니까?","from itertools import permutations
+
+a = ['0', '3', '5', '4']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        e = int(i[2:])
+        c.append(d * e)
+y = min(c)
+print(y)",2280
+295,3,"4장의 수 카드 1, 3, 9, 5가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수 2개를 만들고 나눗셈을 할 때, 가장 큰 몫은 얼마입니까?","from itertools import permutations
+
+a = ['1', '3', '9', '5']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",7
+296,3,1부터 8까지의 수 중에서 다음 식 2*4>27*A 을 만족하는 수는 모두 몇 개입니까?,"a = 1 
+b = 8
+c = 2
+d = 4
+e = 27
+y = 0
+for i in range(a,b+1):
+    if c * d > e * i:
+        y += 1
+print(y)",2
+297,3,"2장의 숫자 카드 9, 5, 4, 7 중에서, 1장을 한 번씩만 사용하여 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 곱을 구해보시오.","from itertools import permutations
+
+a = ['9', '5', '2', '7']
+b = 1
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3298
+298,3,"숫자 카드 5, 2, 7, 3, 8를 한 번 사용하여 다섯 자리 수를 만들려고 합니다. 가장 큰 수를 구해보시오.","from itertools import permutations
+
+a = ['5', '2', '7', '3', '8']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",76542
+299,3,17보다 크고 82보다 작은 두 자리 수 중에서 9로 나누었을 때 나머지가 3인 수는 모두 몇 개일까요? ,"a = 17
+b = 82
+c = 9
+d = 3
+y = 0
+for i in range(a, b):
+    if i % c == d:
+        y = y + 1
+print(y)",10
+300,3,3/23과 크기가 같은 분수 중에서 분모가 56보다 크고 85보다 작은 분수는 모두 몇 개인가요?,"import math
+
+a = 3
+b = 23
+c = 56
+d = 85
+e = math.gcd(a,b)
+y = math.ceil(d / (b // e)) - c // (b // e) - 1
+print(y)",10
+301,3,"숫자 카드 7, 8, 3가 있습니다. 이 카드를 한 번씩 모두 사용하여 소수 두 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['7', '8', '3']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = (c + d) * (0.01)
+print(y)",9.08
+302,3,1부터 2까지의 수 중에서 다음 식 65 > 3 * A 을 만족하는 가장 큰 수는 얼마입니까? ,"a = 65
+b = 2
+c = a // b
+d = 3
+y = c if c < 10 else d
+print(y)",6
+303,3,"숫자 카드 1, 1, 1, 9, 4 를 모두 한 번씩만 사용하여 가장 큰 수를 만들어 보세요.","a = [1, 1, 1, 9, 4]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",64321
+304,3,"숫자 카드 3, 1, 5, 7 가 있습니다. 카드 2장을 뽑아 한 번씩만 사용하여 만든 두 자리 수를 5로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해보시오.","from itertools import permutations
+
+a = ['3', '1', '5', '7']
+b = 5
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+305,3,"9장의 수 카드 4, 6, 1, 2, 5를 한 번씩 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['4', '9', '1', '2', '6']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",620
+306,3,"숫자 카드 8, 2, 3, 1, 2를 한 번만 사용하여 만들 수 있는 가장 큰 수는 얼마인가요?","from itertools import permutations
+
+a = ['8', '2', '3', '1', '2']
+y = int(max(map(''.join, permutations(a, len(a)))))
+print(y)",84321
+307,3,"숫자 카드 1, 2, 2, 2가 있습니다. 카드를 2장을 골라 한 번씩만 사용하여 2보다 큰 한자리 수 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [1, 2, 2, 2]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",9
+308,3,"7장의 숫자 카드 1,2,7,9가 있습니다. 이중에서 2장을 뽑아 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 4로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해보시오.","from itertools import permutations
+
+a = ['1', '2', '7', '9']
+b = 7
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+309,3,"4장의 숫자 카드 0,2,5,7가 있습니다. 카드를 한 번씩만 사용하여 두 자리 수를 만들 때 가장 큰 두 자리 수와 가장 작은 두 자리 수의 곱을 구하시오.","from itertools import permutations
+
+a = ['0', '2', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        c.append(d)
+y = min(c) * max(c)
+print(y)",1500
+310,3,"3장의 숫자 카드 4,8,6 중에서, 2장을 골라 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 2로 나누었을 때 몫이 가장 큰 나눗셈식의 몫을 구하시오.","from itertools import permutations
+
+a = ['4', '8', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",43
+311,3,"4장의 숫자 카드 2, 5, 6, 9가 있습니다. 이중에서, 한 번씩만 사용하여 (100*A+10*B+C)*D의 식을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",5868
+312,3,"숫자 카드0, 8, 3, 8 네장을 한 번씩 모두 사용하여 합이 가장 큰 덧셈식의 합을 구하시오.","from itertools import permutations
+
+a = ['0', '8', '3', '8']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d + e)
+y = max(c)
+print(y)",162
+313,3,어떤 수는 60의 약수이면서 6의 배수가 아닙니다. 조건을 만족하는 수는 모두 몇 개 인가요?,"a = 60
+b = 6
+y = 0
+for i in range(1, a + 1):
+    if a % i == 0 and i % b != 0:
+        y += 1
+print(y)",8
+314,3,"숫자 카드 2, 1, 6, 6, 5, 6 중에서, 카드를 각각 한 번씩 사용하여 만들 수 있는 수 중 가장 작은 수를 구하시오.","a = [2, 1, 6, 6, 5, 6]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",125789
+315,3,"4개의 숫자 카드 0, 3, 8, 9 가 있습니다. 이중에서, 3개를 골라 한 번씩만 사용하여 세 자리 수를 만들 때, 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['0', '3', '8', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+if '0' in a:
+    while True:
+        e = min(c)
+        if e[0] == '0':
+            c.remove(e)
+        else:
+            break
+y = int(d) + int(e)
+print(y)",1291
+316,3,1부터 8까지의 수 중에서 다음 식 92 < 2 * A 을 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 8
+c = 92
+d = 2
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",2
+317,3,"4장의 숫자 카드 1, 5, 6, 8가 있습니다. 이 숫자카드를 한 번씩만 사용하여 두 자리 수 2개를 만들었습니다. 두 수를 나눌 때, 가장 큰 몫을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '6', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+
+print(y)",5
+318,3,다음 식 529 - A < 133 + 423 안에 들어갈 수 있는 수 중에서 가장 작은 수를 구하시오. ,"a = 529
+b = 133
+c = 423
+y = a - (b + c) + 1
+print(y)",222
+319,3,"1부터 9까지의 수 중에서, 다음 식 23 * A < 59 * 23을 만족하는 수는 모두 몇 개입니까?","a = 1
+b = 9
+c = 23
+d = 59 * 23
+y = 0
+for i in range(a, b + 1):
+    if i < d / c:
+        y += 1
+print(y)",6
+320,3,"숫자 카드 9, 1, 5를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 작은 수는 얼마인가요?","from itertools import permutations
+
+a = ['9', '1', '5']
+y = int(min(map(''.join, permutations(a, 3))))
+print(y)",178
+321,3,"숫자 카드 1, 2, 3, 4, 5, 6, 7, 8를 한 번씩 모두 사용하여 가장 작은 수를 만들어보시오.","a = [2, 4, 5, 6, 9, 1, 7, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12456789
+322,3,"숫자 5, 2, 1, 6, 2가 있습니다. 2개의 숫자를 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['5', '2', '1', '6', '2']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1120
+323,3,"숫자카드 3, 5, 4, 8가 있습니다. 이중에서, 서로 다른 숫자 3개를 뽑아 만들 수 있는 세 자리 수 중에서 가장 작은 수를 쓰시오.","from itertools import permutations
+
+a = ['3', '5', '4', '8']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",256
+324,3,"숫자 카드 1, 2, 6, 4, 7 중에서, 숫자 카드를 모두 한 번씩만 사용한다면 만들 수 있는 가장 큰 수는 무엇인가요?","a = [1, 2, 6, 4, 7]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",97531
+325,3,"6장의 수 카드 8, 1, 5, 4 가 있습니다. 이를, 한 번씩만 사용하여 만든 2개의 두 자리 수를 곱할 때, 가장 작은 곱을 계산하세요.","from itertools import permutations
+
+a = ['8', '1', '5', '6']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",912
+326,3,"숫자 카드 1, 5, 1, 6, 9를 모두 한 번씩만 사용하여 만들 수 있는 가장 작은 다섯 자리 수를 구하시오.","a = [1, 5, 1, 6, 9]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+327,3,2/41과 크기가 같은 분수 중에서 분모가 11보다 크고 477보다 작은 분수는 모두 몇 개인가요? ,"import math
+
+a = 2
+b = 41
+c = 11
+d = 477
+e = math.gcd(a,b)
+y = math.ceil(d / (b / e)) - c // (b / e) - 1
+print(y)",4
+328,3,"24부터 66까지 자연수를 쓸 때, 숫자 0은 모두 몇 번 써야 합니까?","a = 24
+b = 66
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",5
+329,3,1부터 22까지의 자연수 중에서 약수의 개수가 1개인 수는 몇 개인가요?,"a = 1
+b = 22
+c = 1
+d = 0
+for i in range(a, b + 1):
+    e = 0
+    for j in range(1, i + 1):
+        if i % j == 0:
+            e += 1
+    if e == c:
+        d += 1
+y = d
+print(y)",4
+330,3,"4장의 숫자 카드 1, 5, 6, 8 중에서, 2장을 한 번씩만 사용하여 만들 수 있는 두 자리 수 중에서 가장 큰 수와 가장 작은 수의 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",1290
+331,3,"숫자 카드 5, 1, 2, 9가 있습니다. 이중에서, 3 장을 뽑아 두 자리 수와 한 자리 수 하나씩을 만들었을 때, 곱이 가장 큰 경우의 값을 구하시오.","from itertools import permutations
+
+a = ['5', '1', '2', '9']
+b = list(map(''.join, permutations(a, 3)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",765
+332,3,"3장의 숫자 2,4,6 중에서, 이를 한 번씩만 사용하여 몫이 가장 큰 나눗셈식을 만들려고 합니다. 몫은 얼마인가요?","from itertools import permutations
+
+a = ['2', '4', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b - 1))))
+y = c // d
+print(y)",32
+333,3,"숫자 카드 1, 7, 2, 7 중에서, 카드를 한 번씩만 사용하여 만들 수 있는 가장 큰 네 자리 수는 얼마입니까?","from itertools import permutations
+
+a = ['1', '7', '2', '7']
+b = 4
+y = int(max(map(''.join, permutations(a, b))))
+print(y)",9861
+334,3,"숫자 1, 5, 9, 9, 9가 있습니다. 이중에서 97/65을 약분하려고 할 때 분모와 분자를 나눌 수 없는 수의 개수는 몇 개입니까?","a = [1, 5, 9, 9, 9]
+b = 97
+c = 65
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+335,3,"숫자 카드 1, 6, 9, 5, 8, 8를 한 번씩 사용하여 만들 수 있는 가장 작은 수는 몇인지 구하시오.","a = [1, 6, 9, 5, 8, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",135678
+336,3,"숫자 1, 4, 6, 7를 한번씩만 사용하여 만들 수 있는 가장 큰 네 자리 수는 무엇인가요?","from itertools import permutations
+
+a = ['1', '4', '6', '7']
+y = int(max(map(''.join, permutations(a, 4))))
+print(y)",9521
+337,3,"4장의 숫자 카드 0,1,2,8이 있습니다. 이중에서, 2장을 뽑아 한 번씩만 사용하여 가장 큰 두 자리 수를 만들었습니다. 이 수를 2로 나눈 몫은 얼마입니까?","from itertools import permutations
+
+a = ['0', '1', '2', '8']
+b = 2
+c = 2
+y = int(max(map(''.join, permutations(a, b)))) / c 
+print(y)",41
+338,3,"숫자 카드 8, 2, 7, 2가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 4보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [8, 2, 7, 2]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",6
+339,3,"4장의 숫자 카드 1, 2, 3, 4 중에서 3장을 한 번씩만 사용하여 (10*A+B)*C의 식을 만들때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '2', '3', '4']
+b = 1
+c = max(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 2
+e = int(max(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",128
+340,3,4/5와 크기가 같은 분수 중에서 분모가 28보다 크고 22보다 작은 분수는 모두 몇 개인가요?,"from math import ceil
+
+a = 5
+b = 28
+c = 22
+y = ceil(c / a) - b // a - 1
+print(y)",2
+341,3,"숫자 카드 1, 5, 9, 3, 4 를 한 번 사용하여 수를 만들려고 합니다. 가장 작은 수를 구해보시오.","a = [1, 5, 9, 3, 4]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+342,3,23/6보다 크고 86/2보다 작은 자연수는 모두 몇 개일까요?,"from math import ceil
+
+a = 23 // 6
+b = ceil(86 / 2)
+y = b - a - 1
+print(y)",16
+343,3,"3장의 숫자카드 6,2,4를 한 번씩만 사용하여 두자리수와 한자리수를 만들어 나눗셈식을 만들려고 합니다. 몫이 가장 크게 될때의 나머지를 구하시오.","from itertools import permutations
+
+a = ['6', '2', '4']
+b = 2
+c = 1
+d = int(max(map(''.join, permutations(a, b))))
+e = int(min(map(''.join, permutations(a, c))))
+y = d % e
+print(y)",0
+344,3,"숫자 카드 9, 9, 2, 2를 모두 한 번씩만 사용하여 만들 수 있는 네 자리 수 중 가장 작은 수를 구해보시오.","a = [9, 9, 2, 2]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",4569
+345,3,1부터 8까지의 수 중에서 다음 식 9 * A < 82 를 만족하는 A의 개수를 구하시오.,"a = 1
+b = 8
+c = 9
+d = 82
+y = 0
+for i in range(a, b + 1):
+    if i < (d / c):
+        y += 1
+print(y)",6
+346,3,"숫자 카드 1, 2, 7, 9중에서 7장을 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+a = ['1', '2', '7', '9']
+b = int(max(map(''.join, permutations(a, 7))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1021
+347,3,"숫자 카드 7, 8, 9  중에서 2장을 뽑아 만들 수 있는 가장 작은 곱은 얼마일까요?","a = [7, 8, 9]
+a.sort()
+y = a[0] * a[1]
+print(y)",56
+348,3,"4장의 숫자 카드 1, 3, 5, 7중 한 장씩만 사용하여 만들 수 있는 두 자리 수 두개의 곱 중에서 가장 큰 곱을 구하시오","from itertools import permutations
+
+a = ['1', '3', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",3763
+349,3,"숫자 9, 39, 5, 84, 24가 있습니다. 이중에서, 가장 작은 두 자리 수와 가장 작은 한 자리 수의 곱은?","a = [9, 39, 5, 84, 24]
+b = []
+c = []
+for i in a:
+    if i < 10:
+        c.append(i)
+    else:
+        b.append(i)
+y = min(b) * min(c)
+print(y)",36
+350,3,"수 카드 3, 2, 8, 0중에서,카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차를 구하세요.","from itertools import permutations
+
+a = ['3', '2', '8', '0']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",709
+351,3,"숫자카드 3, 5, 3, 9, 6, 7, 9, 9가 있습니다. 7으로 나누었을 때, 나머지가 될 수 없는 수를 모두 찾아 더하시오.","a = (3, 5, 3, 9, 6, 7, 9, 9)
+b = []
+for i in a:
+    if i >= 7:
+        b.append(i)
+y = sum(b)
+print(y)",30
+352,3,"숫자 1, 1, 1, 8 가 있습니다. 숫자를 5개 뽑아 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합을 구하시오.","from itertools import permutations
+
+a = ['1', '1', '1', '8']
+b = list(map(''.join, permutations(a, 5)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",955
+353,3,1부터 7까지의 수 중에서 다음 식 90 > 9 * A 를 만족하는 수는 모두 몇 개인가요?,"a = 1
+b = 7
+c = 90
+d = 9
+y = 0
+for i in range(a, b + 1):
+    if i < c / d:
+        y += 1
+print(y)",6
+354,3,"숫자 1, 3, 8, 9, 8가 있습니다. 이중에서 서로 다른 숫자 5개를 뽑아 만들 수 있는 세 자리 수 중에서 가장 큰 수를 쓰시오.","from itertools import permutations
+
+a = ['1', '3', '8', '9', '8']
+b = 5
+c = list(map(''.join, permutations(a, b)))
+c.sort(reverse=True)
+y = c[0]
+print(y)",975
+355,3,"4장의 숫자 카드 1, 5, 7, 8 중에서, 2장을 뽑아 한 번씩만 사용하여 두 자리 수를 만들었습니다. 만든 두 자리 수를 10으로 나누었을 때 몫이 가장 작은 나눗셈식의 몫을 구해 보시오.","from itertools import permutations
+
+a = ['1', '5', '7', '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 10
+y = c // d
+print(y)",8
+356,3,"숫자 카드 1, 2, 3, 9, 2, 7가 있습니다. 이를 한번 씩만 사용하여 만들 수 있는 다섯 자리 수 중 가장 큰수는 얼마인가요?","from itertools import permutations
+
+a = ['1', '2', '3', '9', '2', '7']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",85432
+357,3,2부터 9까지의 수를 하나씩 사용하여 만들 수 있는 가장 큰 수는 얼마입니까?,"a = [2, 7, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",9876
+358,3,"수 카드 1, 2, 1를 한 번씩만 사용하여 만들 수 있는 두 자리 수를 만들려고 합니다. 이중에서 6으로 나누어지는 수는 모두 몇 개일까요?","from itertools import permutations
+
+a = ['1', '2', '1']
+b = 6
+y = 0
+for c in permutations(a, 2):
+    if not int(''.join(c)) % b:
+        y += 1
+print(y)",4
+359,3,"숫자 카드 1, 3, 7 가있습니다. 2장의 카드를 사용하여 만들 수 있는 가장 큰 분수와 가장 작은 분수의 곱을 구하세요.","a = [1, 3, 7]
+y = (max(a) / min(a)) * (min(a) / max(a))
+print(y)",1
+360,3,"숫자 카드 5, 8, 6, 6, 1, 5를 한 번씩 사용하여 만들 수 있는 여섯 자리 수 중에서 가장 큰 수를 구하시오.","a = [5, 8, 6, 6, 1, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",876541
+361,3,"숫자 카드 9, 7, 8이 있습니다. 이중에서, 1장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 4보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [9, 7, 8]
+b = 1
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",4
+362,3,"숫자 카드 9, 3, 7를 한 번씩만 사용하여 가장 큰 대분수를 만들려고 합니다. 이 대분수를 가분수로 바꾸었을 때 분자의 값을 구하세요.","a = [9, 3, 7]
+a = sorted(a)
+y = a[0] + a[1] * a[2]
+print(y)",52
+363,3,"숫자 카드 4, 2, 3, 5, 4가 있습니다. 카드를 한 번씩만 사용하여 세 자리 수와 두 자리 수를 만들었습니다. 세 자리 수에서 두 자리 수를 나눌 때, 가장 작은 몫을 구하세요.","from itertools import permutations
+
+a = ['4', '2', '3', '5', '4']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = c // b
+print(y)",2
+364,3,"숫자 4, 7, 1가 있습니다. 이중에서, 1개를 뽑아 만들 수 있는 가장 큰 두 자리 수를 구하시오.","from itertools import permutations
+
+a = ['4', '7', '1']
+y = int(max(map(''.join, permutations(a, 1))))
+print(y)",87
+365,3,"4 장의 숫자 카드 2, 8, 0, 5가 있습니다. 이중에서, 2장을 골라 한 번씩만 사용하여 소수 한 자리 수를 만들 때, 7보다 큰 소수는 모두 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [2, 8, 0, 5]
+b = 2
+c = list(permutations(a, b))
+y = 0
+for i in c:
+    if i[0] >= 7:
+        y += 1
+if 0 in a:
+    y -= 1
+print(y)",2
+366,3,"4장의 숫자 카드 1, 3, 7, 9 중에서 카드를 한 번씩 모두 사용하여 (A*100+B*10+C)*D의 곱셈식을 만들려고 합니다. 가장 작은 곱은 얼마입니까?","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = 1
+c = min(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 3
+e = int(min(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",379
+367,3,"숫자 카드 2,2,8이 있습니다. 카드를 한 번씩만 사용하여 만들 수 있는 세 자리 수 중에서 1의 배수는 모두 몇 개인가요?","from itertools import permutations
+
+a = ['2', '2', '8']
+b = 1
+c = list(map(''.join, permutations(a, 3)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",4
+368,3,1/5보다 크고 7/5보다 작은 분수 중에서 분모가 77인 분수는 모두 몇 개인지 구하시오.,"a = 1 / 5
+b = 7 / 5
+c = 77
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",16
+369,3,"4장의 숫자 카드 1, 3, 7, 9를 한 번씩만 사용하여 3자리 수 * 한자리 수의 곱셈을 만드려고 합니다. 이때, 가장 큰 곱을 구하시오.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",6579
+370,3,"숫자 카드 3, 5, 7, 1 가 있습니다. 이중에서 2개의 숫자를 뽑아 한 번씩만 사용하여 만들 수 있는 가장 큰 세자리 수와 가장 작은 세자리 수의 합을 구하시오","from itertools import permutations
+
+a = ['3', '5', '7', '1']
+b = list(map(''.join, permutations(a, 2)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",999
+371,3,"숫자 카드 6, 5, 1, 5, 3를 한 번씩 사용하여 가장 큰 수를 만들어 보세요.","a = [6, 5, 1, 5, 3]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87531
+372,3,"4장의 숫자 카드 1, 5, 8, 9 중에서, 2장을 골라 한 번씩만 사용하여 AB/2 와 같은 나눗셈식을 만들려고 합니다. 만든 나눗셈의 몫이 가장 클 때의 몫을 구하시오. ","from itertools import permutations
+
+a = ['1', '5', '8', '9']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 2
+y = c // d
+print(y)",49
+373,3,"승현이는 숫자 카드 1, 9, 9을 갖고 있고, 서현이는 숫자 카드 1, 8, 4을 갖고 있습니다. 승현이와 서현이는 각자의 수 카드를 한 번씩만 사용하여 세 자리 수를 만들려고 합니다. 승현이는 가장 작은 수를, 서현이는 가장 큰 수를 만들었습니다. 두 사람이 만든 숫자의 합을 구해보세요.","from itertools import permutations
+a = ['1', '9', '9']
+b = ['1', '8', '4']
+d = int(min(map(''.join, permutations(a, 3))))
+e = int(max(map(''.join, permutations(b, 3))))
+y = d + e
+print(y)",779
+374,3,80보다 크고 90보다 작은 두 자리 수 중에서 8로 나누어떨어지는 수는 모두 몇 개일까요?,"a = 80
+b = 90
+c = 8
+y = 0
+for i in range(a + 1, b):
+    if i % c == 0:
+        y += 1
+print(y)",4
+375,3,"숫자 1, 9, 3, 6, 9가 있습니다. 이중에서, 서로 다른 2개의 숫자를 뽑아서 만들 수 있는 세 자리 수는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '9', '3', '6', '9']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] != '0':
+        y += 1
+print(y)",60
+376,3,"숫자 카드 1, 5, 7, 8, 6을 한 번 사용하여 만들 수 있는 가장 큰 다섯 자리 숫자를 찾습니다.","from itertools import permutations
+
+a = ['1', '5', '7', '8', '6']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",87651
+377,3,"숫자 카드는 3, 5, 2, 7 4개가 있습니다. 한 번만 사용해서 두 자리 숫자 두 개를 만들었어요. 두 수를 곱할 때 가장 작은 곱을 찾습니다.","from itertools import permutations
+
+a = ['3', '5', '2', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",925
+378,3,"4개의 숫자 카드 2, 5, 6, 9가 있습니다. 그 중 두 장의 카드를 골라 A.B 소수를 만들려고 한다면 만들 수 있는 가장 큰 소수와 가장 작은 소수의 합을 구하라.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = int(max(map(''.join, permutations(a, 2)))) / 10
+c = int(min(map(''.join, permutations(a, 2)))) / 10
+y = b + c
+print(y)",12.10
+379,3,"각 카드를 한 번씩 플레이하여 만들 수 있는 숫자 카드 1, 3, 5, 6, 8, 2의 가장 큰 수를 찾습니다.","a = [1, 3, 5, 6, 8, 2]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865321
+380,3,50부터 100까지의 수 중에서 4로 나누었을 때 나머지가 3인 수는 몇 개입니까?,"a = 50
+b = 100
+c = 4
+d = 3
+y = 0
+for i in range(a, b + 1):
+    if i % c == d:
+        y += 1
+print(y)",13
+381,3,"숫자 카드 1, 5, 6을 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 차이를 찾으십시오.","a = ['1', '5', '6']
+a.sort()
+b = int(''.join(a))
+a.sort(reverse=True)
+c = int(''.join(a))
+y = c - b
+print(y)",495
+382,3,"숫자 카드 2, 4, 6, 8이 있습니다. 한 번만 사용하여 두 자릿수 두 자리 수를 만들 때 두 수의 가장 큰 곱을 구하세요.","from itertools import permutations
+
+a = ['2', '4', '6', '8']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",5248
+383,3,"숫자 카드에는 2, 3, 8, 9가 4개가 있습니다. 모든 카드를 한 번 사용하여 만들 수 있는 가장 큰 네 자리 숫자를 찾으세요.","from itertools import permutations
+
+a = ['2', '3', '8', '9']
+y = int(max(map(''.join, permutations(a, 4))))
+print(y)",9832
+384,3,"숫자 카드 2, 3, 4가 3개 있습니다. 카드를 하나만 사용하여 두 자리/한 자리 숫자와 같은 나눗셈의 가장 작은 몫은 얼마입니까?","a = [2, 3, 4]
+a.sort()
+y = (10 * a[0] + a[1]) // a[2]
+print(y)",5
+385,3,공식은 75*10<A<16*52입니다. 이를 만족하는 세 자리 수 A의 수를 구하십시오.,"a = 75
+b = 10
+c = 16
+d = 52
+y = 0
+for i in range(100,999+1) :
+    if (i > a * b) and (i < c * d):
+        y += 1
+print(y)",81
+386,3,"1423보다 큰 네 자리 숫자 카드 1, 3, 6, 5를 모두 사용하여 만들 수 있는 네 자리 수는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '3', '6', '5']
+b = map(''.join, permutations(a, 4))
+b = list(b)
+y = 0
+for i in b:
+    if int(i) > 1423:
+        y += 1
+print(y)",22
+387,3,"숫자 카드는 9, 2, 1 3개가 있습니다. 2자리 숫자와 1자리 숫자를 만들고 나눌 때 한 번만 사용하려고 합니다. 몫이 가장 작을 때 몫과 나머지의 합을 구하라.","a = [9, 2, 1]
+a.sort()
+c = 10*a[0] + a[1]
+d = a[2]
+y = c // d + c % d
+print(y)",4
+388,3,"3장의 카드 2, 5, 6을 한 번 사용하여 두 개의 십진수를 만들고 싶습니다. 만들 수 있는 가장 큰 수와 가장 작은 수의 합은 얼마입니까?","from itertools import permutations
+
+a = ['2', '5', '6']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 2)
+print(y)",9.08
+389,3,"숫자 카드 5, 6, 9, 1, 3을 한 번 사용하여 가능한 가장 작은 숫자를 찾습니다.","a = [5, 6, 9, 1, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13569
+390,3,"숫자 카드 5, 7, 9, 2, 3을 한 번 사용하여 만들 수 있는 가장 작은 숫자는 무엇입니까?","a = [5, 7, 9, 2, 3]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",23579
+391,3,"숫자 카드 9, 8, 7, 5, 3을 한 번 사용하여 만들 수 있는 가장 큰 다섯 자리 숫자를 찾습니다.","a = [9, 8, 7, 5, 3]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98753
+392,3,1000부터 2000까지 숫자를 쓸 때 숫자 0은 몇 번이나 써야 할까요?,"a = 1000
+b = 2000
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",303
+393,3,123부터 456까지의 모든 숫자를 한 번에 쓴다면 숫자 1이 몇 번 나타나는지 세십시오.,"a = 123
+b = 456
+c = '1'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",140
+394,3,"숫자 카드 7, 5, 9에서 서로 다른 2개의 숫자를 그려서 만들 수 있는 가장 큰 두 자리 숫자를 찾으세요.","from itertools import permutations
+
+a = ['7', '5', '9']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",97
+395,3,"세 개의 숫자 카드 5, 1, 2를 한 번 사용하여 세 자리 숫자를 만들고 싶습니다. 212로 가능한 가장 큰 수보다 작은 수를 찾으십시오.","from itertools import permutations
+
+a = ['5', '1', '2']
+b = 212
+y = int(max(map(''.join, permutations(a, 3)))) - b
+print(y)",309
+396,3,"숫자 카드 2, 5, 6을 한 번만 사용하여 만들 수 있는 가장 작은 세 자리 숫자를 찾습니다.","from itertools import permutations
+
+a = ['2', '5', '6']
+y = int(min(map(''.join, permutations(a))))
+print(y)",256
+397,3,20과 50 사이의 자연수의 수를 구하십시오.,"a = 20
+b = 50
+y = b - a + 1
+print(y)",31
+398,3,"숫자 카드는 3, 1, 5, 9 4개가 있습니다. 이것을 한 번만 사용하여 두 자리 숫자를 만들었습니다. 두 수를 곱할 때 가장 작은 곱을 찾습니다.","from itertools import permutations
+
+a = ['3', '1', '5', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",585
+399,3,"4개의 숫자 카드 1, 5, 9, 2에서 가장 큰 숫자와 가장 작은 숫자의 차이를 찾습니다.","a = [1, 5, 9, 2]
+y = max(a) - min(a)
+print(y)",8
+400,3,"숫자 카드 2, 5, 1, 4, 8 중에서 3장을 뽑고 한 번만 사용하여 세 자리 숫자를 만듭니다. 가능한 가장 큰 수와 가장 작은 수의 합은 얼마입니까?","from itertools import permutations
+
+a = ['2', '5', '1', '4', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",978
+401,3,"숫자 카드 2, 7, 9가 있습니다. 카드를 한 번만 사용하여 한 자리 숫자 A와 두 자리 숫자 B를 형성할 때 8 * A = B가 되도록 B를 찾으세요.","from itertools import permutations
+
+a = [2, 7, 9]
+b = 8
+c = list(permutations(a, 3))
+for i in c:
+    if b * i[0] == (i[1] * 10 + i[2]):
+        y = i[1] * 10 + i[2]
+print(y)",72
+402,3,"0, 9, 8, 7, 2, 1의 6가지 숫자 카드가 있습니다. 한 번 사용하여 가장 큰 6자리 숫자를 만드세요.","from itertools import permutations
+
+a = ['0', '9', '8', '7', '2', '1']
+y = max(list(map(''.join, permutations(a, 6))))
+print(y)",987210
+403,3,7점 중 2점을 사용하여 그릴 수 있는 선분은 몇 개입니까?,"from itertools import combinations
+a = list(range(1,7+1))
+b = 2
+y = len(list(combinations(a, b)))
+print(y)",21
+404,3,"숫자 카드는 2, 9, 8 3개가 있습니다. 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['2', '9', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",693
+405,3,1부터 9까지 A * 9 > 56을 만족하는 수는 몇 개입니까?,"a = 1
+b = 9
+c = 9
+d = 56
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+406,3,"숫자 카드에는 2, 5, 9, 1, 8이 있습니다. 카드를 한 번 사용하여 만들 수 있는 가장 작은 숫자를 찾으세요.","a = [2, 5, 9, 1, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12589
+407,3,다음 식 5 * A > 30 을 만족하는 수는 1 부터 9 까지 몇 개입니까 ?,"a = 1
+b = 9
+c = 5
+d = 30
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",3
+408,3,"숫자 카드 1, 5, 9, 2, 3을 한 번 사용하여 만들 수 있는 가장 큰 다섯 자리 숫자를 찾습니다.","from itertools import permutations
+
+a = ['1', '5', '9', '2', '3']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",95321
+409,3,"숫자 카드 5, 3, 7 3개가 있습니다. 두 자리 숫자와 한 자리 숫자를 만드는 데 한 번만 사용되었습니다. 몇 개의 작은 제품을 만들 수 있습니까?","from itertools import permutations
+
+a = ['5', '3', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = min(c)
+print(y)",171
+410,3,6*13>A*21 표현식이 있습니다. 이를 만족하는 가장 큰 한 자리 수 A를 찾으십시오.,"a = 6
+b = 13
+c = 21
+y = 0
+for i in range(1,9) :
+    if i < a * b / c :
+        y = i
+print(y)",3
+411,3,"4개의 숫자 카드 3, 5, 7, 9를 한 번만 사용하여 3자리 * 1자리의 표현을 만들고 싶습니다. 이 경우 가장 작은 제품을 찾으십시오.","from itertools import permutations
+
+a = ['3', '5', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = min(c)
+print(y)",1737
+412,3,"숫자 카드는 1, 2, 9, 8 4가지가 있습니다. 그 중 2장의 카드를 선택하여 만들 수 있는 가분수와 오분수의 차이를 구하세요.","from itertools import permutations
+
+a = [1, 2, 9, 8]
+b = list(permutations(a, 2))
+c = 0
+d = 0
+b = set(b)
+for i in b:
+    if i[0] >= i[1]:
+        c += 1
+    elif i[0] < i[1]:
+        d += 1
+y = c - d
+print(y)",0
+413,3,"승민은 1, 3, 5번 카드를 가지고 있고, 서현은 2, 4, 6번 카드를 가지고 있습니다. 승민과 서현은 각자의 숫자 카드를 한 번만 사용하여 세 자리 숫자를 만들려고 합니다. 승민이 가장 작은 수를 만들고 서현이 가장 큰 수를 만들었다면 그들이 만든 수의 합은 얼마입니까?","from itertools import permutations
+a = ['1', '3', '5']
+b = ['2', '4', '6']
+d = int(min(map(''.join, permutations(a))))
+e = int(max(map(''.join, permutations(b))))
+y = d + e
+print(y)",777
+414,3,다음 식 25*4>55*A를 만족하는 수는 1부터 9까지 몇 개입니까?,"a = 1
+b = 9
+c = 25
+d = 4
+e = 55
+y = 0
+for i in range(a,b+1) :
+    if i < c * d / e:
+        y += 1 
+print(y)",1
+415,3,"숫자 카드는 1, 5, 8, 2가 있습니다. 그 중 3장의 카드를 선택하여 가장 큰 숫자와 가장 작은 숫자의 합을 찾아 한 번씩 사용하여 세 자리 숫자를 만드세요.","from itertools import permutations
+
+a = ['1', '5', '8', '2']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",977
+416,3,"3개의 숫자 카드 1, 9, 2를 한 번 사용하여 만들 수 있는 가장 큰 세 자리 숫자와 가장 작은 세 자리 숫자의 차이를 구하세요.","from itertools import permutations
+
+a = ['1', '9', '2']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+417,3,"한 번만 4개의 숫자 카드 1, 5, 9, 3을 사용하여 만든 가장 큰 4자리 숫자로 가장 가까운 100분의 1까지 올림합니다.","from itertools import permutations
+a = ['1', '5', '9', '3']
+b = int(max(map(''.join, permutations(a, 4))))
+y = round(b, -2)
+print(y)",9500
+418,3,"숫자는 6, 4, 1, 0, 9입니다. 숫자에서 4개의 다른 숫자를 골라서 만들 수 있는 가장 작은 네 자리 숫자를 쓰세요.","from itertools import permutations
+
+a = ['6', '4', '1', '0', '9']
+b = 4
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",1046
+419,3,"숫자 카드 1, 9, 2, 3, 4가 있습니다. 숫자 2를 한 번 사용하여 가장 큰 다섯 자리 숫자를 만들 때 나타내는 숫자는 무엇입니까?","a = [1, 9, 2, 3, 4]
+a.sort(reverse=True)
+b = 1
+c = 2
+for i in range(len(a)-1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",20
+420,3,"모든 숫자 카드 1, 4, 2를 한 번 사용하여 가장 작은 몫으로 나눗셈을 만들고 싶습니다. 생성한 나눗셈 공식의 몫을 찾습니다.","from itertools import permutations
+
+a = ['1', '4', '2']
+b = int(min(map(''.join, permutations(a, 2))))
+c = int(max(a))
+y = b // c
+print(y)",3
+421,3,분모가 20인 1/2보다 크고 7/9보다 작은 분수는 몇 개입니까?,"a = 1 / 2
+b = 7 / 9
+c = 20
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",5
+422,3,200부터 500까지의 자연수를 한 번 쓴다고 가정하고 모두 0이 나오는 횟수를 세어라.,"a = 200
+b = 500
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",62
+423,3,"숫자 카드 1, 0, 9, 2, 5를 한 번만 사용하여 가장 큰 다섯 자리 숫자를 만드세요.","a = [1, 0, 9, 2, 5]
+a.sort()
+y = 10000*a[4] + 1000*a[3]+ 100*a[2] + 10*a[1] + a[0]
+
+print(y)",95210
+424,3,"숫자 카드 2, 3, 7을 한 번 사용하여 두 자리 및 한 자리 숫자를 만들었습니다. 두 수를 나눌 때 몫과 나머지가 가장 작을 때 나머지의 합을 구합니다.","from itertools import permutations
+
+a = ['2', '3', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+d = []
+for i in b:
+    e = int(i[:2])
+    f = int(i[2:])
+    c.append(e % f)
+    d.append(e // f + e % f)
+y = d[c.index(min(c))]
+print(y)",9
+425,3,"숫자 카드는 8, 2, 3, 9 4장이 있습니다. 그 중 두 장의 카드를 선택하여 한 번만 사용하여 분수를 만들고 싶습니다. 3보다 큰 분수를 몇 개 만들 수 있습니까?","from itertools import permutations
+
+a = [8, 2, 3, 9]
+b = list(permutations(a, 2))
+c = 3
+y = 0
+for i in b:
+    if i[0]/i[1] > c:
+        y += 1
+print(y)",2
+426,3,"숫자 카드에는 2, 3, 4, 7, 8이 있습니다. 숫자 카드를 한 번 사용하여 가장 큰 다섯 자리 숫자를 만들 때 숫자 7은 무엇을 나타내는 숫자입니까?","a = [2, 3, 4, 7, 8]
+a.sort(reverse=True)
+b = 1
+c = 7
+for i in range(len(a) - 1, 0, -1):
+    if a[i] == c:
+        break
+    b *= 10
+y = c * b
+print(y)",7000
+427,3,"숫자 카드는 1, 3, 7, 9 4개가 있습니다. 이 카드를 한 번만 사용하여 두 자리 숫자를 만들었습니다. 두 수를 곱할 때 가장 작은 곱을 찾습니다.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",663
+428,3,"숫자 카드 2, 3, 5 3장 중 2장을 뽑고 두 수의 곱을 구하세요. 가장 작은 제품을 찾으십시오.","a = [2, 3, 5]
+a.sort()
+y = a[0] * a[1]
+print(y)",6
+429,3,"숫자 5, 6, 9, 1, 2가 있습니다. 각 숫자를 한 번만 사용하여 만들 수 있는 가장 큰 세 자리 숫자와 가장 작은 세 자리 숫자의 차이를 구하세요.","from itertools import permutations
+a = ['5', '6', '9', '1', '2']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",840
+430,3,"4개의 숫자 카드 3, 5, 7, 2 중 3개를 뽑아서 한 번만 사용하여 AB/C와 같은 나눗셈 공식을 만들려고 합니다. 가장 작은 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['3', '5', '7', '2']
+b = 3
+c = int(min(map(''.join, permutations(a, b - 1))))
+d = int(max(map(''.join, permutations(a, b - 2))))
+y = c // d
+print(y)",3
+431,3,80보다 크고 100보다 작은 두 자리 숫자를 8로 나누었을 때 나머지가 4인 수는 몇 개입니까?,"a = 80
+b = 100
+c = 8
+d = 4
+y = 0
+for i in range(a, b):
+    if i % c == 7:
+        y = y + 1
+print(y)",2
+432,3,"4개의 숫자 카드 2, 5, 6, 9 중 2개만 사용하여 가장 큰 분수를 만들 때 분자와 분모의 합을 구하세요.","a = [2, 5, 6, 9]
+a.sort()
+y = a[3] + a[0]
+print(y)",11
+433,3,"숫자 카드 2, 1, 6, 8, 7을 한 번만 사용하여 가장 큰 숫자를 만듭니다.","a = [2, 1, 6, 8, 7]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87621
+434,3,"숫자 카드 1, 3, 5, 8, 9를 한 번 사용하여 만들 수 있는 가장 큰 다섯 자리 숫자를 만드세요.","a = [1, 3, 5, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",98531
+435,3,"숫자 카드는 2, 4, 6 3개가 있습니다. 카드 2장을 뽑고 두 자리 숫자를 만들어 보세요. 4의 배수는 몇 개까지 만들 수 있나요?","from itertools import permutations
+a = ['2', '4', '6']
+b = 4
+c = list(map(''.join, permutations(a, 2)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",2
+436,3,다음 식 10 * A > 88을 만족하는 수는 1부터 9까지 몇 개입니까?,"a = 1
+b = 9
+c = 88
+d = 10
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",1
+437,3,"숫자 카드는 1, 2, 3, 4, 5가 있습니다. 저는 한 번만 사용하여 세 자리 숫자와 두 자리 숫자를 만들었습니다. 두 자리 수를 세 자리 수로 나눌 때 가장 작은 몫을 찾습니다.","from itertools import permutations
+
+a = ['1', '2', '3', '4', '5']
+a.sort()
+b = int("""".join(a[:3]))
+c = int("""".join(a[-2:][::-1]))
+y = b // c
+print(y)",2
+438,3,"숫자 카드는 1, 5, 9, 4, 6 5개가 있습니다. 카드를 한 번만 사용하여 두 자릿수 두 자리 수를 만들고 나누면 가장 큰 몫은 얼마입니까?","from itertools import permutations
+
+a = ['1', '5', '9', '4', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",6
+439,3,"숫자 7, 9, 3이 있습니다. 세 숫자를 사용하여 가장 큰 숫자를 만드세요.","a = [7, 9, 3]
+a.sort(reverse=True)
+a = list(map(str, a))
+y = int("""".join(a))
+print(y)",973
+440,3,20부터 99까지 중 1과 자기 자신만을 제수로 갖는 수를 구하십시오.,"import math
+
+a = 20
+b = 99
+y = 0
+for i in range(a, b + 1):
+    for j in range(2, int(math.sqrt(i)) + 1):
+        if i % j == 0:
+            break
+    else:
+        y += 1
+print(y)",17
+441,3,3으로 나누고 나머지를 1로 8로 나누었을 때 10보다 크고 55보다 작은 수는 몇 개인가?,"a = 10
+b = 55
+c = 3
+d = 1
+e = 8
+y = 0
+for i in range(a+1, b):
+    if i % c == d and i % e == 0:
+        y = y + 1
+print(y)",2
+442,3,다음 식 9 * A > 20 을 만족하는 수는 1 부터 9 까지 몇 개입니까 ?,"a = 1
+b = 9
+c = 9
+d = 20
+y = 0
+for i in range(a, b + 1):
+    if i > d / c:
+        y += 1
+print(y)",7
+443,3,"숫자 카드 2, 3, 5, 9가 있습니다. 세 개의 카드를 선택하고 한 번만 사용하여 두 개의 세 자리 숫자를 만들어 자동차를 구하려고 합니다. 차이가 가장 큰 뺄셈 식의 차이를 찾으십시오.","from itertools import permutations
+
+a = ['2', '3', '5', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d - e
+print(y)",718
+444,3,"4개의 숫자 카드 1, 2, 4, 8을 사용하여 3자리 * 1자리의 표현식을 한 번만 만들고 싶습니다. 이 경우 가장 큰 제품을 찾으십시오.","from itertools import permutations
+
+a = ['1', '2', '4', '8']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",3368
+445,3,1부터 7까지의 숫자가 있습니다. 이 숫자를 각각 한 번씩 사용하여 가능한 가장 작은 숫자를 찾으세요.,"a = [1, 2, 3, 4, 5, 6, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234567
+446,3,"숫자 카드 9, 1, 5를 모두 한 번 사용하여 세 자리 숫자를 만들고 싶습니다. 당신이 만들 수 있는 가장 큰 수에서 123을 빼서 답을 찾으세요.","from itertools import permutations
+
+a = ['9', '1', '5']
+b = 123
+y = int(max(map(''.join, permutations(a, 3)))) - b
+print(y)",828
+447,3,"숫자 2, 3, 6, 9, 1이 있습니다. 둘 중 3개의 숫자를 선택하여 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['2', '3', '6', '9', '1']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1086
+448,3,"숫자 카드 2, 5, 6, 7, 1, 8이 있습니다. 그 중 2개의 카드를 선택하고 한 번만 사용하여 하나의 십진수를 만들 수 있는 4보다 큰 소수는 몇 개입니까?","from itertools import permutations
+
+a = [2, 5, 6, 7, 1, 8]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",20
+449,3,"숫자 카드 9, 5, 1, 2, 3 중 모든 카드를 한 번만 사용하여 만들 수 있는 가장 작은 네 자리 수는?","from itertools import permutations
+
+a = ['9', '5', '1', '2', '3']
+y = int(min(map(''.join, permutations(a, 4))))
+print(y)",1235
+450,3,"숫자 1, 2, 3, 4, 5가 있습니다. 24/86을 줄이려고 할 때 분모와 분자가 나누어지지 않는 숫자의 수를 찾으십시오.","a = [1, 2, 3, 4, 5]
+b = 24
+c = 86
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+451,3,1부터 5까지의 수를 한 번 사용하여 만들 수 있는 가장 큰 수를 찾으십시오.,"a = [1, 2, 3, 4, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",54321
+452,3,"숫자 카드 1, 5, 9, 2, 8을 한 번만 사용하여 만들 수 있는 가장 큰 세 자리 숫자와 가장 작은 세 자리 숫자의 차이는 무엇입니까?","from itertools import permutations
+
+a = ['1', '5', '9', '2', '8']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c - d
+print(y)",860
+453,3,"1, 3, 9, 8 중 서로 다른 두 수를 그려서 만들 수 있는 두 자리 수 중 가장 큰 것은?","from itertools import permutations
+
+a = ['1', '3', '9', '8']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",98
+454,3,다음 표현식이 있습니다. 123*A < 1000 . 이를 만족하는 가장 큰 한 자리 수 A를 찾으십시오.,"a = 123
+b = 1000
+y = 0
+for i in range(1,9+1) :
+    if i < b / a  :
+        y = i
+print(y)",8
+455,3,"4장의 카드 3, 1, 7, 9를 한 번 사용하여 만들 수 있는 가장 큰 소수점 세 자리와 가장 작은 소수점 세 자리의 합은 얼마입니까?","from itertools import permutations
+
+a = ['3', '1', '7', '9']
+b = int(max(map(''.join, permutations(a))))
+c = int(min(map(''.join, permutations(a))))
+y = (b + c) * (0.1 ** 3)
+print(y)",11.11
+456,3,"숫자 카드 2, 3, 7을 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['2', '3', '7']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",969
+457,3,"4개의 숫자 카드 1, 8, 6, 2 중 2개를 선택하고 한 번만 사용하여 AB/2와 같은 나눗셈 식을 만들고 싶습니다. 가장 작은 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['1', '8', '6', '2']
+b = int(min(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",6
+458,3,"4개의 숫자 카드 2, 4, 5, 6을 모두 사용하여 두 자리 숫자의 곱을 한 번에 구하려고 합니다. 가장 큰 제품과 가장 작은 제품의 합을 찾습니다.","from itertools import permutations
+
+a = ['2', '4', '5', '6']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c) + min(c)
+print(y)",4498
+459,3,다음 식 50-9÷3+40>A를 만족하는 1부터 9까지의 자연수는 몇 개인가?,"a = 50 - (9/3) + 40
+b = 1
+c = 9
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",9
+460,3,"숫자 카드 2, 4, 6, 8, 5를 한 번만 사용하여 만들 수 있는 가장 큰 수는 무엇입니까?","a = [2, 4, 6, 8, 5]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",86542
+461,3,1부터 9까지의 자연수 중 다음 식 17-80÷5+3>A를 만족하는 수는 몇 개인가?,"a = 17 - 80/5 + 3
+b = 1
+c = 9
+y = 0
+for i in range(b, c + 1):
+    if i < a:
+        y += 1
+print(y)",3
+462,3,1부터 30까지의 자연수를 쓰려면 2를 모두 써야 하는 횟수는?,"a = 1
+b = 30
+c = '2'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",13
+463,3,"숫자 카드에는 1, 2, 5, 7이 있습니다. 한 장의 카드로 만들 수 있는 두 자리 숫자는 4로 나누어 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '2', '5', '7']
+b = 2
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] == '0':
+        continue
+    if int(i) % 4 == 0:
+        y += 1
+print(y)",3
+464,3,"다섯 개의 숫자 카드 5, 6, 7, 8, 9를 한 번 사용하여 만들 수 있는 가장 큰 세 자리 숫자와 가장 작은 세 자리 숫자의 차이를 찾습니다.","from itertools import permutations
+
+a = ['5', '6', '7', '8', '9']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c - d
+print(y)",420
+465,3,"숫자 카드 1, 3, 9가 있습니다. 두 자리 숫자 AB와 한 자리 숫자 C 중 하나의 카드로만 만들 수 있는 가장 큰 곱을 구하세요.","from itertools import permutations
+
+a = ['1', '3', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",279
+466,3,"숫자 1, 3, 5, 9가 있습니다. 두 숫자를 선택하여 만들 수 있는 가장 큰 두 자리 숫자와 가장 작은 두 자리 숫자의 차이를 찾으세요.","from itertools import permutations
+
+a = ['1', '3', '5', '9']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = abs(c - d)
+print(y)",82
+467,3,"숫자 카드 3, 2, 0, 5, 8, 6을 한 번만 사용하여 만들 수 있는 가장 큰 수는 무엇입니까?","a = [3, 2, 0, 5, 8, 6]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",865320
+468,3,"4개의 숫자 카드 2, 5, 7, 6이 있습니다. A.B 형식의 가장 큰 소수와 가장 작은 소수의 차이를 찾으세요.","from itertools import permutations
+
+a = ['2', '5', '7', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b)))) / 10
+d = int(min(map(''.join, permutations(a, b)))) / 10
+y = c - d
+print(y)",5.10
+469,3,"숫자 카드 3, 5, 6, 8 4장 중 2장을 한 번만 사용하여 두 자리 수를 만들고 싶습니다. Double, 가장 큰 수와 가장 작은 수의 곱을 찾습니다.","from itertools import permutations
+
+a = ['3', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3010
+470,3,"숫자카드는 1, 5, 9가 있습니다. 카드를 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['1', '5', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1110
+471,3,"숫자 카드는 2, 3, 7, 9 가 4개 있습니다. 3개의 카드를 한 번만 사용하여 만들 수 있는 가장 큰 세 자리 수와 나머지 카드의 수를 곱한 값은 얼마입니까?","from itertools import permutations
+
+a = ['2', '3', '7', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+for i in d:
+    a.remove(i)
+e = a[0]
+y = int(d) * int(e)
+print(y)",1946
+472,3,1부터 4까지의 수를 하나씩 사용하여 가장 작은 수를 만드세요.,"a = [1, 2, 3, 4]
+a.sort(reverse=False)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",1234
+473,3,"2, 4, 6, 8 4개의 숫자 카드를 한 번만 사용하여 만든 가장 큰 네 자리 수를 100단위로 반올림한 수는 얼마입니까?","from itertools import permutations
+
+a = ['2', '4', '6', '8']
+b = int(max(map(''.join, permutations(a, 4))))
+y = round(b, -2)
+print(y)",8600
+474,3,"숫자 카드에는 1, 9, 2, 8이 있습니다. 3개의 카드를 한 번만 사용하여 만들 수 있는 가장 큰 세 자리 숫자를 찾으세요.","from itertools import permutations
+
+a = ['1', '9', '2', '8']
+y = int(max(map(''.join, permutations(a, 3))))
+print(y)",982
+475,3,"숫자 카드 2, 3, 7, 9는 4개가 있습니다. 2개의 카드를 선택하고 한 번만 사용하여 만들 수 있는 3보다 큰 소수는 몇 개입니까?","from itertools import permutations
+
+a = [2, 3, 7, 9]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",12
+476,3,1부터 9까지의 수를 한 번 사용하여 만들 수 있는 가장 큰 수는?,"a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",987654321
+477,3,"숫자 카드 1, 5, 9를 한 번 재생하여 세 자리 숫자를 만들고 싶습니다. 만들 수 있는 가장 큰 수와 가장 작은 수를 찾으십시오.","from itertools import permutations
+
+a = ['1', '5', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+478,3,"5개의 숫자 카드 3,4,5,1,8이 있습니다. 그 중 0.AA와 같은 소수점 이하 두 자리는 A에 2장의 카드를 한 번만 넣어 만들어졌다. 가능한 가장 큰 수와 가장 작은 수의 곱을 찾으십시오.","from itertools import permutations
+
+a = ['3', '4', '5', '1', '8']
+b = list(permutations(a, 2))
+c = []
+for i in b:
+    c.append(int(i[0]) * 10 + int(i[1]))
+y = max(c) * min(c) * 0.0001
+print(y)",0.11
+479,3,"사과, 복숭아, 배, 멜론 중에서 3개의 과일이 선택된 경우의 총수를 구하시오.","from itertools import combinations
+
+a = ['사과', '복숭아', '배', '참외']
+b = 3
+y = len(list(combinations(a, b)))
+print(y)",4
+480,3,"3개의 숫자 카드 1, 7, 9를 한 번 사용하여 만들 수 있는 가장 큰 숫자와 가장 작은 숫자의 차이를 찾습니다.","from itertools import permutations
+
+a = ['1', '7', '9']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",792
+481,3,다음 식 7 * A > 40을 만족하는 수는 1부터 9까지 몇 개입니까?,"a = 1
+b = 9
+c = 7
+d = 40
+y = 0
+for i in range(a, b + 1):
+    if i > (d / c):
+        y += 1
+print(y)",4
+482,3,"4개의 숫자 카드 0, 4, 5, 7을 모두 사용하여 두 자리 숫자의 곱셈 식을 한 번 만들려고 하면 가장 작은 곱은 무엇입니까?","from itertools import permutations
+
+a = ['0', '4', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        e = int(i[2:])
+        c.append(d * e)
+y = min(c)
+print(y)",2280
+483,3,"숫자 카드는 1, 3, 9, 5 4개가 있습니다. 한 장의 카드로 두 자리 숫자를 만들고 나눌 때 가장 큰 몫은 얼마입니까?","from itertools import permutations
+
+a = ['1', '3', '9', '5']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+print(y)",7
+484,3,다음 식 6*5>11*A를 만족하는 수는 1부터 9까지 몇 개입니까?,"a = 1 
+b = 9
+c = 6
+d = 5
+e = 11
+y = 0
+for i in range(a,b+1):
+    if c * d > e * i:
+        y += 1
+print(y)",2
+485,3,"4개의 숫자 카드 9, 3, 4, 7 중 2개를 한 번만 사용하여 만들 수 있는 가장 큰 두 자리 수와 가장 작은 두 자리 수의 곱을 구하세요.","from itertools import permutations
+
+a = ['9', '3', '4', '7']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",3298
+486,3,"숫자 카드 2, 4, 6, 5, 7을 한 번 사용하여 다섯 자리 숫자를 만들고 싶습니다. 가장 큰 수를 찾으십시오.","from itertools import permutations
+
+a = ['2', '4', '6', '5', '7']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",76542
+487,3,10보다 크고 98보다 작은 두 자리 숫자를 9로 나누었을 때 나머지가 3인 수는 몇 개입니까?,"a = 10
+b = 98
+c = 9
+d = 3
+y = 0
+for i in range(a, b):
+    if i % c == d:
+        y = y + 1
+print(y)",10
+488,3,분모가 20보다 크고 90보다 작은 3/21과 같은 분수는 몇 개입니까?,"import math
+
+a = 3
+b = 21
+c = 20
+d = 90
+e = math.gcd(a,b)
+y = math.ceil(d / (b // e)) - c // (b // e) - 1
+print(y)",10
+489,3,"숫자 카드 2, 5, 6이 있습니다. 이 카드를 모두 한 번 사용하여 소수점 이하 두 자리를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['2', '5', '6']
+b = 3
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = (c + d) * (0.01)
+print(y)",9.08
+490,3,수학식 33 > 5 * A를 만족하는 1부터 9까지의 가장 큰 수는?,"a = 33
+b = 5
+c = a // b
+d = 9
+y = c if c < 10 else d
+print(y)",6
+491,3,"숫자 카드 1, 2, 3, 4, 6을 한 번만 사용하여 가장 큰 숫자를 만듭니다.","a = [1, 2, 3, 4, 6]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",64321
+492,3,"숫자 카드에는 5, 1, 9, 6이 있습니다. 2개의 카드를 뽑고 한 번만 사용하여 만든 두 자리 숫자를 5로 나눌 때 나눗셈 공식의 몫이 가장 작은 몫을 구합니다.","from itertools import permutations
+
+a = ['5', '1', '9', '6']
+b = 5
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+493,3,"5개의 숫자 카드 8, 5, 2, 3, 4를 한 번 사용하여 세 자리 숫자를 만들고 싶습니다. 만들 수 있는 가장 큰 수와 가장 작은 수를 찾으십시오.","from itertools import permutations
+
+a = ['8', '5', '2', '3', '4']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",620
+494,3,"숫자 카드 8, 2, 3, 1, 4를 한 번만 사용하여 만들 수 있는 가장 큰 숫자는 무엇입니까?","from itertools import permutations
+
+a = ['8', '2', '3', '1', '4']
+y = int(max(map(''.join, permutations(a, len(a)))))
+print(y)",84321
+495,3,"숫자 카드에는 1, 2, 3, 4가 있습니다. 2개의 카드를 선택하고 한 번만 사용하여 2보다 큰 한 자리 소수는 몇 개입니까?","from itertools import permutations
+
+a = [1, 2, 3, 4]
+b = 2
+c = 2
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",9
+496,3,"4개의 숫자 카드 1,2,7,9가 있습니다. 그 중 두 개는 두 자리 숫자를 만드는 데 한 번만 사용되었습니다. 두 자리 수를 4로 나눌 때 몫이 가장 작은 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['1', '2', '7', '9']
+b = 4
+c = list(map(''.join, permutations(a, 2)))
+e = []
+for i in c:
+    if int(i) % b == 0:
+        e.append(int(i) // b)
+y = min(e)
+print(y)",3
+497,3,"0,2,5,7 4개의 숫자 카드가 있습니다. 가장 큰 두 자리 수와 가장 작은 두 자리 수의 곱을 하나의 카드만 사용하여 구하여 두 자리 수를 만드십시오.","from itertools import permutations
+
+a = ['0', '2', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    if i[0] != '0' and i[2] != '0' :
+        d = int(i[:2])
+        c.append(d)
+y = min(c) * max(c)
+print(y)",1500
+498,3,"3개의 숫자 카드 중 4,8,6,2를 선택하고 한 번만 사용하여 두 자리 숫자를 만듭니다. 두 자리 숫자를 2로 나눌 때 몫이 가장 큰 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['4', '8', '6']
+b = int(max(map(''.join, permutations(a, 2))))
+c = 2
+y = b // c
+print(y)",43
+499,3,"숫자 카드 2, 5, 6, 9가 4개 있습니다. 이 중 하나만 사용하여 (100*A+10*B+C)*D 식을 만들고 싶습니다. 이 경우 가장 큰 제품을 찾으십시오.","from itertools import permutations
+
+a = ['2', '5', '6', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",5868
+500,3,"네 개의 숫자 카드 0, 7, 2, 9를 모두 한 번 사용하여 합이 가장 큰 덧셈 식의 합을 찾습니다.","from itertools import permutations
+
+a = ['0', '7', '2', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d + e)
+y = max(c)
+print(y)",162
+501,3,일부 숫자는 60의 약수가 아니라 6의 배수가 아닙니다. 조건을 만족하는 숫자는 몇 개입니까?,"a = 60
+b = 6
+y = 0
+for i in range(1, a + 1):
+    if a % i == 0 and i % b != 0:
+        y += 1
+print(y)",6
+502,3,"숫자 카드 2, 1, 5, 9, 8, 7 중에서 각 카드를 한 번 사용하여 만들 수 있는 가장 작은 숫자를 찾습니다.","a = [2, 1, 5, 9, 8, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",125789
+503,3,"숫자 카드는 0, 3, 8, 9의 4가지가 있습니다. 3개를 고를 때 가장 큰 숫자와 가장 작은 숫자의 합을 찾아 한 번만 사용하여 세 자리 숫자를 만드세요.","from itertools import permutations
+
+a = ['0', '3', '8', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = max(c)
+if '0' in a:
+    while True:
+        e = min(c)
+        if e[0] == '0':
+            c.remove(e)
+        else:
+            break
+y = int(d) + int(e)
+print(y)",1291
+504,3,1부터 9까지의 수는 수학식 42 < 6 * A 를 만족하는 수입니까?,"a = 1
+b = 9
+c = 42
+d = 6
+y = 0
+for i in range(a, b + 1):
+    if i > c / d:
+        y += 1
+print(y)",2
+505,3,"숫자 카드는 1, 5, 6, 8 4개가 있습니다. 이 숫자 카드를 한 번만 사용하여 두 자리 숫자를 만들었습니다. 두 수를 나눌 때 가장 큰 몫을 구하십시오.","from itertools import permutations
+
+a = ['1', '5', '6', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 2))))
+y = b // c
+
+print(y)",5
+506,3,다음 방정식 800 - A < 123 + 456에서 가장 작은 수를 찾으십시오.,"a = 800
+b = 123
+c = 456
+y = a - (b + c) + 1
+print(y)",222
+507,3,다음 식 60 * A < 33 * 11을 만족하는 수는 1부터 9까지 몇 개입니까?,"a = 1
+b = 9
+c = 60
+d = 33 * 11
+y = 0
+for i in range(a, b + 1):
+    if i < d / c:
+        y += 1
+print(y)",6
+508,3,"숫자 카드 8, 1, 7을 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 만들 수 있는 가장 작은 수는 무엇입니까?","from itertools import permutations
+
+a = ['8', '1', '7']
+y = int(min(map(''.join, permutations(a, 3))))
+print(y)",178
+509,3,"숫자 카드 1, 2, 3, 4, 5, 6, 7, 8을 동시에 사용하여 가장 작은 숫자를 만드세요.","a = [2, 4, 5, 6, 9, 1, 7, 8]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",12456789
+510,3,"숫자 3, 5, 1, 8, 9가 있습니다. 세 개의 숫자를 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['3', '5', '1', '8', '9']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+d = int(max(c))
+e = int(min(c))
+y = d + e
+print(y)",1120
+511,3,"숫자 카드에는 2, 5, 6, 8이 있습니다. 그 중 3개의 다른 숫자를 선택하여 만들 수 있는 가장 작은 세 자리 숫자를 쓰세요.","from itertools import permutations
+
+a = ['2', '5', '6', '8']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort()
+for i in c:
+    if i[0] != '0':
+        y = i
+        break
+print(y)",256
+512,3,"1, 3, 5, 7, 9의 숫자 카드 중 모든 숫자 카드를 한 번만 사용하면 만들 수 있는 가장 큰 숫자는 무엇입니까?","a = [1, 3, 5, 7, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",97531
+513,3,"숫자 카드는 8, 2, 3, 4 4개가 있습니다. 이것을 사용하여 만든 두 자리 숫자 두 개를 한 번만 곱할 때 가장 작은 곱을 계산합니다.","from itertools import permutations
+
+a = ['8', '2', '3', '4']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = min(c)
+print(y)",912
+514,3,"숫자 카드 1, 3, 5, 7, 9를 한 번만 사용하여 만들 수 있는 가장 작은 다섯 자리 숫자를 찾습니다.","a = [1, 3, 5, 7, 9]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+515,3,크기가 3/20이고 분모가 10보다 크고 100보다 작은 분수는 몇 개입니까?,"import math
+
+a = 3
+b = 20
+c = 10
+d = 100
+e = math.gcd(a,b)
+y = math.ceil(d / (b / e)) - c // (b / e) - 1
+print(y)",4
+516,3,"20부터 60까지의 자연수를 쓸 때, 모두 0을 몇 번이나 써야 할까요?","a = 20
+b = 60
+c = '0'
+y = 0
+for i in range(a, b + 1):
+    y += str(i).count(c)
+print(y)",5
+517,3,1부터 10까지의 자연수는 두 개의 약수를 가지고 있습니까?,"a = 1
+b = 10
+c = 2
+d = 0
+for i in range(a, b + 1):
+    e = 0
+    for j in range(1, i + 1):
+        if i % j == 0:
+            e += 1
+    if e == c:
+        d += 1
+y = d
+print(y)",4
+518,3,"4개의 숫자 카드 1, 5, 6, 8 중 2개의 카드를 한 번만 사용하여 만들 수 있는 가장 큰 두 자리 숫자와 가장 작은 두 자리 숫자의 곱을 구하세요.","from itertools import permutations
+
+a = ['1', '5', '6' , '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b))))
+y = c * d
+print(y)",1290
+519,3,"숫자 카드는 5, 1, 8, 9가 있습니다. 그 중 3장의 카드를 뽑고 두자리수 1개와 한자리수 1개를 만들 때 곱이 가장 큰 경우의 값을 구하세요.","from itertools import permutations
+
+a = ['5', '1', '8', '9']
+b = list(map(''.join, permutations(a, 3)))
+c = []
+for i in b:
+    d = int(i[:-1])
+    e = int(i[-1])
+    c.append(d * e)
+y = max(c)
+print(y)",765
+520,3,"3장의 숫자 2, 4, 6 중에서 가장 큰 몫을 가진 나눗셈을 만들기 위해 한 번만 사용하려고 합니다. 당신의 몫은 얼마입니까?","from itertools import permutations
+
+a = ['2', '4', '6']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = int(min(map(''.join, permutations(a, b - 1))))
+y = c // d
+print(y)",32
+521,3,"숫자 카드 1, 8, 9, 6 중 한 번만 사용하여 만들 수 있는 가장 큰 네 자리 숫자는 무엇입니까?","from itertools import permutations
+
+a = ['1', '8', '9', '6']
+b = 4
+y = int(max(map(''.join, permutations(a, b))))
+print(y)",9861
+522,3,"숫자 1, 5, 9, 8, 7이 있습니다. 50/60을 줄이려고 할 때 나누어지는 분모와 분자에 있는 숫자는 몇 개입니까?","a = [1, 5, 9, 8, 7]
+b = 50
+c = 60
+y = 0
+for i in a:
+    if b % i != 0 or c % i != 0:
+        y += 1
+print(y)",3
+523,3,"숫자 카드 1, 3, 5, 6, 8, 7을 한 번 사용하여 만들 수 있는 가장 작은 숫자를 찾습니다.","a = [1, 3, 5, 6, 8, 7]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",135678
+524,3,"1, 2, 5, 9를 한 번만 사용하여 만들 수 있는 가장 큰 네 자리 수는?","from itertools import permutations
+
+a = ['1', '2', '5', '9']
+y = int(max(map(''.join, permutations(a, 4))))
+print(y)",9521
+525,3,"0,1,2,8 4개의 숫자 카드가 있습니다. 그 중 두 장의 카드를 뽑고 한 번만 사용하여 가장 큰 두 자리 숫자를 만들었습니다. 이 숫자를 2로 나눈 몫은 얼마입니까?","from itertools import permutations
+
+a = ['0', '1', '2', '8']
+b = 2
+c = 2
+y = int(max(map(''.join, permutations(a, b)))) / c 
+print(y)",41
+526,3,"숫자 카드에는 3, 2, 7, 4가 있습니다. 그 중 2개의 카드를 선택하고 한 번만 사용하여 하나의 십진수를 만들 수 있는 4보다 큰 소수는 몇 개입니까?","from itertools import permutations
+
+a = [3, 2, 7, 4]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",6
+527,3,"4개의 숫자 카드 1, 2, 3, 4 중 3개를 한 번만 사용하여 공식 (10*A+B)*C의 가장 큰 곱을 찾습니다.","from itertools import permutations
+
+a = ['1', '2', '3', '4']
+b = 1
+c = max(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 2
+e = int(max(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",128
+528,3,3/9와 크기가 같은 분수의 분모가 10보다 크고 30보다 작은 분수는 몇 개입니까?,"from math import ceil
+
+a = 9
+b = 10
+c = 30
+y = ceil(c / a) - b // a - 1
+print(y)",2
+529,3,"숫자 카드 1, 3, 5, 7, 9를 한 번 사용하여 숫자를 만들고 싶습니다. 가장 작은 수를 찾으십시오.","a = [1, 3, 5, 7, 9]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",13579
+530,3,12/8보다 크고 52/3보다 작은 자연수는 몇 개입니까?,"from math import ceil
+
+a = 12 // 8
+b = ceil(52 / 3)
+y = b - a - 1
+print(y)",16
+531,3,"3개의 숫자 카드 6, 2, 4를 한 번만 사용하여 두 자리 수와 한 자리 수를 만들어 나눗셈 공식을 만들려고 합니다. 몫이 가장 클 때 나머지를 구합니다.","from itertools import permutations
+
+a = ['6', '2', '4']
+b = 2
+c = 1
+d = int(max(map(''.join, permutations(a, b))))
+e = int(min(map(''.join, permutations(a, c))))
+y = d % e
+print(y)",32
+532,3,"숫자 카드 5, 9, 4, 6을 한 번만 사용하여 만들 수 있는 가장 작은 네 자리 수를 찾습니다.","a = [5, 9, 4, 6]
+a.sort()
+b = list(map(str, a))
+y = """".join(b)
+print(y)",4569
+533,3,1부터 9까지의 수 중에서 다음 식 9 * A < 55를 만족하는 A의 수를 구하시오.,"a = 1
+b = 9
+c = 9
+d = 55
+y = 0
+for i in range(a, b + 1):
+    if i < (d / c):
+        y += 1
+print(y)",6
+534,3,"숫자 카드 1, 5, 6, 8 중 3개를 뽑고 한 번만 사용하여 세 자리 숫자를 만들려고 합니다. 가장 큰 수와 가장 작은 수의 합을 구합니다.","from itertools import permutations
+a = ['1', '5', '6', '8']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b + c
+print(y)",1021
+535,3,"카드 2장을 뽑아 만들 수 있는 숫자 카드 7, 8, 9 중 가장 작은 곱은 무엇입니까?","a = [7, 8, 9]
+a.sort()
+y = a[0] * a[1]
+print(y)",56
+536,3,"4개의 숫자 카드 1, 3, 5, 7 중 하나만 사용하여 만들 수 있는 두 자리 숫자의 가장 큰 곱을 구하세요.","from itertools import permutations
+
+a = ['1', '3', '5', '7']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:2])
+    e = int(i[2:])
+    c.append(d * e)
+y = max(c)
+print(y)",3763
+537,3,"숫자 7, 29, 3, 56, 12가 있습니다. 가장 작은 두 자리 수와 가장 작은 한 자리 수의 곱은 무엇입니까?","a = [7, 29, 3, 56, 12]
+b = []
+c = []
+for i in a:
+    if i < 10:
+        c.append(i)
+    else:
+        b.append(i)
+y = min(b) * min(c)
+print(y)",36
+538,3,"숫자 카드 3, 4, 7, 0 중 한 번만 사용하여 세 자리 숫자를 만들려고 합니다. 만들 수 있는 가장 큰 수와 가장 작은 수를 찾으십시오.","from itertools import permutations
+
+a = ['3', '4', '7', '0']
+b = int(max(map(''.join, permutations(a, 3))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = b - c
+print(y)",709
+539,3,"숫자 카드 2, 3, 4, 5, 6, 7, 8, 9가 있습니다. 6으로 나눌 때 나머지가 될 수 없는 모든 숫자를 찾아 더하세요.","a = (2, 3, 4, 5, 6, 7, 8, 9)
+b = []
+for i in a:
+    if i >= 6:
+        b.append(i)
+y = sum(b)
+print(y)",30
+540,3,"숫자 1, 2, 3, 8이 있습니다. 세 개의 숫자를 한 번만 사용하여 세 자리 숫자를 만들고 싶습니다. 가능한 가장 큰 수와 가장 작은 수의 합을 구하십시오.","from itertools import permutations
+
+a = ['1', '2', '3', '8']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",955
+541,3,1부터 9까지의 수는 수학식 55 > 9 * A를 만족하는 수는 몇 개입니까?,"a = 1
+b = 9
+c = 55
+d = 9
+y = 0
+for i in range(a, b + 1):
+    if i < c / d:
+        y += 1
+print(y)",6
+542,3,"숫자 1, 3, 7, 9, 5가 있습니다. 세 자리 숫자 중 가장 큰 숫자 3개를 골라서 만들 수 있는 숫자를 쓰세요.","from itertools import permutations
+
+a = ['1', '3', '7', '9', '5']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+c.sort(reverse=True)
+y = c[0]
+print(y)",975
+543,3,"4개의 숫자 카드 1, 5, 7, 8 중 2개를 뽑고 한 번만 사용하여 두 자리 숫자를 만듭니다. 두 자리 숫자를 10으로 나눌 때 몫이 가장 작은 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['1', '5', '7', '8']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 10
+y = c // d
+print(y)",8
+544,3,"숫자 카드에는 1, 2, 3, 4, 5, 8이 있습니다. 한 번만 사용하여 만들 수 있는 가장 큰 다섯 자리 숫자는 무엇입니까?","from itertools import permutations
+
+a = ['1', '2', '3', '4', '5', '8']
+y = int(max(map(''.join, permutations(a, 5))))
+print(y)",85432
+545,3,6부터 9까지의 수를 하나씩 사용하여 만들 수 있는 가장 큰 수는 무엇입니까?,"a = [6, 7, 8, 9]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",9876
+546,3,"숫자카드 1, 4, 2를 한 번만 사용하여 만들 수 있는 두 자리 숫자를 만들고 싶습니다. 3으로 나누어 떨어지는 수는 몇 개인가?","from itertools import permutations
+
+a = ['1', '4', '2']
+b = 3
+y = 0
+for c in permutations(a, 2):
+    if not int(''.join(c)) % b:
+        y += 1
+print(y)",4
+547,3,"숫자 카드 1, 3, 7이 있습니다. 2개의 카드를 사용하여 만들 수 있는 가장 큰 분수와 가장 작은 분수의 곱을 찾으세요.","a = [1, 3, 7]
+y = (max(a) / min(a)) * (min(a) / max(a))
+print(y)",1
+548,3,"숫자 카드 7, 8, 5, 6, 1, 4를 한 번 사용하여 만들 수 있는 가장 큰 6자리 숫자를 찾습니다.","a = [7, 8, 5, 6, 1, 4]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",876541
+549,3,"숫자 카드에는 4, 3, 8이 있습니다. 그 중 2개의 카드를 선택하고 한 번만 사용하여 하나의 십진수를 만들 수 있는 4보다 큰 소수는 몇 개입니까?","from itertools import permutations
+
+a = [4, 3, 8]
+b = 2
+c = 4
+d = list(permutations(a, b))
+y = 0
+for i in d:
+    if i[0] >= c:
+        y += 1
+if 0 in a and c in a:
+    y -= 1
+print(y)",6
+550,3,"숫자 카드 4, 6, 8을 한 번만 사용하여 가장 큰 대분수를 만들고 싶습니다. 이 대분수를 가분수로 변환할 때의 분자 값을 구하십시오.","a = [4, 6, 8]
+a = sorted(a)
+y = a[0] + a[1] * a[2]
+print(y)",52
+551,3,"숫자 카드는 2, 3, 5, 9, 8이 있습니다. 카드는 한 번만 사용하여 세 자리 숫자와 두 자리 숫자를 만들었습니다. 세 자리 수를 두 자리 수로 나눌 때 가장 작은 몫을 찾습니다.","from itertools import permutations
+
+a = ['2', '3', '5', '9', '8']
+b = int(max(map(''.join, permutations(a, 2))))
+c = int(min(map(''.join, permutations(a, 3))))
+y = c // b
+print(y)",2
+552,3,"숫자 8, 7, 1이 있습니다. 그 중 2개를 취하여 만들 수 있는 가장 큰 두 자리 수를 찾으세요.","from itertools import permutations
+
+a = ['8', '7', '1']
+y = int(max(map(''.join, permutations(a, 2))))
+print(y)",87
+553,3,"숫자 카드 2, 8, 0, 5는 4개가 있습니다. 이 중 2개의 카드를 선택하고 한 번만 사용하여 하나의 십진수를 만들 수 있는 7보다 큰 소수는 몇 개입니까?","from itertools import permutations
+
+a = [2, 8, 0, 5]
+b = 2
+c = list(permutations(a, b))
+y = 0
+for i in c:
+    if i[0] >= 7:
+        y += 1
+if 0 in a:
+    y -= 1
+print(y)",2
+554,3,"4개의 숫자 카드 1, 3, 7, 9를 한 번에 사용하여 (A*100+B*10+C)*D의 곱셈 공식을 만들고 싶습니다. 가장 작은 제품은 무엇입니까?","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = 1
+c = min(map(''.join, permutations(a, b)))
+a.remove(c)
+c = int(c)
+d = 3
+e = int(min(map(''.join, permutations(a, d))))
+y = c * e
+print(y)",379
+555,3,"숫자 카드 2,5,6이 있습니다. 2로 나누어 떨어지는 카드 한 장으로 만들 수 있는 세 자리 숫자는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['2', '5', '6']
+b = 2
+c = list(map(''.join, permutations(a, 3)))
+d = 0
+for i in c:
+    if int(i) % b == 0:
+        d += 1
+y = d
+print(y)",4
+556,3,1/5보다 크고 5/8보다 작은 분수 중에서 분모가 40인 분수의 개수를 구합니다.,"a = 1 / 5
+b = 5 / 8
+c = 40
+y = 0
+for i in range(1, c):
+    if i / c > a and i / c < b:
+        y = y + 1
+print(y)",16
+557,3,"4개의 숫자 카드 1, 3, 7, 9를 한 번만 사용하여 3자리 * 1자리의 곱셈을 만들고 싶습니다. 이 경우 가장 큰 제품을 찾으십시오.","from itertools import permutations
+
+a = ['1', '3', '7', '9']
+b = list(map(''.join, permutations(a)))
+c = []
+for i in b:
+    d = int(i[:3])
+    e = int(i[3:])
+    c.append(d * e)
+y = max(c)
+print(y)",6579
+558,3,"숫자 카드 3, 8, 6, 1이 있습니다. 가장 큰 세 자리 숫자와 가장 작은 세 자리 숫자 중 3개의 숫자를 가져와 한 번만 사용하여 만들 수 있는 가장 큰 세 자리 숫자의 합을 구하세요.","from itertools import permutations
+
+a = ['3', '8', '6', '1']
+b = list(map(''.join, permutations(a, 3)))
+c = int(max(b))
+d = int(min(b))
+y = c + d
+print(y)",999
+559,3,"숫자 카드 5, 3, 1, 7, 8을 한 번 사용하여 가장 큰 숫자를 만드세요.","a = [5, 3, 1, 7, 8]
+a.sort(reverse=True)
+b = list(map(str, a))
+y = """".join(b)
+print(y)",87531
+560,3,"4개의 숫자 카드 1, 5, 8, 9 중 2개를 선택하고 한 번만 사용하여 AB/2와 같은 나눗셈 공식을 만들고 싶습니다. 가장 큰 나눗셈의 몫을 구합니다.","from itertools import permutations
+
+a = ['1', '5', '8', '9']
+b = 2
+c = int(max(map(''.join, permutations(a, b))))
+d = 2
+y = c // d
+print(y)",49
+561,3,"승현이는 1, 3, 7번, 서현은 2, 4, 6번 카드를 가지고 있습니다. 승현과 서현은 각자의 숫자카드를 한 번만 사용하여 세 자리 숫자를 만들려고 합니다. 가장 작은 수는 승현이, 가장 큰 수는 서현이 했다. 두 사람이 만든 숫자의 합을 구하세요.","from itertools import permutations
+a = ['1', '3', '7']
+b = ['2', '4', '6']
+d = int(min(map(''.join, permutations(a, 3))))
+e = int(max(map(''.join, permutations(b, 3))))
+y = d + e
+print(y)",779
+562,3,50보다 크고 88보다 작은 두 자리 수는 8로 나누어 떨어지는 수는 몇 개입니까?,"a = 50
+b = 88
+c = 8
+y = 0
+for i in range(a + 1, b):
+    if i % c == 0:
+        y += 1
+print(y)",4
+563,3,"숫자 1, 9, 2, 3, 5가 있습니다. 세 개의 다른 숫자를 선택하여 만들 수 있는 세 자리 숫자는 모두 몇 개입니까?","from itertools import permutations
+
+a = ['1', '9', '2', '3', '5']
+b = 3
+c = list(map(''.join, permutations(a, b)))
+y = 0
+for i in c:
+    if i[0] != '0':
+        y += 1
+print(y)",60
