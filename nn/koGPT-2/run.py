@@ -111,6 +111,7 @@ if filepath:
             evaluation_strategy = 'steps',
             eval_steps=100,
             load_best_model_at_end = True,
+            metric_for_best_model='accuracy',
             report_to="wandb"
         )
         if val:
@@ -175,6 +176,7 @@ else:
         evaluation_strategy = 'steps',
         eval_steps=100,
         load_best_model_at_end = True,
+        metric_for_best_model='accuracy',
         report_to="wandb"
     )
     if val:
