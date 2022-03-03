@@ -3,11 +3,20 @@ import pandas as pd
 import re
 
 def postprocess(ans):
-    if re.search('\.',str(ans)):
-        if int(str(ans).split(".")[1]) == 0:
-            return str(int(float(ans)))
-        else: return '%.2f' %float(ans)
-    else: return str(ans)
+    try:
+        if re.search('\.',str(ans)):
+            if 'j' in str(ans):
+                return 'error'
+            if 'e' in str(ans):
+                return float(str(ans).strip())
+            if ',' in str(ans):
+                return str(ans)
+            if int(str(ans).split(".")[1]) == 0:
+                return str(int(float(ans)))
+            else: return '%.2f' %float(ans)
+        else: return str(ans)
+    except:
+        return str(ans)
 
 
 
