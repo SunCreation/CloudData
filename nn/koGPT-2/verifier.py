@@ -24,6 +24,8 @@ import argparse as ap
 from torch import nn, optim
 import torch.nn.functional as F
 import json
+from tqdm import tqdm
+
 
 torch.manual_seed(42)
 np.random.seed(42)
@@ -89,10 +91,15 @@ verifier = Verifier().to('cuda')
 learning_rate = 0.00001
 
 optimizer = optim.Adam(verifier.parameters(), lr=learning_rate)
+
+scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001, 
+                steps_per_epoch=1000, epochs=10,anneal_strategy='linear')
+
 BATCH_SIZE = 32
 
 def train():
-    for i in range(0,10000,BATCH_SIZE):
+    t = tqdm(range(0,100,BATCH_SIZE))
+    for i in t:
         global verifier
         # print('hihi')
         verifier.train()
@@ -111,13 +118,14 @@ def train():
         # print(loss.size())
         loss = torch.sum(loss)
         # print(loss.size())
-        print(loss)
-
+        t.set_description_str('What? %2d' % (i//BATCH_SIZE + 1))
+        t.set_postfix_str('Loss %.4f' % (loss.item() / (BATCH_SIZE)))
+        loss = loss / torch.tensor(BATCH_SIZE)
         optimizer.zero_grad()
 
         loss.backward()
         optimizer.step()
-
+        scheduler.step()
     # loss = mse_loss(output, data['labels'].unsqueeze(0).unsqueeze(2))
     # print(loss)
     # loss.backward()
@@ -127,7 +135,7 @@ def train():
     
 train()
 
-
+torch.save(verifier.state_dict(), 'veri/first.pt')
 # homedir = os.getcwd()
 
 # parser = ap.ArgumentParser(description='hyper&input')
