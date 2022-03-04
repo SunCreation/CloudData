@@ -86,7 +86,7 @@ if filepath:
 
         dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
 
-        if val_dir: val = val_dir + filename
+        if val_dir: val = val_dir + '/'+ filename.split('.')[0]
         if val : valdataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{val}.csv', split='train')
         else: 
             dictdataset = dataset.train_test_split(0.06)

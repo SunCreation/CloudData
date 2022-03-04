@@ -64,7 +64,7 @@ dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepa
 dictdataset = dataset.train_test_split(0.06)
 
 tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
-tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda:0')
+tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda')
 
 
 
@@ -98,7 +98,7 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001,
 BATCH_SIZE = 32
 
 def train():
-    t = tqdm(range(0,100,BATCH_SIZE))
+    t = tqdm(range(0,100000,BATCH_SIZE))
     for i in t:
         global verifier
         # print('hihi')
