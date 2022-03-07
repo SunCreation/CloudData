@@ -63,42 +63,33 @@ valbatch_size_perdevice = args.valbatch_size_perdevice
 
 device_num = torch.cuda.device_count()
 
-def prepare_train_features(examples):
-    for i, j in enumerate(examples['problem']):
-        examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
+# def prepare_train_features(examples):
+#     for i, j in enumerate(examples['problem']):
+#         examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
 
-        A = tokenizer.encode(examples['problem'][i])
-        B = tokenizer.encode(examples['code'][i])
+
+#     tokenized_examples = tokenizer(
+#         text=examples['problem'],
+#         text_pair=examples['code'],
+#         padding='max_length',
+#         max_length=260
+#     )
+
+#     # for i, j in enumerate(examples['problem']):
+#     #     A = tokenizer.encode(examples['problem'][i])
+#     #     B = tokenizer.encode(examples['code'][i])
         
-        masks = np.zeros(A[0].shape, dtype=np.int32)
-        codes = np.ones(B[0].shape, dtype=np.int32)
-        attention_mask = masks+codes
+#     #     masks = torch.zeros(len(A))
+#     #     codes = torch.ones(len(B))
+#     #     attention_mask = torch.concat([masks,codes], axis=0)
+#     #     supple = torch.zeros(260-attention_mask.shape[0])
+#     #     attention_mask = torch.concat([attention_mask,supple], axis=0)
 
-        data['attention_mask'][i] = ' '.join(map(str,attention_mask))
-        tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
+#     #     tokenized_examples['attention_mask'][i] = attention_mask
+   
+#     tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
 
-
-
-    tokenized_examples = tokenizer(
-        text=examples['problem'],
-        text_pair=examples['code'],
-        padding='max_length',
-        max_length=260
-    )
-    
-    A = tokenizer.encode(examples['problem'][i]+'<sys> 1<sys>', return_tensors='np')
-    B = tokenizer.encode(examples['code'][i], return_tensors='np')
-    
-    masks = torch.zeros(A[0].shape)
-    codes = torch.ones(B[0].shape)
-    attention_mask = torch.concat([masks,codes], axis=0)
-    supple = torch.zeros(260-attention_mask.shape[0])
-    attention_mask = torch.concat([attention_mask,supple], axis=0)
-
-    data['attention_mask'][i] = attention_mask
-    tokenized_examples["labels"] = tokenized_examples["input_ids"].copy()
-
-    return tokenized_examples
+#     return tokenized_examples
 
 # def prepare_train_features(examples):
 #     for i, j in enumerate(examples['problem']):
@@ -116,8 +107,9 @@ def prepare_train_features(examples):
 #         tokenized_examples["labels"][i] = torch.tensor(list(map(int,examples['labels'][i].split()))+[0]*(260-len(examples['labels'][i].split())))
     
      
-    return tokenized_examples
+    # return tokenized_examples
 
+tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
 
 filepath = 'verifier_data'
@@ -126,7 +118,7 @@ homedir = os.getcwd()
 
 
 dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
-tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+# tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 
 
 class Verifier(nn.Module):
@@ -149,18 +141,34 @@ class Verifier(nn.Module):
 
     def joint(self, model):
         self.gen_model=model
+        self.gen_model.to('cuda')
 
     def generate(self, tokenized_data, EVAL_BATCH=8, per_sentence=True):
+        input_ = tokenized_data['input_ids']
         self.eval()
-        outputs = self.gen_model.generate(tokenized_data, max_length = 260, do_sample=True, top_k=50, top_p=0.95, num_return_sequences=100)
-        output_shape = outputs.shape()
+        outputs = self.gen_model.generate(input_, max_length = 260, do_sample=True, top_k=50, top_p=0.95, num_return_sequences=100)
+        output_shape = outputs.shape
+        print(output_shape)
+        attention_mask = tokenized_data['attention_mask']
+        print(len(attention_mask),output_shape)
+        attention_mask = F.pad(attention_mask, (0,260-attention_mask.shape[1]),"constant", 0.0)
+        print(attention_mask, attention_mask.shape)
+        attention_mask = attention_mask.repeat(EVAL_BATCH,1).to('cuda')
         scores = []
+        self.to("cuda")
         for i in range(0,output_shape[0],EVAL_BATCH):
-            score = self(output[i:i+EVAL])
+            output = outputs[i:i+EVAL_BATCH]
+            batch = output.shape[0]
+            score = self(input_ids=output, attention_mask=attention_mask[:batch], labels=attention_mask[:batch])
             score = torch.sum(score, axis=1)
-            scores.extend(score.numpy().to_list())
+            # print(score)
+            scores.extend(score.detach().to('cpu').numpy().tolist())
+            print('WOW!!')
+        maxnum = np.argmin(np.array(scores))
+        maxoutput = outputs[maxnum].tolist()
 
-        return scores
+
+        return maxoutput
 
 
 def train():
@@ -192,9 +200,9 @@ verifier = Verifier()
 
 verifier.load_state_dict(torch.load('veri/first.pt'))
 
-model = GPT2LMHeadModel.from_pretrained("gen_verifier/gen_data_cp300").to(device)
+model = GPT2LMHeadModel.from_pretrained(modelname).to('cuda')
 
-verifier.gen_model(model)
+verifier.joint(model)
 
 verifier.to('cuda')
 
@@ -206,9 +214,15 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001,
                 steps_per_epoch=1000, epochs=10,anneal_strategy='linear')
 
 BATCH_SIZE = 32
+data = pd.read_csv('CloudData/math/data/val.csv')
 
+# print(data['problem'][2])
+# print(tokenizer(data['problem'][0], return_tensors='pt')['input_ids'])
+for i in data['problem'][:5]:
 
-print(verifier.generate(tokenized_datasets['test'][0]['input_ids']))
+    maxoutput = verifier.generate(tokenizer(i, return_tensors='pt').to('cuda'))
+
+    print(tokenizer.decode(maxoutput))
 
 # train()
 
