@@ -137,7 +137,7 @@ class Verifier(nn.Module):
 
 
 def train():
-    t = tqdm(range(0,100000,BATCH_SIZE))
+    t = tqdm(range(0,200000,BATCH_SIZE))
     for i in t:
         global verifier
         
@@ -163,7 +163,7 @@ def train():
 
 verifier = Verifier()
 
-# verifier.load_state_dict(torch.load('veri/first.pt'))
+# verifier.load_state_dict(torch.load('veri/second.pt'))
 
 # model = GPT2LMHeadModel.from_pretrained("gen_verifier/gen_data_cp300").to(device)
 
