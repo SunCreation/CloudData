@@ -97,7 +97,8 @@ def prepare_train_features(examples):
 
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filename}.csv', split='train')
-tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+dictdataset = dataset.train_test_split(0.01)
+tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda')
 
 
@@ -144,11 +145,11 @@ def train():
         verifier.train()
         verifier.zero_grad()
         
-        output = verifier(**tokenized_datasets[i:i+BATCH_SIZE])
+        output = verifier(**tokenized_datasets['train'][i:i+BATCH_SIZE])
         
-        output = output.squeeze() * tokenized_datasets['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
+        output = output.squeeze() * tokenized_datasets['train']['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
         
-        loss = (output - tokenized_datasets['labels'][i:i+BATCH_SIZE])**2
+        loss = (output - tokenized_datasets['train']['labels'][i:i+BATCH_SIZE])**2
         
         loss = torch.sum(loss)
         
@@ -178,7 +179,7 @@ optimizer = optim.Adam(verifier.parameters(), lr=learning_rate)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001, 
                 steps_per_epoch=1000, epochs=10,anneal_strategy='linear')
 
-BATCH_SIZE = 32
+BATCH_SIZE = 48
 
 
 # print(verifier.generate(tokenized_datasets['test'][0]['input_ids']))
