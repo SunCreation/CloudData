@@ -86,36 +86,12 @@ class Verifier(nn.Module):
         output = self.sigmoid(output)
         return output
 
-    def train(self):
-        t = tqdm(range(0,100000,BATCH_SIZE))
-        for i in t:
-            global verifier
-            # print('hihi')
-            verifier.train()
-            verifier.zero_grad()
-            # print(tokenized_datasets['train'][i:i+64])
-            output = verifier(**tokenized_datasets['train'][i:i+BATCH_SIZE])
-            # print(f'output: {output}')
-            # print(f'len: {len(output[0])}')
+    def joint(self, model):
+        self.gen_model=model
 
-            # mse_loss = nn.MSELoss(reduction='sum')
-            # print(output.squeeze().size())
-            # print(tokenized_datasets['train']['attention_mask'][i:i+64].size())
-            output = output.squeeze() * tokenized_datasets['train']['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
-            # print(output.size())
-            loss = (output - tokenized_datasets['train']['labels'][i:i+BATCH_SIZE])**2
-            # print(loss.size())
-            loss = torch.sum(loss)
-            # print(loss.size())
-            t.set_description_str('What? %2d' % (i//BATCH_SIZE + 1))
-            t.set_postfix_str('Loss %.4f' % (loss.item() / (BATCH_SIZE)))
-            loss = loss / torch.tensor(BATCH_SIZE)
-            optimizer.zero_grad()
-
-            loss.backward()
-            optimizer.step()
-            scheduler.step()
-
+    def generate(self, tokenized_data):
+        outputs = self.gen_model.generate(tokenized_data)
+        
 
 
 
