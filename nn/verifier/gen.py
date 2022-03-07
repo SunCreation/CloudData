@@ -35,10 +35,10 @@ torch.cuda.manual_seed_all(42)
 homedir = os.getcwd()
 
 parser = ap.ArgumentParser(description='hyper&input')
-parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
+parser.add_argument('-i','--input_data', type=str, default='val', help='you can use csv file. without file extention')
 parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
 parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
-parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
+parser.add_argument('-v','--verifier_model', type=str, default=None, help='verifier_name')
 parser.add_argument('--val_dir', type=str, default=None, help='Optional')
 parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
 parser.add_argument('-s','--valbatch_size_perdevice', type=int, default=8, help='default8')
@@ -47,11 +47,13 @@ parser.add_argument('-p','--projectname', type=str, default='kogpt2', help='Ente
 
 args = parser.parse_args()
 
-val = args.validation_data
+veri = args.verifier_model
 
 val_dir = args.val_dir
 
 filepath = args.input_path
+
+filename = args.input_data
 
 modelname = args.modelname
 
@@ -112,12 +114,7 @@ device_num = torch.cuda.device_count()
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
 
 
-filepath = 'verifier_data'
-filename = 'verifier_data.csv'
-homedir = os.getcwd()
-
-
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filename}.csv', split='train')
 # tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 
 
@@ -143,16 +140,18 @@ class Verifier(nn.Module):
         self.gen_model=model
         self.gen_model.to('cuda')
 
-    def generate(self, tokenized_data, EVAL_BATCH=8, per_sentence=True):
+    def generate(self, tokenized_data, EVAL_BATCH=8, per_sentence=True, tokenizer=tokenizer):
         input_ = tokenized_data['input_ids']
         self.eval()
         outputs = self.gen_model.generate(input_, max_length = 260, do_sample=True, top_k=50, top_p=0.95, num_return_sequences=100)
         output_shape = outputs.shape
-        print(output_shape)
+        # outputs_ = outputs.to('cpu')
+        # outputs_ = tokenizer.decode(outputs_)
+        # print(output_shape)
         attention_mask = tokenized_data['attention_mask']
-        print(len(attention_mask),output_shape)
+        # print(len(attention_mask),output_shape)
         attention_mask = F.pad(attention_mask, (0,260-attention_mask.shape[1]),"constant", 0.0)
-        print(attention_mask, attention_mask.shape)
+        # print(attention_mask, attention_mask.shape)
         attention_mask = attention_mask.repeat(EVAL_BATCH,1).to('cuda')
         scores = []
         self.to("cuda")
@@ -160,45 +159,21 @@ class Verifier(nn.Module):
             output = outputs[i:i+EVAL_BATCH]
             batch = output.shape[0]
             score = self(input_ids=output, attention_mask=attention_mask[:batch], labels=attention_mask[:batch])
+            # print(score)
             score = torch.sum(score, axis=1)
             # print(score)
             scores.extend(score.detach().to('cpu').numpy().tolist())
             print('WOW!!')
-        maxnum = np.argmin(np.array(scores))
+        maxnum = np.argmax(np.array(scores))
         maxoutput = outputs[maxnum].tolist()
 
 
         return maxoutput
 
 
-def train():
-    t = tqdm(range(0,100000,BATCH_SIZE))
-    for i in t:
-        global verifier
-        
-        verifier.train()
-        verifier.zero_grad()
-        
-        output = verifier(**tokenized_datasets['train'][i:i+BATCH_SIZE])
-        
-        output = output.squeeze() * tokenized_datasets['train']['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
-        
-        loss = (output - tokenized_datasets['train']['labels'][i:i+BATCH_SIZE])**2
-        
-        loss = torch.sum(loss)
-        
-        t.set_description_str('What? %2d' % (i//BATCH_SIZE + 1))
-        t.set_postfix_str('Loss %.4f' % (loss.item() / (BATCH_SIZE)))
-        loss = loss / torch.tensor(BATCH_SIZE)
-        optimizer.zero_grad()
-
-        loss.backward()
-        optimizer.step()
-        scheduler.step()
-
 verifier = Verifier()
 
-verifier.load_state_dict(torch.load('veri/first.pt'))
+verifier.load_state_dict(torch.load(f'{veri}.pt'))
 
 model = GPT2LMHeadModel.from_pretrained(modelname).to('cuda')
 
@@ -214,11 +189,11 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.001,
                 steps_per_epoch=1000, epochs=10,anneal_strategy='linear')
 
 BATCH_SIZE = 32
-data = pd.read_csv('CloudData/math/data/val.csv')
+# data = pd.read_csv('CloudData/math/data/val.csv')
 
 # print(data['problem'][2])
 # print(tokenizer(data['problem'][0], return_tensors='pt')['input_ids'])
-for i in data['problem'][:5]:
+for i in dataset['problem'][:10]:
 
     maxoutput = verifier.generate(tokenizer(i, return_tensors='pt').to('cuda'))
 

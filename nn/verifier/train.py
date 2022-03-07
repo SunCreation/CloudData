@@ -32,6 +32,49 @@ np.random.seed(42)
 random.seed(42) 
 torch.cuda.manual_seed_all(42)
 
+
+
+homedir = os.getcwd()
+
+parser = ap.ArgumentParser(description='hyper&input')
+parser.add_argument('-i','--input_data', type=str, default='clean_all_correct', help='you can use csv file. without file extention')
+parser.add_argument('-d','--input_path', type=str, default=None, help='you can use csv filepath.')
+parser.add_argument('-o','--output_dir', type=str, default=homedir, help='std output & model save dir')
+parser.add_argument('-v','--validation_data', type=str, default=None, help='Optional')
+parser.add_argument('--val_dir', type=str, default=None, help='Optional')
+parser.add_argument('-b','--batch_size', type=int, default=16, help='default16')
+parser.add_argument('-s','--valbatch_size_perdevice', type=int, default=8, help='default8')
+parser.add_argument('-n','--modelname', type=str, default='PowerfulMyModel', help='Enter model name')
+parser.add_argument('-p','--projectname', type=str, default='kogpt2', help='Enter model name')
+
+args = parser.parse_args()
+
+val = args.validation_data
+
+val_dir = args.val_dir
+
+filepath = args.input_path
+
+filename = args.input_data
+
+output_dir = args.output_dir
+
+modelname = args.modelname
+
+project = args.projectname
+
+batch_size = args.batch_size
+
+valbatch_size_perdevice = args.valbatch_size_perdevice
+
+device_num = torch.cuda.device_count()
+
+
+
+
+
+
+
 def prepare_train_features(examples):
     for i, j in enumerate(examples['problem']):
         examples['problem'][i] = j + '<sys>' + str(examples["class"][i]) + '<sys>'
@@ -52,15 +95,9 @@ def prepare_train_features(examples):
 
 
 
-filepath = 'verifier_data'
-filename = 'verifier_data.csv'
-homedir = os.getcwd()
-
-
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2', bos_token='</s>', sep_token='<sep>', eos_token='</s>', pad_token='<pad>')
-dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filepath}/{filename}', split='train')
-dictdataset = dataset.train_test_split(0.06)
-tokenized_datasets = dictdataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
+dataset = load_dataset('csv', data_files=f'{homedir}/CloudData/math/data/{filename}.csv', split='train')
+tokenized_datasets = dataset.map(prepare_train_features, batched=True, remove_columns=dataset.column_names)
 tokenized_datasets.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'],device='cuda')
 
 
@@ -107,11 +144,11 @@ def train():
         verifier.train()
         verifier.zero_grad()
         
-        output = verifier(**tokenized_datasets['train'][i:i+BATCH_SIZE])
+        output = verifier(**tokenized_datasets[i:i+BATCH_SIZE])
         
-        output = output.squeeze() * tokenized_datasets['train']['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
+        output = output.squeeze() * tokenized_datasets['attention_mask'][i:i+BATCH_SIZE] #.type(torch.FloatTensor)
         
-        loss = (output - tokenized_datasets['train']['labels'][i:i+BATCH_SIZE])**2
+        loss = (output - tokenized_datasets['labels'][i:i+BATCH_SIZE])**2
         
         loss = torch.sum(loss)
         
@@ -126,11 +163,11 @@ def train():
 
 verifier = Verifier()
 
-verifier.load_state_dict(torch.load('veri/first.pt'))
+# verifier.load_state_dict(torch.load('veri/first.pt'))
 
-model = GPT2LMHeadModel.from_pretrained("gen_verifier/gen_data_cp300").to(device)
+# model = GPT2LMHeadModel.from_pretrained("gen_verifier/gen_data_cp300").to(device)
 
-verifier.gen_model(model)
+# verifier.gen_model(model)
 
 verifier.to('cuda')
 
@@ -148,4 +185,4 @@ BATCH_SIZE = 32
 
 train()
 
-torch.save(verifier.state_dict(), 'veri/first.pt')
+torch.save(verifier.state_dict(), f'{output_dir}.pt')
