@@ -6,12 +6,12 @@ git config --global user.email cake0103@nate.com # $email
 apt update
 apt upgrade -y
 apt install openjdk-11-jdk -y
-echo "alias pip=pip3" >> ~/.bashrc
+# echo "alias pip=pip3" >> ~/.bashrc
 . ~/.bashrc
 pip install -U Commitizen
 pip install sentencepiece
 pip install transformers
 apt install vim -y
-echo "alias push='. /${dirt}/CloudData/push'" >> ~/.bashrc
+# echo "alias push='. /${dirt}/CloudData/push'" >> ~/.bashrc
 pip install -r /${dirt}/CloudData/requirements
 . ~/.bashrc
